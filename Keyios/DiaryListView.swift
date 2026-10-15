@@ -41,18 +41,9 @@ struct DiaryListView: View {
     var body: some View {
         // NavigationStack 管"页面推进/返回"。path 是当前的页面栈。
         NavigationStack(path: $path) {
-            ZStack(alignment: .bottom) {
-
+            ZStack {
                 Theme.background.ignoresSafeArea()
-
                 listContent
-
-                // 底部浮动条。它比列表后写，所以盖在列表上面。
-                BottomBarView(
-                    onSearch: { isSearching = true },
-                    onNew:    { showingNewNote = true }
-                )
-                .padding(.bottom, 8)
             }
 
             // ── 搜索：交给系统，不自己写 ──
@@ -67,11 +58,9 @@ struct DiaryListView: View {
             // `isPresented: $isSearching` 让我们能从外面控制"搜索开不开"，
             // 底部那个放大镜按钮就是靠它把搜索唤起/收起的。
             .searchable(text: $searchText, isPresented: $isSearching, prompt: "搜索日记")
-            // 【两种形态，改这一行切换】
-            //   不写  -> 搜索框常驻屏幕底部（跟 iOS 26 的备忘录/邮件一样，推荐）
-            //   写上  -> 平时收成一个小圆按钮，点开才展开
-            // 两种都在模拟器里验证过，效果见 shots/。
-            // .modifier(MinimizedSearchField())
+            // 让搜索平时"收成一个按钮"，点开才展开成输入框。
+            // 不加这行的话它会常驻占着屏幕底部一整条（之前的截图就是这样）。
+            .modifier(MinimizedSearchField())
 
             // 点列表某行 -> path 里加一条 -> 自动推进详情页
             .navigationDestination(for: DiaryEntry.self) { entry in
@@ -83,9 +72,20 @@ struct DiaryListView: View {
                 NewNoteView()
             }
 
-            // 这一页不要系统导航栏 —— 设计里"头部不放任何东西"。
-            // （`searchable` 想借用导航栏那块地方，跟这行是冲突的，实测见下）
+            // 这一页不要系统"顶部"导航栏 —— 设计里头部不放任何东西。
+            // 注意：`.bottomBar`（底部那条）不受这行影响，它们是两码事。
             .toolbar(.hidden, for: .navigationBar)
+
+            // 底部那条按钮。内容在 BottomBar.swift 里定义。
+            .toolbar {
+                BottomBar(
+                    onSearch: { isSearching = true },
+                    onNew:    { showingNewNote = true }
+                )
+            }
+            // 系统底栏默认用系统色（白/灰），不认识我们的绿。
+            // `.tint` 是"告诉系统这一片的主色是什么"，系统会把它用到按钮、光标等处。
+            .tint(Theme.accent)
         }
         .preferredColorScheme(.dark)   // 强制深色（我们的设计本来就是黑底）
     }
@@ -105,7 +105,7 @@ struct DiaryListView: View {
             }
             .padding(.horizontal, 12)
             .padding(.top, 8)
-            .padding(.bottom, 80)   // 给底部浮动条让位，滚到底也能看全最后一行
+            .padding(.bottom, 8)    // 底部条的避让由系统自己处理，这里只要一点余量
         }
     }
 }

@@ -58,13 +58,34 @@ xcodebuild -project "$PROJECT.xcodeproj" -scheme "$SCHEME" -configuration Debug 
   -destination "id=$UDID" -derivedDataPath "$DERIVED" \
   build 2>&1 | tail -5
 
-# 5. 装 + 重启 (先 terminate, 否则可能拍到的还是上一版的旧界面)
+# 5. 装 + 启动
+#
+#    关键概念：**模拟器之间不共享已安装的 app**。
+#    每台模拟器有自己的文件系统、自己的一份安装 —— 装到哪台就得逐台装。
+#
+#    所以这里对**所有已开机的模拟器**都装一遍（先 terminate 再 launch，
+#    否则可能拍到上一版的旧界面）。
+#    用法：你在 Device Hub 里把想看的机型开机，跑一次 ./build.sh，
+#    它们全都拿到最新版 —— 在 Device Hub 里切哪台都是最新的。
+#
+#    一台都没开机时，就开下面那台"主机器"（截图也用它）。
 APP="$DERIVED/Build/Products/Debug-iphonesimulator/$PROJECT.app"
-xcrun simctl install "$UDID" "$APP"
-xcrun simctl terminate "$UDID" "$BUNDLE_ID" 2>/dev/null || true
-xcrun simctl launch "$UDID" "$BUNDLE_ID" >/dev/null
+BOOTED=$(xcrun simctl list devices booted \
+           | grep -oE '[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}' || true)
+if [[ -z "$BOOTED" ]]; then
+  echo "==> 没有已开机的模拟器, 开机 $UDID"
+  xcrun simctl bootstatus "$UDID" -b >/dev/null
+  BOOTED="$UDID"
+fi
 
-# 6. 等它渲染完再截图
+for D in $BOOTED; do
+  xcrun simctl install "$D" "$APP"
+  xcrun simctl terminate "$D" "$BUNDLE_ID" 2>/dev/null || true
+  xcrun simctl launch "$D" "$BUNDLE_ID" >/dev/null
+  echo "    装好了 $D"
+done
+
+# 6. 等它渲染完再截图（固定拍主机器那台，方便前后对比）
 sleep 3
 mkdir -p "$SHOTS"
 SHOT="$SHOTS/latest.png"

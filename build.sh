@@ -78,11 +78,16 @@ if [[ -z "$BOOTED" ]]; then
   BOOTED="$UDID"
 fi
 
+# 报个数 —— 开着的机器越多，这里越慢（每台都要装一遍）
+echo "==> 已开机 $([[ -n "$BOOTED" ]] && echo "$BOOTED" | wc -l | tr -d ' ') 台, 逐台安装"
+
 for D in $BOOTED; do
   xcrun simctl install "$D" "$APP"
   xcrun simctl terminate "$D" "$BUNDLE_ID" 2>/dev/null || true
   xcrun simctl launch "$D" "$BUNDLE_ID" >/dev/null
-  echo "    装好了 $D"
+  # 报机器名，不是一长串 UUID —— 看得出来装到哪台了
+  NAME=$(xcrun simctl list devices | grep -F "$D" | head -1 | sed 's/^ *//; s/ (.*//')
+  echo "    装好了 $NAME"
 done
 
 # 6. 等它渲染完再截图（固定拍主机器那台，方便前后对比）

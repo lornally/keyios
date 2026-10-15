@@ -1,0 +1,19 @@
+# Xcode 每用户状态 (打开 Xcode 就会生成)
+xcuserdata/
+*.xcuserstate
+DerivedData/
+
+# XcodeGen 产物 —— 真源是 project.yml, 这个不提交
+*.xcodeproj/
+
+# 构建产物 (build.sh 里把 DerivedData 放在这里)
+.build/
+
+# SwiftPM
+.swiftpm/
+
+# 截图 (build.sh 输出, 只是用来看效果的)
+shots/
+
+# macOS
+.DS_Store

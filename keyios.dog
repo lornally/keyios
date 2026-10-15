@@ -19,6 +19,7 @@
     支持keydogi
       话说为啥intel版本使用的是不同的icloud? ing
         为啥intel版本不能和keydog版本使用同样的icloud?
+        卧槽, 可以共用的
   样例
     [[[
 * 一级节点
@@ -49,3 +50,9 @@
     项目配置
       project.yml
     vscode安装swift插件
+  需要icloud ui配合
+    SwiftUI Preview — VSCode 没有替代品。缓解: 模拟器 build→launch→screenshot 回路, 小 app 一次几秒到十几秒, 且能自动化截图验收 (跟你 macOS 项目的 AI 驱动开发一个路子) 11
+    Instruments 图形分析 — CLI 有 xctrace 能录, 但分析界面没有。真遇到性能问题再说, 便签 app 不太可能用上 22
+  签名打包发布
+    /Users/x/keydog/do/打包
+      里面的 ai必读 文档

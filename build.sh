@@ -23,8 +23,25 @@ if [[ "${1:-}" != "--no-gen" ]]; then
   xcodegen generate
 fi
 
-# 2. 挑一台可用的 iPhone 模拟器 (列表里第一台)
-UDID=$(xcrun simctl list devices available | awk -F '[()]' '/iPhone/ {print $2; exit}')
+# 2. 挑一台 iPhone 模拟器 —— 只从**最新 iOS 版本**那一段里挑。
+#
+#    为什么要这么绕：装了多代 runtime 之后（比如同时有 iOS 26 和 27），
+#    `simctl` 的列表是按版本**升序**排的，直接取"第一台 iPhone"
+#    会拿到老系统那台 —— 踩过。
+#
+#    想指定机型：DEVICE="iPhone 17 Pro" ./build.sh
+newest_iphones() {
+  # 反转 -> 取到第一个 "-- iOS" 分组头为止（那就是最新版本那一段）-> 再反转回来
+  xcrun simctl list devices available | tail -r | awk '{print} /^-- iOS/{exit}' | tail -r
+}
+
+if [[ -n "${DEVICE:-}" ]]; then
+  UDID=$(newest_iphones | grep -F "$DEVICE (" \
+           | grep -oE '[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}' | head -1 || true)
+else
+  UDID=$(newest_iphones | grep -E 'iPhone' \
+           | grep -oE '[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}' | head -1 || true)
+fi
 if [[ -z "$UDID" ]]; then
   echo "没有可用的 iPhone 模拟器。先装 runtime:" >&2
   echo "  xcodebuild -downloadPlatform iOS" >&2

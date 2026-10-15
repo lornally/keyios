@@ -1,0 +1,32 @@
+# XcodeGen 工程定义 —— 这是唯一真源, Keyios.xcodeproj 是它的产物(不提交)。
+# 改工程(加文件/改设置)一律改这个文件, 然后跑 `xcodegen generate`。
+name: Keyios
+
+options:
+  bundleIdPrefix: com.lornally
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+
+targets:
+  Keyios:
+    type: application
+    platform: iOS
+    sources:
+      - path: Keyios
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.lornally.keyios
+        SWIFT_VERSION: "6.0"
+        # Info.plist 由 Xcode 按下面的键现生成, 不用手写文件
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIStatusBarStyle: UIStatusBarStyleLightContent
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        TARGETED_DEVICE_FAMILY: "1"          # 1 = 只 iPhone
+        ENABLE_PREVIEWS: YES                 # 给 Xcode 的 #Preview / axe 用
+        ONLY_ACTIVE_ARCH: YES                # 只编当前架构, 别浪费一半时间编 x86_64
+        CODE_SIGN_STYLE: Automatic
+        # 模拟器构建不需要签名, 省掉开发者账号依赖; 上真机时去掉这两行
+        CODE_SIGNING_ALLOWED: NO
+        CODE_SIGNING_REQUIRED: NO

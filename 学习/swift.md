@@ -328,8 +328,40 @@ if #available(iOS 26.0, *) { ... }
 | `@` 开头 | 编译器标记，会生成你没写的代码 |
 | `@Environment(\.dismiss)` | 取系统给的值（这里是"关掉自己"的函数） |
 | `@ViewBuilder` | 允许大括号里写 if/else、ForEach。不加只能放单个值 |
-| `#available(iOS 26.0, *)` | 版本判断。`*` = 其他平台不限制。老系统上大括号里那行编译时就不存在 |
-| `#Preview { ... }` | 给预览工具单独画一屏用，app 运行时不执行它 |
+| `#available(iOS 26.0, *)` | 版本判断。`*` = 其他平台不限制。**是运行期判断，不是编译开关** —— 见下 |
+| `#Preview { ... }` | 给预览工具单独画一屏用。app 里没有一行代码调它，但**它照样被编进 app** —— 见下 |
+
+### 15.1 `#available`：块里的代码照样要编译
+
+```swift
+if #available(iOS 26.0, *) {
+    Text("新").没有这个函数()     // ❌ 照样报错: value of type 'Text' has no member '没有这个函数'
+} else {
+    Text("旧")
+}
+```
+
+如果真是"老系统上编译时就不存在"，编译器就不该管这块里的内容 —— 但它一字一句地管。真实编出来的是一次**对系统版本的询问**（`-emit-sil` 里能看到这个符号）：
+
+```swift
+_stdlib_isOSVersionAtLeast(iOS, 26, 0)   // 运行到这一行才问系统版本, 拿 true/false 决定走哪支
+```
+
+所以 `#available` 里能写 iOS 26 才有的 API、老系统上又不崩，靠的是"**代码编进去了，但跑到这里时判断为 false，不执行**"。
+
+### 15.2 `#Preview`：不执行，但会被编进去
+
+`#Preview { Text("hi") }` 展开出来是个挂在系统登记表上的结构体（实测 `-dump-macro-expansions`）：
+
+```swift
+struct $...PreviewRegistry: DeveloperToolsSupport.PreviewRegistry {
+    static func makePreview() -> Preview { Preview { Text("hi") } }
+}
+```
+
+它外面**没有** `#if DEBUG`（实测：不开 DEBUG 编译，`.o` 里照样有这个符号）。区别只在"谁去调它"：app 自己的代码一处都不调，只有预览工具来查这张表。
+
+后果，用本项目的话说：`p1列表单行.swift` 末尾那个 `#Preview` 里写了 `DiaryRowView(日记: ...)`。哪天你把 `DiaryRowView` 的参数改个名，忘了改 `#Preview` 里这行 —— **整个 app 编不过**，哪怕 app 跑起来根本不执行预览。
 
 ---
 
@@ -508,7 +540,7 @@ let b: any 会游泳 = 青蛙()   // ✓ 零警告 —— 没有 associatedtype:
 let c: 容器 = 箱子()         // ⚠️ 旧写法, 警告:
                             //    use of protocol '容器' as a type must be written
                             //    'any 容器'; this will be an error in a future Swift language mode
-let d: any 容器 = 箱子()     // ✓ 零警告 —— 新写法: 有 associatedtype 的必须加 any
+let d: any 容器 = 箱子()     // ✓ 零警告 —— 有 associatedtype 的写成 any
 ```
 
 `associatedtype` = 协议里的**占位类型名**, 谁符合谁填:
@@ -527,7 +559,7 @@ struct 日记: Identifiable { var id: String { 文件名 } }   // Identifiable �
 | -------------- | ------------------------------------------------------------ | ---------------------- |
 | ① **冒号后面** | `struct 青蛙: 会游泳`、`enum 蝌蚪: 会游泳`、`class 鱼: 会游泳` | 符合                   |
 | ② **泛型约束** | `func f<T: 会游泳>(_ x: T)`、`struct 箱子<T: 会游泳>`        | 约束                   |
-| ③ **值的类型** | `var a: any 会游泳` / `var b: some 会游泳`                   | 必须加 `any` 或 `some` |
+| ③ **值的类型** | `var a: any 会游泳` / `var b: some 会游泳`                   | any和some都写得出来，但**只有 `any` 能换值**（见下） |
 
 `any` 把 protocol 变成一个 **existential** 类型（所有符合者共用一个）；`some 协议` 是 **opaque** 类型.
 
@@ -561,6 +593,27 @@ func 同一个类型<T>(_ a: T, _ b: T) {}   // 探针: 两个参数共用一个
 //`type(of:)` 是标准库的。
 type(of: 造甲()) == 青蛙.self               // true —— 运行时那个值就是 青蛙
 ```
+
+### `some` 当变量类型 = 上了锁：写得出来，但一个值都换不了
+
+```swift
+var 甲: any 会游泳 = 青蛙()
+甲 = 鱼()                     // ✓ any: 想装谁装谁
+
+var 乙: some 会游泳 = 青蛙()
+乙 = 青蛙()                   // ❌ error: cannot assign value of type '青蛙' to type 'some 会游泳'
+乙 = 鱼()                     // ❌ 一样报错
+```
+
+`some` 读作"**某个我不说的类型**"。这个类型在**写下这行的时候**就定死了，之后谁都不许往里塞 —— 连同一个 `青蛙` 都不行，因为"写出来的 `青蛙`"和那个藏起来的类型，编译器当成两回事。（Swift 5 模式、6 模式实测都一样。）
+
+所以位置是这样分的：
+
+| 位置                   | 写什么                            | 例子                                                |
+| ---------------------- | --------------------------------- | --------------------------------------------------- |
+| 返回类型               | `some`（就它的主场）              | `var body: some View`、`func 造() -> some 会游泳`   |
+| 函数参数               | `some` = 泛型参数的简写，可以     | `func 收(_ x: some 会游泳)`                         |
+| **变量的类型**         | `any`（或直接写具体类型 `青蛙`）  | `var 甲: any 会游泳 = 青蛙()`                       |
 
 **`func 同一个类型<T>(_ a: T, _ b: T) {}`**
 

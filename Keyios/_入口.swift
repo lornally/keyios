@@ -42,7 +42,7 @@ struct KeyiosApp: App {
         WindowGroup {
             DiaryListView(diaries: sampleDiaries)
         }
-        // ↑ `sampleDiaries` 是 Models.swift 里的假数据。
+        // ↑ `sampleDiaries` 是 样本数据.swift 里的假数据。
         //   以后接上真实 dog 文件读取，换掉这个参数即可，DiaryListView 本身不用动。
     }
 }
@@ -66,6 +66,7 @@ struct KeyiosApp: App {
 //    Keyios/p2详情.swift      —— 详情页（占位）
 //    Keyios/p3新建.swift      —— 新建页（占位）
 //    Keyios/f1文件名.swift    —— 文件名缩减（纯函数，无界面）
-//    Keyios/Models.swift      —— 数据模型 + 假数据
+//    Keyios/d1行摘要.swift    —— 数据模型（Summary / DiaryEntry）
+//    Keyios/样本数据.swift    —— 假数据（MVP 阶段用）
 //    Keyios/Theme.swift       —— 配色
 // ============================================================================

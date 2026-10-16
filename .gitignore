@@ -12,6 +12,10 @@ DerivedData/
 # SwiftPM
 .swiftpm/
 
+# VSCode 的代码跳转配置 (含本机绝对路径), 换机器跑一次就好:
+#     brew install slime-studio/tap/sourcekit-xcode-bsp && sourcekit-xcode-bsp init
+buildServer.json
+
 # 截图 (build.sh 输出, 只是用来看效果的)
 shots/
 

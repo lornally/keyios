@@ -40,10 +40,10 @@ struct KeyiosApp: App {
         // WindowGroup 里放的就是第一屏。
         // ── 想改"打开 app 看到什么"，改的就是这一行 ──
         WindowGroup {
-            DiaryListView(diaries: sampleDiaries)
+            DiaryListView(日记表: 日记表)
         }
-        // ↑ `sampleDiaries` 是 样本数据.swift 里的假数据。
-        //   以后接上真实 dog 文件读取，换掉这个参数即可，DiaryListView 本身不用动。
+        // ↑ `日记表` 是 d1日记表.swift 里的假数据（字典: 文件名 -> 那一篇）。
+        //   以后接上真的"遍历 iCloud 目录"，换掉这个参数即可，DiaryListView 本身不用动。
     }
 }
 
@@ -66,7 +66,6 @@ struct KeyiosApp: App {
 //    Keyios/p2详情.swift      —— 详情页（占位）
 //    Keyios/p3新建.swift      —— 新建页（占位）
 //    Keyios/f1文件名.swift    —— 文件名缩减（纯函数，无界面）
-//    Keyios/d1行摘要.swift    —— 数据模型（Summary / DiaryEntry）
-//    Keyios/样本数据.swift    —— 假数据（MVP 阶段用）
+//    Keyios/d1日记表.swift    —— 内存数据（日记表字典 + 临时的假数据）
 //    Keyios/Theme.swift       —— 配色
 // ============================================================================

@@ -13,8 +13,10 @@ import SwiftUI
 
 struct DiaryListView: View {
 
-    /// 要显示的日记。现在从外面传（App 里传的假数据），以后换成从 iCloud 读的 dog 文件。
-    let diaries: [DiaryEntry]
+    /// 内存里的日记表: 文件名 -> 那一篇。
+    /// 字典本身**无序**，列表要的顺序在下面现排。
+    /// 现在从外面传（App 里传的假数据），以后换成真的从 iCloud 读出来的那张表。
+    let 日记表: [String: 日记]
 
     // ── 状态 ──
     // `@State` = "这个值会变，变了就重画界面"。
@@ -24,17 +26,30 @@ struct DiaryListView: View {
     @State private var searchText = ""          // 搜索框里打的字
     @State private var isSearching = false      // 搜索开着吗？(点底部放大镜时置 true)
     @State private var showingNewNote = false   // 新建页弹出来了吗？
-    @State private var path: [DiaryEntry] = []  // 导航栈：点进详情页时往里塞一条
+    @State private var path: [日记] = []        // 导航栈：点进详情页时往里塞一条
+
+    /// 字典 -> 列表。按日期**倒序**（新的在上）。
+    /// 文件名里没有日期的（比如 "摩托车"）排在最后，它们之间按名字排。
+    private var 按日期排: [日记] {
+        日记表.values.sorted { a, b in
+            switch (DiaryNameAbbreviator.日期(a.文件名), DiaryNameAbbreviator.日期(b.文件名)) {
+            case let (x?, y?): return x > y
+            case (nil, _?):    return false     // 没日期的沉底
+            case (_?, nil):    return true
+            default:           return a.文件名 < b.文件名
+            }
+        }
+    }
 
     /// 按搜索词过滤后的列表。
     /// 平时原样返回；搜索时只留对得上的行。
     /// `guard` = "不满足就立刻返回"，省掉一层 if 嵌套。
-    private var filtered: [DiaryEntry] {
-        guard isSearching, !searchText.isEmpty else { return diaries }
-        return diaries.filter { entry in
-            DiaryNameAbbreviator.abbreviate(entry.fileName).contains(searchText)  // 缩减后的名字
-                || entry.fileName.contains(searchText)                            // 原始文件名
-                || entry.summaries.contains { $0.text.contains(searchText) }      // 任一条摘要
+    private var 过滤后: [日记] {
+        guard isSearching, !searchText.isEmpty else { return 按日期排 }
+        return 按日期排.filter { d in
+            d.文件名.contains(searchText)                                          // 磁盘文件名
+                || DiaryNameAbbreviator.abbreviate(d.文件名).contains(searchText)  // 缩减后的名字
+                || d.摘要.contains { $0.contains(searchText) }                     // 任一条摘要
         }
     }
 
@@ -63,8 +78,8 @@ struct DiaryListView: View {
             .modifier(MinimizedSearchField())
 
             // 点列表某行 -> path 里加一条 -> 自动推进详情页
-            .navigationDestination(for: DiaryEntry.self) { entry in
-                DiaryDetailView(entry: entry)
+            .navigationDestination(for: 日记.self) { d in
+                DiaryDetailView(日记: d)
             }
 
             // `+` 按钮 -> 从底部升起新建页
@@ -97,10 +112,10 @@ struct DiaryListView: View {
         // Lazy = 只渲染屏幕上看得见的行，长列表才不卡。
         ScrollView {
             LazyVStack(spacing: 8) {
-                ForEach(filtered) { entry in
-                    DiaryRowView(entry: entry)
+                ForEach(过滤后) { d in
+                    DiaryRowView(日记: d)
                         .contentShape(Capsule())          // 让整条胶囊都可点（默认只有文字可点）
-                        .onTapGesture { path.append(entry) }
+                        .onTapGesture { path.append(d) }
                 }
             }
             .padding(.horizontal, 12)
@@ -142,5 +157,5 @@ private struct MinimizedSearchField: ViewModifier {
 // 习惯上每个界面文件末尾都配一个。
 // ────────────────────────────────────────────────────────────────────────────
 #Preview {
-    DiaryListView(diaries: sampleDiaries)
+    DiaryListView(日记表: 日记表)
 }

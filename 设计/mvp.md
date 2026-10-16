@@ -42,14 +42,39 @@
 
 
 
-#### 新便签页(新建页)
+## 新便签页(新建页)
 
 
 
 
-#### 日记详情页
+## 日记详情页
 
 
 
 
 
+
+
+## icloud相关
+
+## iCloud 文件有时间属性，而且不止一个
+
+从你机器上的 SDK 里抠出来的真名：
+
+| Swift 名字                 | 是什么                  |
+| -------------------------- | ----------------------- |
+| `.creationDate`            | 创建时间                |
+| `.contentModificationDate` | **mtime**，最后修改时间 |
+| `.contentAccessDate`       | 最后访问时间            |
+| `.addedToDirectoryDate`    | 被放进这个目录的时间    |
+
+
+
+```swift
+let 值 = try URL(fileURLWithPath: 路径).resourceValues(
+    forKeys: [.creationDateKey, .contentModificationDateKey])
+值.creationDate              // Date?
+值.contentModificationDate   // Date?
+```
+
+iCloud 还额外给两个键（判断文件是不是还没落到本地）：`.isUbiquitousItem`、`.ubiquitousItemDownloadingStatus`。

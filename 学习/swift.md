@@ -7,7 +7,7 @@
 ## 1. 变量声明
 
 ```swift
-let entry: DiaryEntry
+let 文件名: String
 private let categories = ["待办", "持续", "暂缓", "完成", "全部"]
 private static let weekdayNames = ["日", "一", "二", "三", "四", "五", "六"]
 @State private var searchText = ""
@@ -15,7 +15,7 @@ private static let weekdayNames = ["日", "一", "二", "三", "四", "五", "�
 
 | 片段 | 意思 |
 | --- | --- |
-| `let entry: DiaryEntry` | 不可变属性，名字 `entry`，类型 `DiaryEntry` |
+| `let 文件名: String` | 不可变属性，名字 `文件名`，类型 `String`（没有初始值，类型必须写） |
 | `private let categories = [...]` | `private` = 只有本文件能碰；类型推断出来，不用写 |
 | `private static let weekdayNames = [...]` | `static` = 属于类型本身，不属于实例 |
 | `@State private var searchText = ""` | `@State` = 值变了界面自动重画；`var` 可变 |
@@ -26,21 +26,21 @@ private static let weekdayNames = ["日", "一", "二", "三", "四", "五", "�
 ## 2. 结构体声明
 
 ```swift
-struct Summary: Identifiable, Hashable {
-    let id = UUID()
-    let time: String
-    let text: String
+struct 日记: Identifiable, Hashable {
+    let 文件名: String
+    let 摘要: [String]
+    var id: String { 文件名 }
 }
 ```
 
 | 片段 | 意思 |
 | --- | --- |
-| `struct Summary` | 声明一个结构体，名字 `Summary`（关键字在名字前） |
+| `struct 日记` | 声明一个结构体，名字 `日记`（关键字在名字前） |
 | `: Identifiable, Hashable` | 符合这两个协议。不是父类，是"能力清单" |
 | `Identifiable` | 我能提供一个 `id`。列表（ForEach）靠它区分第几行 |
 | `Hashable` | 我能比较相等，能当字典的 key |
-| `let id = UUID()` | 不可变属性，初始值 `UUID()`（每次生成新值） |
-| `let time: String` | 不可变属性，没有初始值 -> 构造时必须传 |
+| `let 文件名: String` | 不可变属性，没有初始值 -> 构造时必须传 |
+| `var id: String { 文件名 }` | 身份就是文件名（大括号里直接算，见 §12），不用 UUID |
 | struct vs class | 区别在赋值行为：struct 整体复制（改 A 不影响 B），class 传同一个对象。两者都能有方法 |
 
 ---
@@ -104,10 +104,10 @@ var onSearch: () -> Void = {}
 ## 6. 可选类型 `?` 及三种拆法
 
 ```swift
-private static func parseDate(_ s: String, calendar: Calendar) -> Date?
+static func 日期(_ fileName: String, calendar: Calendar = .current) -> Date?
 
-guard let date = parseDate(stripped, calendar: calendar) else {
-    return stripped
+guard let date = 日期(fileName, calendar: calendar) else {
+    return 干净名(fileName)
 }
 
 let days = calendar.dateComponents([.day], from: a, to: b).day ?? 0
@@ -118,7 +118,7 @@ let d = Calendar.current.date(byAdding: .day, value: -daysAgo, to: Date())!
 | 片段 | 意思 |
 | --- | --- |
 | `-> Date?` | 返回类型：可能是 Date，也可能是 nil。 |
-| `guard let date = parseDate(...) else { return stripped }` | 不是 nil -> 赋值给 `date` 继续；是 nil -> 执行 else 里的 return |
+| `guard let date = 日期(...) else { return 干净名(fileName) }` | 不是 nil -> 赋值给 `date` 继续；是 nil -> 执行 else 里的 return |
 | `.day` | `DateComponents` 的属性，类型是 `Int?` |
 | `?? 0` | 不是 nil 就用左边，是 nil 就用右边的 0 |
 | `...to: Date())!` | `!` = 我确定不是 nil，直接给值。猜错程序崩溃 |
@@ -148,20 +148,17 @@ return String(format: "%02d周%@", day, weekday(date, calendar))
 ## 8. 数组和元组类型
 
 ```swift
-let summaries: [Summary]
-private let rawData: [(Int, [(String, String)])] = [
-    (  0, [("10:12", "买菜"), ("11:22", "洗衣服")]),
-    (  3, [("22:10", "加班到十点")]),
-]
+let 摘要: [String]
+let 日记表: [String: 日记]
+private func 拆时间(_ 摘要: String) -> (时间: String?, 正文: String)
 ```
 
 | 片段 | 意思 |
 | --- | --- |
-| `[Summary]` | 数组，元素类型 Summary |
-| `[(Int, [(String, String)])]` | 从外往里读：数组；元素是元组；元组第一个是 `Int`，第二个是数组；那个数组的元素是 `(String, String)` 元组 |
-| `(  0, [ ... ])` | 一项：第一个值 `0`（距今几天），第二个值是一个数组 |
-| `("10:12", "买菜")` | 一个元组：按位置取，`.0`、`.1` |
-| 元组 | 几个值临时捆一起，不用先声明类型，按位置取值 |
+| `[String]` | 数组，元素类型 `String` |
+| `[String: 日记]` | 字典：键是 `String`，值是 `日记`。从外往里读，方括号里的冒号左边是键的类型、右边是值的类型 |
+| `(时间: String?, 正文: String)` | 元组：两个位置捆一起，还各起了名字。取的时候 `.时间` `.正文`，或者拆成两个变量 |
+| 元组 | 几个值临时捆一起，不用先声明类型；它和数组一样能嵌套（元组里放数组、数组里放元组都行） |
 
 ---
 
@@ -184,40 +181,38 @@ Button("关闭", action: { dismiss() })   // 和上一行完全等价，写全�
 ### 9.2 `in` 和 `$0`
 
 ```swift
-rawData.map { daysAgo, items in
-    DiaryEntry(fileName: day(daysAgo), summaries: items.map { Summary(time: $0.0, text: $0.1) })
-}
+let 名字列表 = 日记表.values.map { $0.文件名 }
+let 排序后  = 名字列表.sorted { a, b in a > b }
 ```
 
 | 片段 | 意思 |
 | --- | --- |
-| `map { ... }` | map 对数组每个元素调一次大括号里的闭包，要求闭包返回新值 |
-| `{ daysAgo, items in ... }` | `in` 前面是参数名，后面是闭包体。对应 JS 的 `(daysAgo, items) => { ... }` |
-| `daysAgo, items` | rawData 的元素是个元组 `(Int, [...])`，元组可以直接拆成两个参数：`daysAgo` = `.0`，`items` = `.1` |
-| 内层 `{ Summary(time: $0.0, text: $0.1) }` | 没写参数名时用 `$0` 指第一个参数。`items` 的元素是 `(String, String)`，所以 `$0.0` 是时间、`$0.1` 是内容 |
-| `$1` | 需要第二个参数时是 `$1`，以此类推 |
+| `map { ... }` | map 对每个元素调一次大括号里的闭包，要求闭包返回新值（这里是"取出它的文件名"） |
+| `{ $0.文件名 }` | 没写参数名时用 `$0` 指第一个参数。`日记表.values` 的元素是 `日记`，`$0` 就是其中一篇 |
+| `{ a, b in a > b }` | `in` 前面是参数名，后面是闭包体。对应 JS 的 `(a, b) => { ... }`。比较要两个参数，所以是 `a`、`b` |
+| `$1` | 不写参数名时，第二个参数是 `$1`，以此类推 |
 
 ### 9.3 `filter` 和 `contains` 的闭包
 
 ```swift
-[1, 2, 3, 4].filter { $0 % 2 == 0 }            // 结果是 [2, 4]
-diaries.filter { $0.text.contains(text) }
-entry.summaries.contains { $0.text.contains(text) }
+[1, 2, 3, 4].filter { $0 % 2 == 0 }                    // 结果是 [2, 4]
+按日期排.filter { $0.文件名.contains(searchText) }      // 当前元素是 日记
+日记.摘要.contains { $0.contains(searchText) }           // 当前元素是 String
 ```
 
 | 片段 | 意思 |
 | --- | --- |
 | `filter { ... }` | 对每个元素调一次闭包，返回 true 就留下 |
 | `{ $0 % 2 == 0 }` | `$0` = 当前元素（一个数），返回"是不是偶数" |
-| `{ $0.text.contains(text) }` | `$0` = 当前元素（DiaryEntry 或 Summary），`.text` 是它的属性 |
-| 同一行里两个 `contains` | 外层是数组的 `contains`（吃闭包），`$0.text` 是字符串，内层是字符串的 `contains`（吃字符串） |
+| `{ $0.文件名.contains(searchText) }` | `$0` = 当前那一篇日记，`.文件名` 是它的属性 |
+| 同一行里两个 `contains` | 外层是数组的 `contains`（吃闭包），`$0` 是字符串，内层是字符串的 `contains`（吃字符串） |
 
 ---
 
 ## 10. `guard` 和 `switch`
 
 ```swift
-guard isSearching, !searchText.isEmpty else { return diaries }
+guard isSearching, !searchText.isEmpty else { return 按日期排 }
 
 switch days {
 case ..<0:   return full(date)
@@ -242,15 +237,15 @@ default:     break
 ## 11. 类型标注什么时候能省
 
 ```swift
-let id = UUID()                  // 省: 右边能推出类型
-let time: String = "10:12"      // 写了也合法，就是多余
-let diaries: [DiaryEntry]        // 必须写: 值是从外面传的，没有初始值可推
+let 文件名 = "26-10-16_日记"        // 省: 右边能推出类型
+let 摘要: [String] = ["买菜"]       // 写了也合法，就是多余
+let 日记表: [String: 日记]          // 必须写: 值是从外面传的，没有初始值可推
 ```
 
 | 片段 | 意思 |
 | --- | --- |
-| `id = UUID()` | 不写 `: UUID`，编译器从右边推出来 |
-| `diaries: [DiaryEntry]` | 只有类型、没有值，只能手写类型 |
+| `文件名 = "26-10-16_日记"` | 不写 `: String`，编译器从右边推出来 |
+| `日记表: [String: 日记]` | 只有类型、没有值，只能手写类型 |
 | 一般规则 | 右边能看出类型就省，看不出（或想强制）才写 |
 
 ---
@@ -258,16 +253,16 @@ let diaries: [DiaryEntry]        // 必须写: 值是从外面传的，没有初
 ## 12. 计算属性
 
 ```swift
-private var filtered: [DiaryEntry] {
-    guard isSearching, !searchText.isEmpty else { return diaries }
-    return diaries.filter { ... }
+private var 过滤后: [日记] {
+    guard isSearching, !searchText.isEmpty else { return 按日期排 }
+    return 按日期排.filter { ... }
 }
 ```
 
 | 片段 | 意思 |
 | --- | --- |
-| `var filtered: [DiaryEntry] { ... }` | 没有 `=` 和值，直接跟大括号 = 计算属性：每次读都现算，不存值 |
-| `filtered` 的读法 | 不写括号，它不是函数 |
+| `var 过滤后: [日记] { ... }` | 没有 `=` 和值，直接跟大括号 = 计算属性：每次读都现算，不存值 |
+| `过滤后` 的读法 | 不写括号，它不是函数 |
 
 ---
 
@@ -275,7 +270,7 @@ private var filtered: [DiaryEntry] {
 
 ```swift
 @State private var searchText = ""
-@State private var path: [DiaryEntry] = []
+@State private var path: [日记] = []
 
 NavigationStack(path: $path) { ... }
 .searchable(text: $searchText, isPresented: $isSearching, prompt: "搜索日记")
@@ -296,7 +291,7 @@ NavigationStack(path: $path) { ... }
 @main
 struct KeyiosApp: App {
     var body: some Scene {
-        WindowGroup { DiaryListView(diaries: sampleDiaries) }
+        WindowGroup { DiaryListView(日记表: 日记表) }
     }
 }
 
@@ -310,7 +305,7 @@ private struct BarButton<Label: View>: ToolbarContent { ... }
 | --- | --- |
 | `@main` | 程序入口标记。整个 app 只有一个 |
 | `struct KeyiosApp: App` | 符合 App 协议 = 能被系统当"一个 app"启动 |
-| `var body: some Scene` | `some Scene` 读作"某种 Scene"。协议不能直接当返回类型写，加 `some` 就行 |
+| `var body: some Scene` | `Scene` 是**协议**不是能造值的类型。`some Scene` = "一个**具体**类型，它符合 Scene，名字不写"。写成 `Scene` 或 `any Scene` 都编译不过，见 §18 |
 | `WindowGroup { ... }` | 构造调用 + 尾随闭包 |
 | `body` 的固定写法 | App -> `some Scene`；View -> `some View`；ToolbarContent -> `some ToolbarContent` |
 | `BarButton<Label: View>` | 泛型：`Label` 是占位名字，约束"某种 View"，实际是啥由调用处决定 |
@@ -325,7 +320,7 @@ private struct BarButton<Label: View>: ToolbarContent { ... }
 @Environment(\.dismiss) private var dismiss
 @ViewBuilder var label: () -> Label
 if #available(iOS 26.0, *) { ... }
-#Preview { DiaryListView(diaries: sampleDiaries) }
+#Preview { DiaryListView(日记表: 日记表) }
 ```
 
 | 片段 | 意思 |
@@ -349,5 +344,190 @@ let color: Calendar
 | --- | --- |
 | `enum Theme { }` | 关键字在前：声明"Theme 是个枚举"。空 enum 当命名空间用，只挂 static 成员，不能被 `Theme()` 实例化 |
 | `let color: Calendar` | 冒号后：说"color 的类型是 Calendar" |
-| 为什么没有 `Theme: enum` | `enum` 是关键字不是类型，冒号后面只能放类型名。冒号那个位置是给协议留的（`: Identifiable`） |
+| 为什么没有 `Theme: enum` | 冒号那个位置要的是**类型**，而 `enum` 是关键字不是名字（编译器原话：`expected type`）。对 struct/enum 来说那个位置必须放**协议**（编译器原话：`inheritance from non-protocol type 'Int'`）；class 还能放父类 |
 | `DiaryNameAbbreviator` | 同一个用法：空 enum + 一堆 `static func` |
+
+---
+
+## 17. 数据结构有哪几种，区别在哪
+
+| 类型 | 长什么样 | 有序? | 靠什么取元素 | 变长? | 值/引用 | 项目里的 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 数组 `[T]` | `["买菜", "洗衣服"]` | 有序（按位置） | 下标 `[0]` | 变长 | 值 | `摘要: [String]`、`categories` |
+| 字典 `[K: V]` | `["26-10-16_日记": 日记(...)]` | **无序** | 键 | 变长 | 值 | `日记表` |
+| 集合 `Set<T>` | `Set(["a", "b"])` | 无序 | 只能问"在不在" | 变长 | 值 | （还没用到）自动去重 |
+| 元组 `(A, B)` | `(时间: "10:12", 正文: "买菜")` | 有序（按位置） | `.0` / `.时间` | 定长 | 值 | `拆时间()` 的返回类型 |
+| 结构体 `struct` | `struct 日记 { let 文件名: String }` | 字段固定 | 字段名 | — | 值 | `日记` |
+| 类 `class` | `class 下载进度 { var 已完成 = 0 }` | 字段固定 | 字段名 | — | **引用** | （还没用到） |
+| 枚举 `enum` | `enum 状态 { case 待办, 持续 }` | — | case 名 | 固定几个 | 值 | `Theme`、`DiaryNameAbbreviator` |
+
+两条最重要的分界线：
+
+1. **值 vs 引用** —— 数组/字典/集合/元组/struct/enum **都是值类型**：赋值和传参时整个复制，改一份不影响另一份。只有 `class` 是引用类型：传的是同一个对象，这边改了那边看得见。项目里目前一个 class 都没有，这是有意的 —— 默认就该用 struct。
+2. **现成容器 vs 自造类型** —— 前四种（数组/字典/集合/元组）是"装现成东西的容器"，装谁都行；后三种（struct/class/enum）是"自己造的类型"，一个字段一个字段定义出来，还能挂方法、协议。
+
+三个容易漏的：
+
+- **可选 `T?` 本身是个枚举**（`Optional` 只有两种 case：有值 / nil）。所以 `??`、`if let`、`guard let` 拆的其实是枚举（见 §6）
+- **函数/闭包 `(A) -> B` 也是能存进变量的值**：`var onSearch: () -> Void = {}` 就是"一个装着函数的变量"（见 §4）
+- **String 是个 struct**（所以字符串也是值语义，改一个副本不影响原串）
+
+### 各自的例子（造一个 → 用一下 → 看结果）
+
+```swift
+// ── 数组: 有序, 下标取, 允许重复 ──
+let 概览 = ["10:12 买菜", "11:22 洗衣服"]
+概览[0]                                  // "10:12 买菜"
+概览.count                               // 2
+概览 + ["21:00 散步"]                     // 拼出一串新的, 3 条
+
+// ── 字典: 键取, 键唯一, 无序 ──
+let 表 = ["26-10-16_日记": 日记(文件名: "26-10-16_日记", 摘要: ["10:12 买菜"])]
+表["26-10-16_日记"]?.摘要                  // ["10:12 买菜"]   (? 是因为可能取不到)
+表["没有这个"]                            // nil
+
+// ── 集合: 只关心"在不在", 自动去重 ──
+let 已读 = Set(["T1", "T2", "T1"])
+已读.count                               // 2  —— 重复的自动没了
+已读.contains("T1")                      // true
+
+// ── 元组: 几个值临时捆一起 ──
+let 拆 = 拆时间("10:12 买菜")
+拆.时间                                   // "10:12"  (类型 String? —— 可能没有)
+拆.正文                                   // "买菜"
+let (时间, 正文) = 拆时间("10:12 买菜")    // 也可以一步拆成两个变量 → 这叫**解构**
+
+// ── struct: 造一个, 取字段, 值语义(复制) ──
+let 今天 = 日记(文件名: "26-10-16_日记", 摘要: ["10:12 买菜"])
+今天.摘要.count                           // 1
+let 副本 = 今天                           // 整个复制一份, 后来的改动与 今天 无关
+
+// ── class: 引用语义(同一份, 共享) ──
+class 下载进度 { var 已完成 = 0 }
+let 甲 = 下载进度()
+let 乙 = 甲                               // 不是复制, 是同一个对象
+乙.已完成 = 3
+甲.已完成                                 // 3  —— 改乙就是改甲
+
+// ── enum: 值只有固定几种; switch 必须一个不漏 ──
+enum 待办状态 { case 待办, 持续, 暂缓, 完成 }
+let 状态 = 待办状态.待办
+状态 == .待办                             // true —— 简单 enum 自动能比相等, 不用声明 Equatable
+
+switch 状态 {
+case .待办: print("还没开始")              // 四个 case 少写一个, 编译直接报错
+case .持续: print("在做")
+case .暂缓: print("放一放")
+case .完成: print("完事了")
+}
+
+// 想让"所有 case"变成一个数组 (底部按钮那排将来就能这么写):
+enum 待办状态: CaseIterable { case 待办, 持续, 暂缓, 完成 }
+待办状态.allCases                         // [待办, 持续, 暂缓, 完成]
+```
+
+**解构**：只有**元组**能 `let (a, b) = ...` 这样一步拆开。enum 的关联值只能在 `switch` / `if case` 里拆；struct / class 是取字段（`今天.摘要`），数组是取下标（`概览[0]`），都不叫解构。
+
+| 问自己 | 就用 |
+| --- | --- |
+| 就是一串，按顺序 | 数组 |
+| 拿一个键/名字查东西 | 字典 |
+| 只判断"有没有"，要自动去重 | 集合 |
+| 临时捆几个值，用完就散 | 元组 |
+| 一组字段捆成新类型 | struct（默认） |
+| 需要共享同一份、要继承 | class |
+| 值只有固定这几种 | enum |
+
+---
+
+## 函数
+
+```swift
+let f: (Int) -> Int = { $0 + 1 }    
+func g(x: Int) -> Int { x + 1 }  
+```
+
+| 写法                | 标签（**调用时**写） | 内部名（**函数体里**用） | 怎么调用   |
+| ------------------- | -------------------- | ------------------------ | ---------- |
+| `func g(x: Int)`    | `x`                  | `x`                      | `g(x: 5)`  |
+| `func g(数 x: Int)` | `数`                 | `x`                      | `g(数: 5)` |
+| `func g(_ x: Int)`  | 无                   | `x`                      | `g(5)`     |
+
+
+
+## 1. Swift 的类型清单（就这些）
+
+| 分类            | 写法            | 例子                                                         |
+| --------------- | --------------- | ------------------------------------------------------------ |
+| **struct**      | `struct X {}`   | `Int`、`Bool`、`String`、数组、字典 —— **标准库里全是 struct**（`public struct Int`、public struct Array） |
+| **enum**        | `enum X {}`     | `Optional`（就是 `T?`，原文 `public enum Optional<Wrapped>`） |
+| **class**       | `class X {}`    | 项目里没有                                                   |
+| **元组 / 函数** | 无关键字，内建  | `(Int, String)`、`(Int) -> Int`                              |
+| **protocol**    | `protocol X {}` | `View`、`Scene`、`Identifiable`                              |
+
+Swift关键字只有 4 个（struct / enum / class / protocol）。** 别的语言里那些全是你熟悉的这 4 个变出来的：
+
+```swift
+int / string / 数组 / 字典  →  struct（标准库写的）
+null                        →  enum（Optional）
+元组 / 函数                  →  内建的复合类型
+抽象类 / 接口                →  protocol
+```
+
+能造值的类型"（狭义）= struct / enum / class / 元组 / 函数。协议不在里面.
+
+## 泛型
+
+泛型是"类型带参数"的机制，struct / enum / class / 函数都能带（刚跑通）：
+
+```swift
+struct 箱子<T> { var 内容: T }          // 泛型 struct —— Array / Dictionary / Set 就是
+enum 结果<T>   { case 成功(T) }         // 泛型 enum   —— Optional 就是
+class 栈<T>    { var 项: [T] = [] }     // 泛型 class
+func 取第一个<T>(_ a: [T]) -> T? { }    // 泛型函数
+```
+
+
+
+## 2. 抽象类/接口 ↔ 协议：**对**
+
+但是, 协议不能作为值的类型, 但是他可以作为struct/enum/class的类型
+
+| 位置           | 写法                                                         | 意思                   |
+| -------------- | ------------------------------------------------------------ | ---------------------- |
+| ① **冒号后面** | `struct 青蛙: 会游泳`、`enum 蝌蚪: 会游泳`、`class 鱼: 会游泳` | 符合                   |
+| ② **泛型约束** | `func f<T: 会游泳>(_ x: T)`、`struct 箱子<T: 会游泳>`        | 约束                   |
+| ③ **值的类型** | `var a: any 会游泳` / `var b: some 会游泳`                   | 必须加 `any` 或 `some` |
+
+any和some把protocol转化了
+
+| 写法        | 落在哪一档                          | 是新造的吗                                 |
+| ----------- | ----------------------------------- | ------------------------------------------ |
+| `some 协议` | 3 种之一（struct / enum / class）   | **不是** —— 就是背后那个具体类型，没有转化 |
+| `any 协议`  | 内建类型（如: 函数类型、元组, Any） | **是** —— 从协议造出来的一个新类型         |
+
+
+
+---
+
+## 19. 怎么在命令行跑 Swift
+
+和 Python 几乎一一对应（都在终端实测过）：
+
+| 想干啥 | Swift | Python 对应 |
+| --- | --- | --- |
+| 跑一个文件 | `swift 文件.swift` | `python x.py` |
+| 交互式 | `swift repl` | `python` |
+| 一行式 | `swift -e 'print(6*7)'` | `python -c 'print(6*7)'` |
+| 编成可执行文件再跑 | `swiftc 文件.swift -o 名字 && ./名字` | （没有这么直接的对等物） |
+
+```bash
+$ swift /tmp/a.swift            # 直接跑
+$ echo 'print(6*7)' | swift repl   # 交互式的管子版, 输出 42
+$ swift -e 'print(6*7)'         # 42
+```
+
+两条边界：
+
+- 纯逻辑（字符串、数组、日期、算法）随便在终端跑
+- 用到 SwiftUI / UIKit 的代码**不能在终端跑** —— 它要 iOS SDK 和模拟器，只能走项目里的 `./build.sh`。以后 dog 解析这类纯逻辑抽成 SwiftPM 包，就能 `swift test` 在终端里毫秒级验证（不用开模拟器）

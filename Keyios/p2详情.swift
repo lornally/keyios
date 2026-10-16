@@ -18,7 +18,7 @@ import SwiftUI
 struct DiaryDetailView: View {
 
     /// 点的是哪一篇。列表页推进来的时候传进来。
-    let entry: DiaryEntry
+    let 日记: 日记
 
     var body: some View {
         ZStack {
@@ -29,11 +29,11 @@ struct DiaryDetailView: View {
                     .font(.title2)
                     .foregroundStyle(Theme.primaryText)
 
-                Text(DiaryNameAbbreviator.abbreviate(entry.fileName))
+                Text(DiaryNameAbbreviator.abbreviate(日记.文件名))
                     .font(.headline)
                     .foregroundStyle(Theme.accent)
 
-                Text(entry.fileName)
+                Text(日记.文件名)          // 磁盘上的原始文件名
                     .font(.caption)
                     .foregroundStyle(Theme.secondaryText)
 
@@ -47,7 +47,7 @@ struct DiaryDetailView: View {
             }
             .padding()
         }
-        .navigationTitle(DiaryNameAbbreviator.abbreviate(entry.fileName))
+        .navigationTitle(DiaryNameAbbreviator.abbreviate(日记.文件名))
         .navigationBarTitleDisplayMode(.inline)
         .preferredColorScheme(.dark)
     }
@@ -61,7 +61,7 @@ struct DiaryDetailView: View {
 // ────────────────────────────────────────────────────────────────────────────
 #Preview {
     NavigationStack {
-        DiaryDetailView(entry: sampleDiaries[0])
+        DiaryDetailView(日记: 日记表["26-10-16_日记"]!)
     }
     .preferredColorScheme(.dark)
 }

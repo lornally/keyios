@@ -305,7 +305,7 @@ private struct BarButton<Label: View>: ToolbarContent { ... }
 | --- | --- |
 | `@main` | 程序入口标记。整个 app 只有一个 |
 | `struct KeyiosApp: App` | 符合 App 协议 = 能被系统当"一个 app"启动 |
-| `var body: some Scene` | `Scene` 是**协议**不是能造值的类型。`some Scene` = "一个**具体**类型，它符合 Scene，名字不写"。写成 `Scene` 或 `any Scene` 都编译不过，见 §18 |
+| `var body: some Scene` | `Scene` 是**协议**不是能造值的类型。`some Scene` = 一个 **opaque** 类型（见 §21），底层是**某个具体类型**，名字不写。写成 `Scene` 或 `any Scene` 都编译不过 |
 | `WindowGroup { ... }` | 构造调用 + 尾随闭包 |
 | `body` 的固定写法 | App -> `some Scene`；View -> `some View`；ToolbarContent -> `some ToolbarContent` |
 | `BarButton<Label: View>` | 泛型：`Label` 是占位名字，约束"某种 View"，实际是啥由调用处决定 |
@@ -440,7 +440,7 @@ enum 待办状态: CaseIterable { case 待办, 持续, 暂缓, 完成 }
 
 ---
 
-## 函数
+## 18. 函数
 
 ```swift
 let f: (Int) -> Int = { $0 + 1 }    
@@ -455,17 +455,20 @@ func g(x: Int) -> Int { x + 1 }
 
 
 
-## 1. Swift 的类型清单（就这些）
+## 19. Swift 的类型清单（就这些）
 
 | 分类            | 写法            | 例子                                                         |
 | --------------- | --------------- | ------------------------------------------------------------ |
 | **struct**      | `struct X {}`   | `Int`、`Bool`、`String`、数组、字典 —— **标准库里全是 struct**（`public struct Int`、public struct Array） |
 | **enum**        | `enum X {}`     | `Optional`（就是 `T?`，原文 `public enum Optional<Wrapped>`） |
 | **class**       | `class X {}`    | 项目里没有                                                   |
+| **actor**       | `actor X {}`    | 项目里没有（和 class 一样是引用类型，多了并发隔离）          |
 | **元组 / 函数** | 无关键字，内建  | `(Int, String)`、`(Int) -> Int`                              |
 | **protocol**    | `protocol X {}` | `View`、`Scene`、`Identifiable`                              |
+| **existential** | 无关键字，内建  | `any 会游泳`、`Any`（= 不要求任何东西的 any）                |
+| **opaque**      | `some 协议`     | `some View`、`some Scene`                                    |
 
-Swift关键字只有 4 个（struct / enum / class / protocol）。** 别的语言里那些全是你熟悉的这 4 个变出来的：
+造类型的关键字 5 个（struct / enum / class / actor / protocol）。别的语言里那些全是你熟悉的这几个变出来的：
 
 ```swift
 int / string / 数组 / 字典  →  struct（标准库写的）
@@ -474,9 +477,9 @@ null                        →  enum（Optional）
 抽象类 / 接口                →  protocol
 ```
 
-能造值的类型"（狭义）= struct / enum / class / 元组 / 函数。协议不在里面.
+能造值的类型（狭义）= struct / enum / class / actor / 元组 / 函数。协议不在里面。
 
-## 泛型
+## 20. 泛型
 
 泛型是"类型带参数"的机制，struct / enum / class / 函数都能带（刚跑通）：
 
@@ -489,9 +492,36 @@ func 取第一个<T>(_ a: [T]) -> T? { }    // 泛型函数
 
 
 
-## 2. 抽象类/接口 ↔ 协议：**对**
+## 21. 抽象类/接口 ↔ 协议：**对**
 
-但是, 协议不能作为值的类型, 但是他可以作为struct/enum/class的类型
+当值的类型时, 协议名有两种写法（下面每行注释都是实测输出, 见 research/some与any.swift 实验 1、2）:
+
+```swift
+protocol 会游泳 {}                         // 没有 associatedtype
+protocol 容器 { associatedtype 元素 }       // 有 associatedtype
+struct 青蛙: 会游泳 {}
+struct 箱子: 容器 { typealias 元素 = Int }
+
+let a: 会游泳 = 青蛙()       // ✓ 零警告
+let b: any 会游泳 = 青蛙()   // ✓ 零警告 —— 没有 associatedtype: 裸名、any 都行
+
+let c: 容器 = 箱子()         // ⚠️ 旧写法, 警告:
+                            //    use of protocol '容器' as a type must be written
+                            //    'any 容器'; this will be an error in a future Swift language mode
+let d: any 容器 = 箱子()     // ✓ 零警告 —— 新写法: 有 associatedtype 的必须加 any
+```
+
+`associatedtype` = 协议里的**占位类型名**, 谁符合谁填:
+
+```swift
+protocol 容器 { associatedtype 元素 }
+struct 箱子: 容器 { typealias 元素 = Int }   // 填法一: 明写
+
+protocol 有内容 { associatedtype 元素; var 内容: [元素] { get } }
+struct 筐: 有内容 { var 内容: [Int] }        // 填法二: 从用它的地方推出来 → 元素 = Int
+
+struct 日记: Identifiable { var id: String { 文件名 } }   // Identifiable 的 ID = String（填法二）
+```
 
 | 位置           | 写法                                                         | 意思                   |
 | -------------- | ------------------------------------------------------------ | ---------------------- |
@@ -499,18 +529,95 @@ func 取第一个<T>(_ a: [T]) -> T? { }    // 泛型函数
 | ② **泛型约束** | `func f<T: 会游泳>(_ x: T)`、`struct 箱子<T: 会游泳>`        | 约束                   |
 | ③ **值的类型** | `var a: any 会游泳` / `var b: some 会游泳`                   | 必须加 `any` 或 `some` |
 
-any和some把protocol转化了
+`any` 把 protocol 变成一个 **existential** 类型（所有符合者共用一个）；`some 协议` 是 **opaque** 类型.
 
-| 写法        | 落在哪一档                          | 是新造的吗                                 |
-| ----------- | ----------------------------------- | ------------------------------------------ |
-| `some 协议` | 3 种之一（struct / enum / class）   | **不是** —— 就是背后那个具体类型，没有转化 |
-| `any 协议`  | 内建类型（如: 函数类型、元组, Any） | **是** —— 从协议造出来的一个新类型         |
+| 写法        | 落在哪一档                                   | 是新造的吗                                                   |
+| ----------- | -------------------------------------------- | ------------------------------------------------------------ |
+| `some 协议` | §19 里的 opaque                              | **是** —— 底层类型由函数体定（4 种之一）（struct / enum / class / actor） |
+| `any 协议`  | §19 里的 existential（官方名，没有中文对译） | **是** —— 从协议造出来的一个新类型                           |
 
+`any 会游泳` 是一个类型，青蛙鱼都装得进；`some 会游泳` 每个函数各一个：
 
+```swift
+protocol 会游泳 {}
+struct 青蛙: 会游泳 {}
+struct 鱼:   会游泳 {}
+
+var 任意: any 会游泳 = 青蛙()
+任意 = 鱼()                                  // ✓ any: 一个类型, 谁都能装
+
+func 造甲()  -> some 会游泳 { 青蛙() }
+func 造甲2() -> some 会游泳 { 青蛙() }        // 协议一样, 函数体一字不差
+
+//为了测"是不是同一个类型"临时造的函数
+func 同一个类型<T>(_ a: T, _ b: T) {}   // 探针: 两个参数共用一个 T, 只有"同一个类型"才编得过
+
+同一个类型(造甲(), 造甲2())
+// ❌ error: conflicting arguments to generic parameter 'T'
+//    ('some 会游泳' (result type of '造甲') vs. 'some 会游泳' (result type of '造甲2'))
+
+同一个类型(造甲(), 造甲())   // ✓ 同一个函数调两次: 还是同一个类型（按"声明"算, 不是按"每次调用"）
+
+//`type(of:)` 是标准库的。
+type(of: 造甲()) == 青蛙.self               // true —— 运行时那个值就是 青蛙
+```
+
+**`func 同一个类型<T>(_ a: T, _ b: T) {}`**
+
+| 片段         | 意思                                                         |
+| ------------ | ------------------------------------------------------------ |
+| `func`       | 声明函数                                                     |
+| `同一个类型` | 函数名。我瞎起的，叫 `是不是一回事`、`day`、`abbreviate` 都一样，就是个名字 |
+| `<T>`        | 泛型参数（§20 那种）：`T` 是**占位类型名**，调用时由编译器填成实际类型 |
+| `_ a: T`     | 第一个参数叫 `a`，类型写的是 `T`；`_` = 调用时不写标签       |
+| `_ b: T`     | 第二个参数 `b`，**也写 `T`** —— 两个参数共用同一个 T         |
+| `{}`         | 函数体空的：它什么都不干，作用全在签名上                     |
+
+关键就是"两个参数共用同一个 `T`"：编译器没法把 `T` 同时填成两种类型。所以 `同一个类型(x, y)` 能编过的唯一条件就是 x、y 是同一个类型 —— 等于把它变成了一个编译错误开关。实测：
+
+```swift
+同一个类型(青蛙(), 青蛙())   // ✓ 编过
+同一个类型(青蛙(), 鱼())     // ❌ error: conflicting arguments to generic parameter 'T' ('青蛙' vs. '鱼')
+```
+
+**`type(of: 造甲()) == 青蛙.self`**
+
+| 片段               | 意思                                                         |
+| ------------------ | ------------------------------------------------------------ |
+| `type(of:)`        | 标准库的函数：传一个值进去，返回它在**运行时**实际是什么类型。`of` 是参数标签 |
+| `type(of: 造甲())` | 结果就是 `青蛙`                                              |
+| `.self`            | 接在类型名后面 = 把"类型"本身当值用。`青蛙.self` 是"青蛙这个类型"，不是一只青蛙 |
+| `==`               | 比较相等                                                     |
+| 整句               | 问"造甲() 运行时那个值是不是青蛙类型" → `true`               |
+
+**为什么两个都要**：一个问编译期，一个问运行期 —— 而这两个答案不一样，正是这段要说的：
+
+- `同一个类型(...)` 报错 = **编译期**：编译器把两个函数的 `some 会游泳` 当成两个不同类型
+- `type(of: ...)` 是 true = **运行期**：那个值就是一只青蛙
+
+进一步实测：
+
+```swift
+同一个类型(造甲(), 造甲())    // ✓ 编过
+let 一堆 = [造甲(), 造甲()]   // ✓ 连数组都放得进, 2 个元素
+```
+
+所以那句"每个 some xxx 都是不同的类型"要改成：**每个「声明」一个类型，不是每次调用一个**。`造甲` 调一万次，拿到的都是同一个类型；只有换一个函数（`造甲2`）才变成另一个类型。
+
+再往下推一层（顺手也测了，`造` 是带泛型的）：
+
+```swift
+func 造<T>(_ x: T) -> some 会游泳 { 青蛙() }
+
+同一个类型(造(1), 造(1))      // ✓ 同一个函数 + 同一个泛型实参 = 同一个类型
+同一个类型(造(1), 造("a"))    // ❌ error: conflicting arguments to generic parameter 'T' ('Int' vs. 'String')
+```
+
+所以完整的规则是：**声明 + 泛型实参** 才算一个 —— `造<Int>()` 和 `造<String>()` 是两个类型。
 
 ---
 
-## 19. 怎么在命令行跑 Swift
+## 22. 怎么在命令行跑 Swift
 
 和 Python 几乎一一对应（都在终端实测过）：
 

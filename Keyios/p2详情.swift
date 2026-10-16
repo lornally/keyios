@@ -41,7 +41,7 @@ struct DiaryDetailView: View {
                     .font(.footnote)
                     .foregroundStyle(Theme.secondaryText)
 
-                Text("代码在 Keyios/DiaryDetailView.swift")
+                Text("代码在 Keyios/p2详情.swift")
                     .font(.footnote)
                     .foregroundStyle(Theme.accent)
             }
@@ -57,7 +57,7 @@ struct DiaryDetailView: View {
 // #Preview：不是 app 会跑的代码，只是给编辑器/预览工具"单独画这一屏"用。
 // 外面包一层 NavigationStack 是因为这一页依赖于"被推进来"（要有导航栏和返回键），
 // 不包的话预览里就看不到导航栏。
-// （完整说明见 DiaryListView.swift 末尾）
+// （完整说明见 p1列表.swift 末尾）
 // ────────────────────────────────────────────────────────────────────────────
 #Preview {
     NavigationStack {

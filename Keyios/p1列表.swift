@@ -76,7 +76,7 @@ struct DiaryListView: View {
             // 注意：`.bottomBar`（底部那条）不受这行影响，它们是两码事。
             .toolbar(.hidden, for: .navigationBar)
 
-            // 底部那条按钮。内容在 BottomBar.swift 里定义。
+            // 底部那条按钮。内容在 p1_底部按钮.swift 里定义。
             .toolbar {
                 BottomBar(
                     onSearch: { isSearching = true },

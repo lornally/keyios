@@ -8,8 +8,8 @@
 // 苹果只要求一件事：整个 app 里有且只有一个 `@main`。
 //
 // 那为什么大家都叫 xxxApp.swift？因为用 Xcode 新建项目时它默认就这么生成，
-// 于是成了社区惯例。我们跟着用，是为了别人（和人自己几年后）一眼能认出来。
-// 所以你完全可以把它改名成 `Qidong.swift`，只要 `@main` 还在，照样能跑。
+// 于是成了社区惯例。我们没跟这个惯例 —— 这个文件叫 `_入口.swift`，
+// 前面的 `_` 只是让它在文件列表里排最前面。只要 `@main` 还在，照样能跑。
 //
 // ── 再说这三个套娃：App / Scene / WindowGroup ──────────────────────────────
 //
@@ -59,10 +59,13 @@ struct KeyiosApp: App {
 //    project.yml 里开了 `GENERATE_INFOPLIST_FILE: YES`，Xcode 按构建设置现生成。
 //    要加自己的项（比如 iCloud capability），改成在 project.yml 里填。
 //
-// 3. 界面代码在哪？
-//    Keyios/DiaryListView.swift    —— 日记列表页（唯一做完的页）
-//    Keyios/DiaryRowView.swift     —— 列表里的"一行"长什么样
-//    Keyios/BottomBarView.swift    —— 底部那条浮动按钮栏
-//    Keyios/NewNoteView.swift      —— 新建页（占位）
-//    Keyios/DiaryDetailView.swift  —— 详情页（占位）
+// 3. 界面代码在哪？（文件名规则：`pN` = 第 N 页, `fN` = 函数, `_` 开头 = 入口）
+//    Keyios/p1列表.swift      —— 日记列表页（唯一做完的页）
+//    Keyios/p1列表单行.swift  —— 列表里的"一行"长什么样
+//    Keyios/p1_底部按钮.swift —— 底部那条浮动按钮栏
+//    Keyios/p2详情.swift      —— 详情页（占位）
+//    Keyios/p3新建.swift      —— 新建页（占位）
+//    Keyios/f1文件名.swift    —— 文件名缩减（纯函数，无界面）
+//    Keyios/Models.swift      —— 数据模型 + 假数据
+//    Keyios/Theme.swift       —— 配色
 // ============================================================================

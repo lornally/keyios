@@ -29,7 +29,7 @@ struct NewNoteView: View {
                     .font(.footnote)
                     .foregroundStyle(Theme.secondaryText)
 
-                Text("代码在 Keyios/NewNoteView.swift")
+                Text("代码在 Keyios/p3新建.swift")
                     .font(.footnote)
                     .foregroundStyle(Theme.accent)
 
@@ -45,7 +45,7 @@ struct NewNoteView: View {
 // ────────────────────────────────────────────────────────────────────────────
 // #Preview：不是 app 会跑的代码，只是给编辑器/预览工具"单独画这一屏"用。
 // 有它就能不跑整个 app、直接看这一页长什么样。
-// （完整说明见 DiaryListView.swift 末尾）
+// （完整说明见 p1列表.swift 末尾）
 // ────────────────────────────────────────────────────────────────────────────
 #Preview {
     NewNoteView()

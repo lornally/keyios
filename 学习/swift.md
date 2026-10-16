@@ -687,7 +687,18 @@ $ echo 'print(6*7)' | swift repl   # 交互式的管子版, 输出 42
 $ swift -e 'print(6*7)'         # 42
 ```
 
-两条边界：
+两条边界，分清"跑起来看界面"和"只检查能不能编"：
 
 - 纯逻辑（字符串、数组、日期、算法）随便在终端跑
-- 用到 SwiftUI / UIKit 的代码**不能在终端跑** —— 它要 iOS SDK 和模拟器，只能走项目里的 `./build.sh`。以后 dog 解析这类纯逻辑抽成 SwiftPM 包，就能 `swift test` 在终端里毫秒级验证（不用开模拟器）
+- 用到 SwiftUI / UIKit 的代码**不能在终端跑起来看界面** —— 那要模拟器，只能走项目里的 `./build.sh`。
+  但**"只检查能不能编"（不跑）在终端就能做**，加两个参数：
+
+  ```bash
+  xcrun -sdk iphonesimulator swiftc -typecheck -target arm64-apple-ios17.0-simulator Keyios/*.swift
+  ```
+
+  实测：整份项目源码这样检查是**通过**的（research/ 里那几段实验用的就是这条命令）。
+  不加 `-sdk iphonesimulator` 会按 macOS 编，同一份代码立刻报 8 个错 —— 全是 `'bottomBar' is unavailable in macOS`，
+  也就是说挡路的是**iOS 专属的 API**，不是 SwiftUI 本身。
+
+- 以后 dog 解析这类纯逻辑抽成 SwiftPM 包，就能 `swift test` 在终端里毫秒级验证（不用开模拟器）

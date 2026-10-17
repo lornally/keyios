@@ -36,7 +36,7 @@ struct 日记: Identifiable, Hashable {
 | 片段 | 意思 |
 | --- | --- |
 | `struct 日记` | 声明一个结构体，名字 `日记`（关键字在名字前） |
-| `: Identifiable, Hashable` | 符合这两个协议。不是父类，是"能力清单" |
+| `: Identifiable, Hashable` | 遵循这两个协议。不是父类，是"能力清单" |
 | `Identifiable` | 我能提供一个 `id`。列表（ForEach）靠它区分第几行 |
 | `Hashable` | 我能比较相等，能当字典的 key |
 | `let 文件名: String` | 不可变属性，没有初始值 -> 构造时必须传 |
@@ -344,7 +344,7 @@ private struct BarButton<Label: View>: ToolbarContent { ... }
 | 片段 | 意思 |
 | --- | --- |
 | `@main` | 程序入口标记。整个 app 只有一个 |
-| `struct KeyiosApp: App` | 符合 App 协议 = 能被系统当"一个 app"启动 |
+| `struct KeyiosApp: App` | 遵循 App 协议 = 能被系统当"一个 app"启动 |
 | `var body: some Scene` | `Scene` 是**协议**不是能造值的类型。`some Scene` = 一个 **opaque** 类型（见 §21），底层是**某个具体类型**，名字不写。写成 `Scene` 或 `any Scene` 都编译不过 |
 | `WindowGroup { ... }` | 构造调用 + 尾随闭包 |
 | `body` 的固定写法 | App -> `some Scene`；View -> `some View`；ToolbarContent -> `some ToolbarContent` |
@@ -591,7 +591,7 @@ let c: 容器 = 箱子()         // ⚠️ 旧写法, 警告:
 let d: any 容器 = 箱子()     // ✓ 零警告 —— 有 associatedtype 的写成 any
 ```
 
-`associatedtype` = 协议里的**占位类型名**, 谁符合谁填:
+`associatedtype` = 协议里的**占位类型名**, 谁遵循谁填:
 
 ```swift
 protocol 容器 { associatedtype 元素 }
@@ -603,13 +603,59 @@ struct 筐: 有内容 { var 内容: [Int] }        // 填法二: 从用它的地
 struct 日记: Identifiable { var id: String { 文件名 } }   // Identifiable 的 ID = String（填法二）
 ```
 
+### 21.1 泛型参数 vs `associatedtype`：一对对偶，Swift 只做了半边
+
+两个都是"占位类型"，但方向相反：**泛型是输入**（用的人给，∀），**associatedtype 是输出**（实现的人给，∃）。
+
+下面把"声明遵循某协议的类型"简称**遵循者**（conforming type；`struct 甲: 容器` 里的 `甲` 就是）。
+
+| | 泛型 `<T>` | `associatedtype` |
+| --- | --- | --- |
+| 谁选 | 用的人（调用处/字段声明处） | 实现协议的类型（写遵循处） |
+| 在哪定死 | **每个使用处**各定一次，可以并存 | **每个遵循者**定一次，之后固定 |
+
+占位符本身两边一样，**没有区别** —— `associatedtype` 也随遵循者变成不同的具体类型，不是"只有一种"：
+
+```swift
+protocol 容器 { associatedtype 元素 }
+struct 甲: 容器 { typealias 元素 = Int }
+struct 乙: 容器 { typealias 元素 = String }      // 各填各的
+
+func 取<T: 容器>(_ x: T, _ e: T.元素) -> T.元素 { e }
+取(甲(), 1)        // T = 甲 → T.元素 = Int
+取(乙(), "x")      // T = 乙 → T.元素 = String
+
+struct 箱子<T> { var 内容: T }
+let a = 箱子(内容: 1); let b = 箱子(内容: "x")   // 箱子<Int> / 箱子<String>, 两个类型并存
+extension 甲: 容器 {}                            // ❌ redundant conformance of '甲' to protocol '容器'
+```
+
+差别只剩在"谁在什么时候定死"：泛型是**每个使用处**各定一次（同一个 `箱子` 可以有无数个实例类型）；
+`associatedtype` 是**每个遵循者**在声明遵循时（`struct 甲: 容器`）定一次 —— 可以 `typealias 元素 = Int` 明写，
+也可以从成员的**声明类型**推出来（前面"填法二"：`var 内容: [Int]` → 元素 = Int）。
+它跟"初始值"无关：类型不是一个值，没有初始值这回事 —— 必须从初始值推类型的那个是 `var 乙: some 会游泳`（见上）。
+
+Rust 两边都有，选法一句话：**一个类型可能有多份实现 → 泛型参数；只有一份 → 关联类型**（`Iterator::Item`）。
+
+Swift 只有 associatedtype 这半边。协议上的尖括号**也不是**泛型参数，是主关联类型（SE-0346）——
+只是让存在类型能把它钉住，填的仍然是实现者：
+
+```swift
+protocol 容器<元素> { associatedtype 元素; var 内容: 元素 { get } }
+let a: any 容器<Int> = 箱(内容: 1)           // ✓
+let c: any 容器<String> = 箱(内容: 1)        // ❌ cannot convert value of type 'Int' to specified type 'String'
+```
+
+对偶的另一半（协议由**用的人**选参数、一个类型可以按不同参数遵循多次）Swift 没有对等物，
+只能拿泛型函数 / 泛型 struct 去凑 —— 所以这两套语法看着不像一个东西的两面。
+
 | 位置           | 写法                                                         | 意思                   |
 | -------------- | ------------------------------------------------------------ | ---------------------- |
-| ① **冒号后面** | `struct 青蛙: 会游泳`、`enum 蝌蚪: 会游泳`、`class 鱼: 会游泳` | 符合                   |
+| ① **冒号后面** | `struct 青蛙: 会游泳`、`enum 蝌蚪: 会游泳`、`class 鱼: 会游泳` | 遵循                   |
 | ② **泛型约束** | `func f<T: 会游泳>(_ x: T)`、`struct 箱子<T: 会游泳>`        | 约束                   |
 | ③ **值的类型** | `var a: any 会游泳` / `var b: some 会游泳`                   | any和some都写得出来，但**只有 `any` 能换值**（见下） |
 
-`any` 把 protocol 变成一个 **existential** 类型（所有符合者共用一个）；`some 协议` 是 **opaque** 类型.
+`any` 把 protocol 变成一个 **existential** 类型（所有遵循者共用一个）；`some 协议` 是 **opaque** 类型.
 
 | 写法        | 落在哪一档                                   | 是新造的吗                                                   |
 | ----------- | -------------------------------------------- | ------------------------------------------------------------ |
@@ -740,27 +786,24 @@ func 造<T>(_ x: T) -> some 会游泳 { 青蛙() }
 
 ## 22. 怎么在命令行跑 Swift
 
-和 Python 几乎一一对应（都在终端实测过）：
+四步，别混：**静态检查 → 编译 → 链接 → 运行**。
 
-| 想干啥 | Swift | Python 对应 |
-| --- | --- | --- |
-| 跑一个文件 | `swift 文件.swift` | `python x.py` |
-| 交互式 | `swift repl` | `python` |
-| 一行式 | `swift -e 'print(6*7)'` | `python -c 'print(6*7)'` |
-| 编成可执行文件再跑 | `swiftc 文件.swift -o 名字 && ./名字` | （没有这么直接的对等物） |
+| 停在哪一步 | 命令 | 干什么 | 产物 |
+| --- | --- | --- | --- |
+| 静态检查 | `swiftc -typecheck x.swift` | 语法 + 类型 | 没有 |
+| 编译 | `swiftc -c x.swift` | 检查 + 生成机器码 | `x.o` |
+| 链接 | `swiftc x.o -o 名字` | 把 .o 和系统库拼起来 | 可执行文件 |
+| 运行 | `./名字` | 执行 | 输出 |
 
-```bash
-$ swift /tmp/a.swift            # 直接跑
-$ echo 'print(6*7)' | swift repl   # 交互式的管子版, 输出 42
-$ swift -e 'print(6*7)'         # 42
-```
+日常就是打包：`swiftc x.swift -o 名字` = 编译 + 链接；`swift x.swift` = 编译 + 链接 + 运行；
+`swift -e 'print(6*7)'` 一行式（输出 42）；`swift repl` 交互式。
+`swiftc -v` 能看到两条命令：先 `swift-frontend -frontend -c … -o a.o`，再 `clang a.o … -o 程序`（clang 负责链接）。
 
 两条边界，分清"跑起来看界面"和"只检查能不能编"：
 
 - 纯逻辑（字符串、数组、日期、算法）随便在终端跑
 - 用到 SwiftUI / UIKit 的代码**不能在终端跑起来看界面** —— 那要模拟器，只能走项目里的 `./build.sh`。
-  但"只检查能不能编"（不跑）在终端就能做。
-- 这其中 `-typecheck` 和`-c`有巨大差异
+  但"只检查能不能编"（不跑）在终端就能做 —— 注意下面 `-typecheck` 和 `-c` 的差别：
 
   **先记住 `-typecheck` 的坑：它不等于"能不能编"。** 它只跑到"类型检查"为止，后面（SILGen）才发现的错它不报 ——
   `missing return`、读还没赋值的变量都是这一类：
@@ -817,7 +860,24 @@ $ swift -e 'print(6*7)'         # 42
 Swift 是值类型复制（容器写时复制）+ 引用类型 ARC **运行时**引用计数 —— 循环引用要手动 `weak`，生命周期基本不写进签名。
 这条差异的直接后果就在上表第三行：**Rust 是编不过，Swift 是跑着炸**。
 
-另外几处 Swift 明显是另一路人：有 class 和继承（Rust 故意不要）、协议能给别人的类型补符合（retroactive conformance）、
+另外几处 Swift 明显是另一路人：有 class 和继承（Rust 故意不要）、协议能给别人的类型补遵循（retroactive conformance）、
 错误处理是 `throws` 副作用而不是 `Result` 值。
 
 （Rust 那列没实测 —— 这台机器没装 rustc，写的是它固定的语言规则；Swift 那列每条都跑过。）
+
+---
+
+## 24. 文档从哪查（给以后扩充本文的 AI）
+
+| 查什么 | 去哪 | 怎么抓 |
+| --- | --- | --- |
+| 语言 / 语法 / 语义 | [docs.swift.org](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/)（TSPL 英文原书） | 有 JSON 后端：`docs.swift.org/swift-book/data/documentation/the-swift-programming-language/<章节>.json` |
+| 官网 / 下载 / 新闻 | `www.swift.org` | |
+| 官方论坛、提案讨论 | `forums.swift.org` | |
+| 编译器源码、标准库、提案 | `github.com/swiftlang/swift`、`swiftlang/swift-evolution` | |
+| SwiftUI / UIKit / iOS SDK | `developer.apple.com`（**只有 Apple 有**：这是平台框架，不在开源 Swift 里） | `developer.apple.com/tutorials/data/documentation/<路径>.json` |
+
+- **没有官方中文版**：TSPL 中文是社区翻译（SwiftGG 等）。术语沿用它的：conform = 遵循，conforming type = 遵循者。
+- **本机直连这些站都通**（实测 0.7–1.7s，不挂代理；代理对 Apple CDN 反而更慢）。
+- Claude 的 WebFetch 工具会被安全策略挡（`Unable to verify if domain is safe`），改成 `curl --compressed` 抓。
+- 规矩：往本文加结论前，先抓原文或用 swiftc 跑一遍；标"实测"的段落必须是真实输出（跑通用 `swiftc -c`，见 §22 —— `-typecheck` 会漏错）。

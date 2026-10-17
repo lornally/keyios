@@ -43,6 +43,28 @@ struct 日记: Identifiable, Hashable {
 | `var id: String { 文件名 }` | 身份就是文件名（大括号里直接算，见 §12），不用 UUID |
 | struct vs class | 区别在赋值行为：struct 整体复制（改 A 不影响 B），class 传同一个对象。两者都能有方法 |
 
+### 2.1 struct 想改自己的属性：`mutating`
+
+struct 是值类型：实例就是那堆属性本身，没有"另有一个对象在别处"。所以**改属性就等于换掉 `self`** —— 类型系统正是这么看的，不加 `mutating` 一律不许换：
+
+```swift
+struct 钱包 {
+    var 余额 = 0
+    func 充() { 余额 += 1 }           // ❌ error: left side of mutating operator isn't mutable: 'self' is immutable
+    mutating func 充2() { 余额 += 1 } // ✓ note 说的就是它: mark method 'mutating' to make 'self' mutable
+}
+```
+
+本质是 `self` 变成了 `inout`（手写出来是 `static func 充(self: inout 钱包)`）—— 改的是**调用者那个变量**，所以调用侧必须是个能变的变量：
+
+```swift
+var 钱 = 钱包(); 钱.充2()   // ✓
+let 甲 = 钱包(); 甲.充2()   // ❌ cannot use mutating member on immutable value: '甲' is a 'let' constant
+钱包().充2()               // ❌ cannot use mutating member on immutable value: function call returns immutable value
+```
+
+两条配套：**class 不许写** `mutating`（`'mutating' is not valid on instance methods in classes` —— 引用类型改的是对象内部，引用自己不动）；**protocol 里写 `mutating func`** = "这条要求要改 self"，于是 struct 实现必须写、class 实现不许写。enum 同理，还能在 `mutating` 里整个换：`self = .别的case`。
+
 ---
 
 ## 3. 函数签名
@@ -62,9 +84,30 @@ static func abbreviate(_ fileName: String, today: Date = Date(),
 | 不加 `_` 时 | 参数名自动兼任调用时的标签：`long(s: "abc")`，写 `long("abc")` 编译错误 |
 | `.current` | 类型能从上下文看出时省略类型名，只写 `.成员` |
 
+### 3.1 `inout`：把调用者的变量借给函数
+
+参数默认是拷贝（而且是 `let` 拷贝，函数里改不了）；`inout` = 借来**调用者那个变量本身**，改了就写回去：
+
+```swift
+func 普通(_ n: Int) { n += 1 }       // ❌ 'n' is a 'let' constant
+func 就地(_ n: inout Int) { n += 1 }
+
+var x = 1
+就地(&x)                             // 2   ← 外面的 x 变了
+swap(&a, &b)                         // 标准库的 swap 也是 inout: 5 3
+```
+
+`&` 不是 C 的取地址，是"借出去"的标记 —— 借的必须是一块**能改的存储**（`就地(&1)` 报 `literals are not mutable`；
+`let y = 1; 就地(&y)` 报 `'y' is a 'let' constant`；`就地(&(x + 1))` 报 `binary operator returns immutable value`）。
+一块存储同时只能借一次（`两个(&x, &x)` → `inout arguments are not allowed to alias each other`），
+也不能存起来（逃逸闭包捕获它 → `escaping closure captures 'inout' parameter 'n'`）—— 函数返回就还。
+
+`mutating func 充()`（§2.1）就是 `self` 是 `inout`：`钱.充()` 省掉的 `&` 是语法糖，脱糖版 `钱包.充(self: &钱)` 要写。
+项目里目前一个 `inout` 都没有（都是纯函数）。
+
 ---
 
-## 4. 参数带默认值的函数（空函数是干啥的）
+## 4. 带默认值的闭包属性（空函数是干啥的）
 
 > 回调钩子
 
@@ -130,10 +173,7 @@ let d = Calendar.current.date(byAdding: .day, value: -daysAgo, to: Date())!
 
 ```swift
 return f.string(from: d) + " 日记"
-if y == nowYear, m == nowMonth { 
-  day =5
-  return "本月\(day)日" 
-}
+if y == nowYear, m == nowMonth { return "本月\(day)日" }
 return String(format: "%02d周%@", day, weekday(date, calendar))
 ```
 
@@ -230,7 +270,7 @@ default:     break
 | `case ..<0:` | 区间当条件：小于 0 |
 | `case 3...6:` | 区间：3 到 6（含两头） |
 | `default:` | 剩下的全部 |
-| `break` | 占位：Swift 每个 case 自动结束，不用写 break 防穿透 |
+| `break` | 不是用来"防穿透"的（Swift 每个 case 自动结束，没有穿透）。这里是**必须写**：case 体不能空着 —— `default:` 后面什么都不写，报 `'default' label in a 'switch' must have at least one executable statement` |
 
 ---
 
@@ -513,13 +553,21 @@ null                        →  enum（Optional）
 
 ## 20. 泛型
 
-泛型是"类型带参数"的机制，struct / enum / class / 函数都能带（刚跑通）：
+泛型是"类型带参数"的机制，struct / enum / class / 函数都能带：
 
 ```swift
-struct 箱子<T> { var 内容: T }          // 泛型 struct —— Array / Dictionary / Set 就是
-enum 结果<T>   { case 成功(T) }         // 泛型 enum   —— Optional 就是
-class 栈<T>    { var 项: [T] = [] }     // 泛型 class
-func 取第一个<T>(_ a: [T]) -> T? { }    // 泛型函数
+struct 箱子<T> { var 内容: T }                   // 泛型 struct —— Array / Dictionary / Set 就是
+enum 结果<T>   { case 成功(T) }                  // 泛型 enum   —— Optional 就是
+class 栈<T>    { var 项: [T] = [] }              // 泛型 class
+func 取第一个<T>(_ a: [T]) -> T? { a.first }     // 泛型函数
+```
+
+泛型函数最容易踩的坑：**函数体不能空着**。这行原来是 `{ }`，`-typecheck` 说通过，真编报错：
+
+```swift
+func 取第一个<T>(_ a: [T]) -> T? { }
+// swiftc -c         → error: missing return in global function expected to return 'T?'
+// swiftc -typecheck → 一声不吭, 退出码 0      ← 见 §22
 ```
 
 
@@ -603,7 +651,27 @@ var 甲: any 会游泳 = 青蛙()
 var 乙: some 会游泳 = 青蛙()
 乙 = 青蛙()                   // ❌ error: cannot assign value of type '青蛙' to type 'some 会游泳'
 乙 = 鱼()                     // ❌ 一样报错
+
+// 初始值不能省 —— some 的真身只能从初始值推。没初始值, 声明这一行就立不住:
+var 丙: some 会游泳           // ❌ error: property declares an opaque return type, but has no
+丙 = 青蛙()                   //    initializer expression from which to infer an underlying type
+                             //    [#OpaqueTypeInference]
+
+// 但初始值锁的是**类型**, 不是值 —— 值在 var 下还能原地改 (走协议自己的要求):
+protocol 能充值 { var 余额: Int { get set }; mutating func 充() }
+struct 钱包: 能充值 { var 余额 = 0; mutating func 充() { 余额 += 1 } }
+
+var 戊: some 能充值 = 钱包()
+戊.充(); 戊.充(); 戊.余额      // 2      ✓ 内容能改
+戊 = 钱包()                   // ❌ cannot assign value of type '钱包' to type 'some 能充值'
+
+let 己: some 能充值 = 钱包()
+己.充()                      // ❌ cannot use mutating member on immutable value: '己' is a 'let' constant
+                            //    note: change 'let' to 'var' to make it mutable
 ```
+
+一句话：`var some P` 不是废的 —— 协议带 `{ get set }` / `mutating` 时非它不可（要改内容）；
+协议只读时（多数情况，比如 View）确实写 `let` 更合适。
 
 `some` 读作"**某个我不说的类型**"。这个类型在**写下这行的时候**就定死了，之后谁都不许往里塞 —— 连同一个 `青蛙` 都不行，因为"写出来的 `青蛙`"和那个藏起来的类型，编译器当成两回事。（Swift 5 模式、6 模式实测都一样。）
 
@@ -691,14 +759,65 @@ $ swift -e 'print(6*7)'         # 42
 
 - 纯逻辑（字符串、数组、日期、算法）随便在终端跑
 - 用到 SwiftUI / UIKit 的代码**不能在终端跑起来看界面** —— 那要模拟器，只能走项目里的 `./build.sh`。
-  但**"只检查能不能编"（不跑）在终端就能做**，加两个参数：
+  但"只检查能不能编"（不跑）在终端就能做。
+- 这其中 `-typecheck` 和`-c`有巨大差异
 
+  **先记住 `-typecheck` 的坑：它不等于"能不能编"。** 它只跑到"类型检查"为止，后面（SILGen）才发现的错它不报 ——
+  `missing return`、读还没赋值的变量都是这一类：
+
+  ```swift
+  // bad.swift 的全部内容
+  func f() -> Int { }
+  ```
   ```bash
-  xcrun -sdk iphonesimulator swiftc -typecheck -target arm64-apple-ios17.0-simulator Keyios/*.swift
+  $ swiftc -typecheck bad.swift ; echo $?
+  0                       # "没事" —— 其实编不过
+  $ swiftc -c bad.swift
+  bad.swift:2:19: error: missing return in global function expected to return 'Int'
   ```
 
-  实测：整份项目源码这样检查是**通过**的（research/ 里那几段实验用的就是这条命令）。
+  ```swift
+  var x: Int
+  print(x)                // swiftc -typecheck 过, -c 报: variable 'x' used before being initialized
+  ```
+
+  （§20 那个空函数体的泛型函数，就是这么漏过去的。）
+
+  所以"检查能不能编"要用 `-c`（真编，产物是 .o，所以去临时目录跑，别在项目根拉一地）：
+
+  ```bash
+  cd /tmp && xcrun -sdk iphonesimulator swiftc -c -target arm64-apple-ios17.0-simulator \
+      /Users/X/keyios/Keyios/*.swift
+  ```
+
+  实测：整份项目源码这样编**通过**，零错零警告。
+  （research/ 里那几段实验用的 `-typecheck` 版更快，但别拿它当"能编"的证明。）
   不加 `-sdk iphonesimulator` 会按 macOS 编，同一份代码立刻报 8 个错 —— 全是 `'bottomBar' is unavailable in macOS`，
   也就是说挡路的是**iOS 专属的 API**，不是 SwiftUI 本身。
 
 - 以后 dog 解析这类纯逻辑抽成 SwiftPM 包，就能 `swift test` 在终端里毫秒级验证（不用开模拟器）
+
+---
+
+## 23. Swift ↔ Rust 对照（为什么写着像）
+
+"值语义 + 明确的可变性 + 独占访问"
+
+| 事 | Rust | Swift |
+| --- | --- | --- |
+| 改自己要标记 | `let mut x`、`fn f(&mut self)` | `var x`、`mutating func`（§2.1） |
+| 借出去改 | `&mut T`，调用 `f(&mut x)` | `inout T`，调用 `f(&x)`（§3.1） |
+| 不能同时两个可变借 | 借用检查器，**全编译期** | inout 别名编不过；全局变量/类属性是**运行期炸**：`Simultaneous accesses to 0x…, but modification requires exclusive access` |
+| 抽象类型 | `impl Trait` / `dyn Trait` | `some P` / `any P` —— 零开销 vs 盒子，分工一样（§21） |
+| 代数数据类型 | `enum` + `match`，少一个分支编不过 | `enum` + `switch`，同（§17） |
+| 可空 | `Option<T>` + `if let Some(x)` | `T?` + `if let` / `guard let`（§6） |
+| 移动语义 | 默认 move，`Copy` 才复制 | 默认复制；新加的 `~Copyable` + `consuming`/`borrowing`（复制一下报 `'a' consumed more than once`） |
+
+**真不一样的地方，一条就够：内存怎么管。** Rust 是所有权 + 生命周期，全编译期算完，运行时零开销、没有引用计数；
+Swift 是值类型复制（容器写时复制）+ 引用类型 ARC **运行时**引用计数 —— 循环引用要手动 `weak`，生命周期基本不写进签名。
+这条差异的直接后果就在上表第三行：**Rust 是编不过，Swift 是跑着炸**。
+
+另外几处 Swift 明显是另一路人：有 class 和继承（Rust 故意不要）、协议能给别人的类型补符合（retroactive conformance）、
+错误处理是 `throws` 副作用而不是 `Result` 值。
+
+（Rust 那列没实测 —— 这台机器没装 rustc，写的是它固定的语言规则；Swift 那列每条都跑过。）

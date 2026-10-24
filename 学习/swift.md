@@ -1,6 +1,4 @@
-# Swift 语法样例（只收本项目用到的）
-
-学习建议
+# 学习建议
 
 ### 关键区别：**"用" `some` 和"设计" `some` 是两码事**
 
@@ -26,6 +24,115 @@
 **入口处的 `some` 是"必答题但不是难题"**，照写就行；真正难的是想自己抽象。"绕开"不准确，应该是"**先消费、后生产**"。
 
 
+
+# 符号要点
+
+
+
+## 1. `var` 关键字
+
+```swift
+var a: Int = 42   // 存储属性，直接赋值
+var a: Int { 42 } // 这是**计算属性（computed property）**的语法，花括号里是 getter 的返回值。`a` 每次访问时都会执行花括号里的代码。
+// 两者不同：前者是存储值，后者是每次访问时计算。
+```
+
+## 2. `struct` / `enum` / `class`
+
+```swift
+struct Point {
+    // 这里是类型成员（属性、方法等），不是"值"
+    var x: Int   // 成员声明
+    var y: Int
+}
+struct 日记: Identifiable, Hashable {
+    let 文件名: String
+    let 摘要: [String]
+    var id: String { 文件名 } 
+    // 这里就是get只读属性, 现在的写法是“零成本的别名”：值仍然只有一份，就在 文件名 里。
+}
+```
+
+具体含义：
+
+- **没有独立的 `id` 存储**。结构体里只有 `文件名` 和 `摘要` 两个字段，`id` 不占内存、不能被赋值（只读）。
+- 每次读 `某篇.id`，就现场取一次 `文件名` 的值返回。因为 `文件名` 是 `let`，值不变，所以读到的 `id` 永远稳定。
+- 这里是为了满足 `Identifiable` 协议的要求（`var id { get }`）：列表要用稳定的身份标识，而字典的 key 本来就是文件名，直接拿它当身份，就不用再造 UUID。
+- 顺带一提：`id` 是计算属性，不参与编译器合成的 `Hashable`/`==`——相等性只看存储属性 `文件名` 和 `摘要`。
+
+### Swift 用同一套 { } 大括号语法承载了多种语义：
+
+| 花括号位置       | 里面是      | 语义            |
+| ---------------- | ----------- | --------------- |
+| var a: T { ... } | getter 代码 | 运行时求值 → 值 |
+| struct S { ... } | 成员声明    | 定义类型结构    |
+| func f() { ... } | 语句        | 调用时执行      |
+| if x { ... }     | 语句        | 条件成立时执行  |
+| 闭包 { ... }     | 语句        | 作为值传递      |
+
+### 冒号的2大类用法:
+
+```swift
+// 类型标注
+let name: String = "Swift" //类型
+struct MyStruct: Equatable { } //协议
+class MyClass: NSObject { } //继承
+func f<T>(_ x: T) where T: Equatable {} //`where` 子句中 `T: P` 表示 T 受协议 P 约束
+associatedtype E: Equatable //协议中约束关联类型遵循某协议
+
+
+```
+
+```swift
+// 各种语法
+let dict = ["key": "value"] //字典
+let result = condition ? "yes" : "no" //三元
+dict.updateValue("飞机", forKey: 21) //参数标签:值
+case let x as String: //case
+case 1: ... //case
+outer: for _ in 0..<3 {} // 跳转标签，供 `break outer` 使用
+```
+
+
+
+# 语言组织和序
+
+```sh
+target/module（模块）
+  └─ 文件夹（仅组织代码，不影响可见性）
+      └─ 文件
+          └─ 类型：class / struct / enum / actor / protocol / extension
+              └─ 成员：方法、计算属性、嵌套类型, 函数一般组织在enum里面, enum作为函数的命名空间
+                  └─ 嵌套类型里还能再有成员……
+```
+
+* 目录/文件纯粹是人类工具, 和编译没关系, 编译都声明在一起.
+  * 子目录也可以直接用, 他是模块(target), 不是文件和目录限制.
+* 没有编译顺序问题, 所以不存在循环依赖问题. 
+  * swift的方式是, 先收集所有声明, 再做类型检查, 因此, 声明后置没有问题.
+* 代码有序
+  * **存储属性的初始化顺序**有运行时语义，但那是初始化器执行顺序，不是声明可见性。
+  * **顶层代码**（main.swift 或 playground）是顺序执行的，但那是运行时执行顺序，不影响声明在模块内的编译期可见性。
+* 构造函数是 init() 但是, 经常看不到他
+  * struct可以省略, 因为有个默认的.
+  * var参数是可以有默认值的, let如果有默认值就不是参数, 否则就是参数.
+
+```swift
+struct G {
+    var x: Int
+    var y: Int
+    init(x: Int, y: Int) { self.x = x; self.y = y }
+}
+
+extension G {
+    init(z: Int) { self.init(x: z, y: z) }
+}
+//此时2个构造器都合法
+let gg = G(x: 1, y: 2) 
+let g = G(z: 3)   // 等价于 G(x: 3, y: 3)
+```
+
+# 语法样例
 
 每个样例：一段代码 + 一张表。
 
@@ -195,6 +302,25 @@ let d = Calendar.current.date(byAdding: .day, value: -daysAgo, to: Date())!
 | `?? 0` | 不是 nil 就用左边，是 nil 就用右边的 0 |
 | `...to: Date())!` | `!` = 我确定不是 nil，直接给值。猜错程序崩溃 |
 | 总规则 | 变量默认不许是 nil，想允许必须在类型上加 `?` |
+
+```swift
+private var 按日期排: [日记] {
+    日记表.values.sorted { a, b in
+        switch (DiaryNameAbbreviator.日期(a.文件名), DiaryNameAbbreviator.日期(b.文件名)) {
+        case let (x?, y?): return x > y   // 两边都有日期：日期大的排前面
+        case (nil, _?):    return false   // 左边没日期、右边有：左边沉底
+        case (_?, nil):    return true    // 左边有、右边没：左边排前面
+        default:           return a.文件名 < b.文件名  // 都没日期：按文件名排
+        }
+    }
+}
+```
+
+| 写法 | 含义                                                         |
+| :--- | :----------------------------------------------------------- |
+| `x?` | 可选值非 `nil` 时匹配，把解包后的值绑定给 `x`                |
+| `y?` | 同上，绑定给 `y`                                             |
+| `_?` | 可选值非 `nil` 时匹配，但**不绑定名字**（`_` 表示忽略解包后的值），只关心“不是 nil” |
 
 ---
 

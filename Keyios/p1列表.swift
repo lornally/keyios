@@ -13,116 +13,116 @@ import SwiftUI
 
 struct DiaryListView: View {
 
-    /// 内存里的日记表: 文件名 -> 那一篇。
-    /// 字典本身**无序**，列表要的顺序在下面现排。
-    /// 现在从外面传（App 里传的假数据），以后换成真的从 iCloud 读出来的那张表。
-    let 日记表: [String: 日记]
+  /// 内存里的日记表: 文件名 -> 那一篇。
+  /// 字典本身**无序**，列表要的顺序在下面现排。
+  /// 现在从外面传（App 里传的假数据），以后换成真的从 iCloud 读出来的那张表。
+  let 日记表: [String: 日记]
 
-    // ── 状态 ──
-    // `@State` = "这个值会变，变了就重画界面"。
-    // 类比 Qt：相当于一个信号量，只不过你不用手动 connect/emit，SwiftUI 自动盯着。
-    //
-    // 用 `private` 是因为这些值只属于这一页，外面（App）不需要也不该碰。
-    @State private var searchText = ""          // 搜索框里打的字
-    @State private var isSearching = false      // 搜索开着吗？(点底部放大镜时置 true)
-    @State private var showingNewNote = false   // 新建页弹出来了吗？
-    @State private var path: [日记] = []        // 导航栈：点进详情页时往里塞一条
+  // ── 状态 ──
+  // `@State` = "这个值会变，变了就重画界面"。
+  // 类比 Qt：相当于一个信号量，只不过你不用手动 connect/emit，SwiftUI 自动盯着。
+  //
+  // 用 `private` 是因为这些值只属于这一页，外面（App）不需要也不该碰。
+  @State private var searchText = ""  // 搜索框里打的字
+  @State private var isSearching = false  // 搜索开着吗？(点底部放大镜时置 true)
+  @State private var showingNewNote = false  // 新建页弹出来了吗？
+  @State private var path: [日记] = []  // 导航栈：点进详情页时往里塞一条
 
-    /// 字典 -> 列表。按日期**倒序**（新的在上）。
-    /// 文件名里没有日期的（比如 "摩托车"）排在最后，它们之间按名字排。
-    private var 按日期排: [日记] {
-        日记表.values.sorted { a, b in
-            switch (DiaryNameAbbreviator.日期(a.文件名), DiaryNameAbbreviator.日期(b.文件名)) {
-            case let (x?, y?): return x > y
-            case (nil, _?):    return false     // 没日期的沉底
-            case (_?, nil):    return true
-            default:           return a.文件名 < b.文件名
-            }
-        }
+  /// 字典 -> 列表。按日期**倒序**（新的在上）。
+  /// 文件名里没有日期的（比如 "摩托车"）排在最后，它们之间按名字排。
+  private var 按日期排: [日记] {
+    日记表.values.sorted { a, b in
+      switch (日记名工具.日期(a.文件名), 日记名工具.日期(b.文件名)) {
+      case (let x?, let y?): return x > y
+      case (nil, _?): return false  // 没日期的沉底
+      case (_?, nil): return true
+      default: return a.文件名 < b.文件名
+      }
     }
+  }
 
-    /// 按搜索词过滤后的列表。
-    /// 平时原样返回；搜索时只留对得上的行。
-    /// `guard` = "不满足就立刻返回"，省掉一层 if 嵌套。
-    private var 过滤后: [日记] {
-        guard isSearching, !searchText.isEmpty else { return 按日期排 }
-        return 按日期排.filter { d in
-            d.文件名.contains(searchText)                                          // 磁盘文件名
-                || DiaryNameAbbreviator.abbreviate(d.文件名).contains(searchText)  // 缩减后的名字
-                || d.摘要.contains { $0.contains(searchText) }                     // 任一条摘要
-        }
+  /// 按搜索词过滤后的列表。
+  /// 平时原样返回；搜索时只留对得上的行。
+  /// `guard` = "不满足就立刻返回"，省掉一层 if 嵌套。
+  private var 过滤后: [日记] {
+    guard isSearching, !searchText.isEmpty else { return 按日期排 }
+    return 按日期排.filter { d in
+      d.文件名.contains(searchText)  // 磁盘文件名
+        || 日记名工具.缩写(d.文件名).contains(searchText)  // 缩减后的名字
+        || d.摘要.contains { $0.contains(searchText) }  // 任一条摘要
     }
+  }
 
-    var body: some View {
-        // NavigationStack 管"页面推进/返回"。path 是当前的页面栈。
-        NavigationStack(path: $path) {
-            ZStack {
-                Theme.background.ignoresSafeArea()
-                listContent
-            }
+  var body: some View {
+    // NavigationStack 管"页面推进/返回"。path 是当前的页面栈。
+    NavigationStack(path: $path) {
+      ZStack {
+        Theme.background.ignoresSafeArea()
+        listContent
+      }
 
-            // ── 搜索：交给系统，不自己写 ──
-            // `.searchable` 是系统给的搜索能力：搜索框长什么样、放在屏幕哪儿、
-            // 键盘怎么弹、点外面怎么关，全归系统管。
-            //
-            // 为什么必须用它而不是自己搭一个输入框：
-            // 自己搭就等于把"搜索该长什么样"这个决定**冻结在我写代码那天**，
-            // 以后 iOS 改了搜索的位置和样式，我的代码不会跟着变。
-            // 系统版会跟着系统版本自动变 —— iOS 26 的搜索框位置就跟以前不一样了。
-            //
-            // `isPresented: $isSearching` 让我们能从外面控制"搜索开不开"，
-            // 底部那个放大镜按钮就是靠它把搜索唤起/收起的。
-            .searchable(text: $searchText, isPresented: $isSearching, prompt: "搜索日记")
-            // 让搜索平时"收成一个按钮"，点开才展开成输入框。
-            // 不加这行的话它会常驻占着屏幕底部一整条（之前的截图就是这样）。
-            .modifier(MinimizedSearchField())
+      // ── 搜索：交给系统，不自己写 ──
+      // `.searchable` 是系统给的搜索能力：搜索框长什么样、放在屏幕哪儿、
+      // 键盘怎么弹、点外面怎么关，全归系统管。
+      //
+      // 为什么必须用它而不是自己搭一个输入框：
+      // 自己搭就等于把"搜索该长什么样"这个决定**冻结在我写代码那天**，
+      // 以后 iOS 改了搜索的位置和样式，我的代码不会跟着变。
+      // 系统版会跟着系统版本自动变 —— iOS 26 的搜索框位置就跟以前不一样了。
+      //
+      // `isPresented: $isSearching` 让我们能从外面控制"搜索开不开"，
+      // 底部那个放大镜按钮就是靠它把搜索唤起/收起的。
+      .searchable(text: $searchText, isPresented: $isSearching, prompt: "搜索日记")
+      // 让搜索平时"收成一个按钮"，点开才展开成输入框。
+      // 不加这行的话它会常驻占着屏幕底部一整条（之前的截图就是这样）。
+      .modifier(MinimizedSearchField())
 
-            // 点列表某行 -> path 里加一条 -> 自动推进详情页
-            .navigationDestination(for: 日记.self) { d in
-                DiaryDetailView(日记: d)
-            }
+      // 点列表某行 -> path 里加一条 -> 自动推进详情页
+      .navigationDestination(for: 日记.self) { d in
+        DiaryDetailView(日记: d)
+      }
 
-            // `+` 按钮 -> 从底部升起新建页
-            .sheet(isPresented: $showingNewNote) {
-                NewNoteView()
-            }
+      // `+` 按钮 -> 从底部升起新建页
+      .sheet(isPresented: $showingNewNote) {
+        NewNoteView()
+      }
 
-            // 这一页不要系统"顶部"导航栏 —— 设计里头部不放任何东西。
-            // 注意：`.bottomBar`（底部那条）不受这行影响，它们是两码事。
-            .toolbar(.hidden, for: .navigationBar)
+      // 这一页不要系统"顶部"导航栏 —— 设计里头部不放任何东西。
+      // 注意：`.bottomBar`（底部那条）不受这行影响，它们是两码事。
+      .toolbar(.hidden, for: .navigationBar)
 
-            // 底部那条按钮。内容在 p1_底部按钮.swift 里定义。
-            .toolbar {
-                BottomBar(
-                    onSearch: { isSearching = true },
-                    onNew:    { showingNewNote = true }
-                )
-            }
-            // 系统底栏默认用系统色（白/灰），不认识我们的绿。
-            // `.tint` 是"告诉系统这一片的主色是什么"，系统会把它用到按钮、光标等处。
-            .tint(Theme.accent)
-        }
-        .preferredColorScheme(.dark)   // 强制深色（我们的设计本来就是黑底）
+      // 底部那条按钮。内容在 p1_底部按钮.swift 里定义。
+      .toolbar {
+        BottomBar(
+          onSearch: { isSearching = true },
+          onNew: { showingNewNote = true }
+        )
+      }
+      // 系统底栏默认用系统色（白/灰），不认识我们的绿。
+      // `.tint` 是"告诉系统这一片的主色是什么"，系统会把它用到按钮、光标等处。
+      .tint(Theme.accent)
     }
+    .preferredColorScheme(.dark)  // 强制深色（我们的设计本来就是黑底）
+  }
 
-    // MARK: - 列表本体
+  // MARK: - 列表本体
 
-    private var listContent: some View {
-        // ScrollView + LazyVStack：自己拼的滚动列，行样式完全自由。
-        // Lazy = 只渲染屏幕上看得见的行，长列表才不卡。
-        ScrollView {
-            LazyVStack(spacing: 8) {
-                ForEach(过滤后) { d in
-                    DiaryRowView(日记: d)
-                        .contentShape(Capsule())          // 让整条胶囊都可点（默认只有文字可点）
-                        .onTapGesture { path.append(d) }
-                }
-            }
-            .padding(.horizontal, 12)
-            .padding(.top, 8)
-            .padding(.bottom, 8)    // 底部条的避让由系统自己处理，这里只要一点余量
+  private var listContent: some View {
+    // ScrollView + LazyVStack：自己拼的滚动列，行样式完全自由。
+    // Lazy = 只渲染屏幕上看得见的行，长列表才不卡。
+    ScrollView {
+      LazyVStack(spacing: 8) {
+        ForEach(过滤后) { d in
+          DiaryRowView(日记: d)
+            .contentShape(Capsule())  // 让整条胶囊都可点（默认只有文字可点）
+            .onTapGesture { path.append(d) }
         }
+      }
+      .padding(.horizontal, 12)
+      .padding(.top, 8)
+      .padding(.bottom, 8)  // 底部条的避让由系统自己处理，这里只要一点余量
     }
+  }
 }
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -137,14 +137,14 @@ struct DiaryListView: View {
 // ────────────────────────────────────────────────────────────────────────────
 private struct MinimizedSearchField: ViewModifier {
 
-    func body(content: Content) -> some View {
-        if #available(iOS 26.0, *) {
-            // minimize = 不用的时候把搜索框收成一个小按钮
-            content.searchToolbarBehavior(.minimize)
-        } else {
-            content          // iOS 17~25 没这个 API，原样返回
-        }
+  func body(content: Content) -> some View {
+    if #available(iOS 26.0, *) {
+      // minimize = 不用的时候把搜索框收成一个小按钮
+      content.searchToolbarBehavior(.minimize)
+    } else {
+      content  // iOS 17~25 没这个 API，原样返回
     }
+  }
 }
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -157,5 +157,5 @@ private struct MinimizedSearchField: ViewModifier {
 // 习惯上每个界面文件末尾都配一个。
 // ────────────────────────────────────────────────────────────────────────────
 #Preview {
-    DiaryListView(日记表: 日记表)
+  DiaryListView(日记表: 日记表)
 }

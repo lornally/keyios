@@ -14,47 +14,47 @@
 
 import SwiftUI
 
-struct DiaryRowView: View {
+struct 单行V: View {
 
-    /// 要画的这一篇
-    let 日记: 日记
+  /// 要画的这一篇
+  let 日记: 日记
 
-    // `var body: some View` 是 SwiftUI 每个视图的固定写法：
-    // "我这个视图长什么样"。里面就是把它拼出来。
-    var body: some View {
+  // `var body: some View` 是 SwiftUI 每个视图的固定写法：
+  // "我这个视图长什么样"。里面就是把它拼出来。
+  var body: some View {
 
-        // HStack = 横向排列（像 QHBoxLayout），spacing 是子元素间距
-        HStack(spacing: 10) {
+    // HStack = 横向排列（像 QHBoxLayout），spacing 是子元素间距
+    HStack(spacing: 10) {
 
-            // 文件名：缩减过的，主色绿，加粗
-            Text(DiaryNameAbbreviator.abbreviate(日记.文件名))
-                .foregroundStyle(Theme.accent)
-                .fontWeight(.semibold)
+      // 文件名：缩减过的，主色绿，加粗
+      Text(DiaryNameAbbreviator.abbreviate(日记.文件名))
+        .foregroundStyle(Theme.accent)
+        .fontWeight(.semibold)
 
-            // 摘要（最多 3 条是加载时就截好的，这里照单画）
-            ForEach(日记.摘要, id: \.self) { 摘要 in
-                let 拆 = 拆时间(摘要)
-                HStack(spacing: 4) {
-                    if let 时间 = 拆.时间 {
-                        Text(时间).foregroundStyle(Theme.secondaryText)   // 时间：灰
-                    }
-                    Text(拆.正文).foregroundStyle(Theme.primaryText)      // 正文：白
-                }
-            }
+      // 摘要（最多 3 条是加载时就截好的，这里照单画）
+      ForEach(日记.摘要, id: \.self) { 摘要 in
+        let 拆 = 拆时间(摘要)
+        HStack(spacing: 4) {
+          if let 时间 = 拆.时间 {
+            Text(时间).foregroundStyle(Theme.secondaryText)  // 时间：灰
+          }
+          Text(拆.正文).foregroundStyle(Theme.primaryText)  // 正文：白
         }
-        .font(.system(size: 15))
-        .lineLimit(1)       // 一行放不下就截断（不折行）。想改成允许折两行就删掉这行。
-        .frame(maxWidth: .infinity, alignment: .leading)
-
-        // 内边距：上下 13、左右 14。数字直接改就能看效果。
-        .padding(.vertical, 13)
-        .padding(.horizontal, 14)
-
-        // 背景：圆角胶囊。Capsule() 是"两头半圆"的形状。
-        // 想改成"描边"就把 fill 换成 stroke：
-        //     Capsule().stroke(Theme.accent)
-        .background(Capsule().fill(Theme.rowBackground))
+      }
     }
+    .font(.system(size: 15))
+    .lineLimit(1)  // 一行放不下就截断（不折行）。想改成允许折两行就删掉这行。
+    .frame(maxWidth: .infinity, alignment: .leading)
+
+    // 内边距：上下 13、左右 14。数字直接改就能看效果。
+    .padding(.vertical, 13)
+    .padding(.horizontal, 14)
+
+    // 背景：圆角胶囊。Capsule() 是"两头半圆"的形状。
+    // 想改成"描边"就把 fill 换成 stroke：
+    //     Capsule().stroke(Theme.accent)
+    .background(Capsule().fill(Theme.rowBackground))
+  }
 }
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -62,14 +62,14 @@ struct DiaryRowView: View {
 // 纯显示层的事 —— 数据里没这个字段。
 // ────────────────────────────────────────────────────────────────────────────
 private func 拆时间(_ 摘要: String) -> (时间: String?, 正文: String) {
-    let 两截 = 摘要.split(separator: " ", maxSplits: 1)
-    guard 两截.count == 2 else { return (nil, 摘要) }
-    let 时分 = 两截[0].split(separator: ":")
-    guard 时分.count == 2,
-          let 时 = Int(时分[0]), let 分 = Int(时分[1]),
-          时 < 24, 分 < 60
-    else { return (nil, 摘要) }
-    return (String(两截[0]), String(两截[1]))
+  let 两截 = 摘要.split(separator: " ", maxSplits: 1)
+  guard 两截.count == 2 else { return (nil, 摘要) }
+  let 时分 = 两截[0].split(separator: ":")
+  guard 时分.count == 2,
+    let 时 = Int(时分[0]), let 分 = Int(时分[1]),
+    时 < 24, 分 < 60
+  else { return (nil, 摘要) }
+  return (String(两截[0]), String(两截[1]))
 }
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -79,14 +79,14 @@ private func 拆时间(_ 摘要: String) -> (时间: String?, 正文: String) {
 // （完整说明见 p1列表.swift 末尾）
 // ────────────────────────────────────────────────────────────────────────────
 #Preview {
-    ZStack {
-        Theme.background.ignoresSafeArea()
-        VStack(spacing: 8) {
-            DiaryRowView(日记: 日记表["26-10-16_日记"]!)
-            DiaryRowView(日记: 日记表["26-10-14_日记"]!)
-            DiaryRowView(日记: 日记表["26-09-16_日记"]!)
-        }
-        .padding(.horizontal, 12)
+  ZStack {
+    Theme.background.ignoresSafeArea()
+    VStack(spacing: 8) {
+      DiaryRowView(日记: 日记表["26-10-16_日记"]!)
+      DiaryRowView(日记: 日记表["26-10-14_日记"]!)
+      DiaryRowView(日记: 日记表["26-09-16_日记"]!)
     }
-    .preferredColorScheme(.dark)
+    .padding(.horizontal, 12)
+  }
+  .preferredColorScheme(.dark)
 }

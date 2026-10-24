@@ -11,7 +11,7 @@
 
 import SwiftUI
 
-struct DiaryListView: View {
+struct 列表v: View {
 
   /// 内存里的日记表: 文件名 -> 那一篇。
   /// 字典本身**无序**，列表要的顺序在下面现排。

@@ -15,42 +15,42 @@
 
 import SwiftUI
 
-struct DiaryDetailView: View {
+struct 脑图V: View {
 
-    /// 点的是哪一篇。列表页推进来的时候传进来。
-    let 日记: 日记
+  /// 点的是哪一篇。列表页推进来的时候传进来。
+  let 日记: 日记
 
-    var body: some View {
-        ZStack {
-            Theme.background.ignoresSafeArea()
+  var body: some View {
+    ZStack {
+      Theme.background.ignoresSafeArea()
 
-            VStack(spacing: 14) {
-                Text("📖 详情页（占位）")
-                    .font(.title2)
-                    .foregroundStyle(Theme.primaryText)
+      VStack(spacing: 14) {
+        Text("📖 详情页（占位）")
+          .font(.title2)
+          .foregroundStyle(Theme.primaryText)
 
-                Text(DiaryNameAbbreviator.abbreviate(日记.文件名))
-                    .font(.headline)
-                    .foregroundStyle(Theme.accent)
+        Text(DiaryNameAbbreviator.abbreviate(日记.文件名))
+          .font(.headline)
+          .foregroundStyle(Theme.accent)
 
-                Text(日记.文件名)          // 磁盘上的原始文件名
-                    .font(.caption)
-                    .foregroundStyle(Theme.secondaryText)
+        Text(日记.文件名)  // 磁盘上的原始文件名
+          .font(.caption)
+          .foregroundStyle(Theme.secondaryText)
 
-                Text("将来在这里：整篇日记的树 / 折叠 / 编辑")
-                    .font(.footnote)
-                    .foregroundStyle(Theme.secondaryText)
+        Text("将来在这里：整篇日记的树 / 折叠 / 编辑")
+          .font(.footnote)
+          .foregroundStyle(Theme.secondaryText)
 
-                Text("代码在 Keyios/p2详情.swift")
-                    .font(.footnote)
-                    .foregroundStyle(Theme.accent)
-            }
-            .padding()
-        }
-        .navigationTitle(DiaryNameAbbreviator.abbreviate(日记.文件名))
-        .navigationBarTitleDisplayMode(.inline)
-        .preferredColorScheme(.dark)
+        Text("代码在 Keyios/p2详情.swift")
+          .font(.footnote)
+          .foregroundStyle(Theme.accent)
+      }
+      .padding()
     }
+    .navigationTitle(DiaryNameAbbreviator.abbreviate(日记.文件名))
+    .navigationBarTitleDisplayMode(.inline)
+    .preferredColorScheme(.dark)
+  }
 }
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -60,8 +60,8 @@ struct DiaryDetailView: View {
 // （完整说明见 p1列表.swift 末尾）
 // ────────────────────────────────────────────────────────────────────────────
 #Preview {
-    NavigationStack {
-        DiaryDetailView(日记: 日记表["26-10-16_日记"]!)
-    }
-    .preferredColorScheme(.dark)
+  NavigationStack {
+    DiaryDetailView(日记: 日记表["26-10-16_日记"]!)
+  }
+  .preferredColorScheme(.dark)
 }

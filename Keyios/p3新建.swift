@@ -10,36 +10,36 @@
 
 import SwiftUI
 
-struct NewNoteView: View {
+struct 新建V: View {
 
-    /// 系统提供的"关掉我自己"的方法。从底部升起来的页面不是 push 进栈的，
-    /// 所以不能靠返回按钮，得自己调用 dismiss。
-    @Environment(\.dismiss) private var dismiss
+  /// 系统提供的"关掉我自己"的方法。从底部升起来的页面不是 push 进栈的，
+  /// 所以不能靠返回按钮，得自己调用 dismiss。
+  @Environment(\.dismiss) private var dismiss
 
-    var body: some View {
-        ZStack {
-            Theme.background.ignoresSafeArea()
+  var body: some View {
+    ZStack {
+      Theme.background.ignoresSafeArea()
 
-            VStack(spacing: 14) {
-                Text("📝 新建页（占位）")
-                    .font(.title2)
-                    .foregroundStyle(Theme.primaryText)
+      VStack(spacing: 14) {
+        Text("📝 新建页（占位）")
+          .font(.title2)
+          .foregroundStyle(Theme.primaryText)
 
-                Text("将来在这里：输入内容 → 生成新的 .dog 文件")
-                    .font(.footnote)
-                    .foregroundStyle(Theme.secondaryText)
+        Text("将来在这里：输入内容 → 生成新的 .dog 文件")
+          .font(.footnote)
+          .foregroundStyle(Theme.secondaryText)
 
-                Text("代码在 Keyios/p3新建.swift")
-                    .font(.footnote)
-                    .foregroundStyle(Theme.accent)
+        Text("代码在 Keyios/p3新建.swift")
+          .font(.footnote)
+          .foregroundStyle(Theme.accent)
 
-                Button("关闭") { dismiss() }
-                    .foregroundStyle(Theme.accent)
-                    .padding(.top, 8)
-            }
-        }
-        .preferredColorScheme(.dark)
+        Button("关闭") { dismiss() }
+          .foregroundStyle(Theme.accent)
+          .padding(.top, 8)
+      }
     }
+    .preferredColorScheme(.dark)
+  }
 }
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -48,5 +48,5 @@ struct NewNoteView: View {
 // （完整说明见 p1列表.swift 末尾）
 // ────────────────────────────────────────────────────────────────────────────
 #Preview {
-    NewNoteView()
+  NewNoteView()
 }

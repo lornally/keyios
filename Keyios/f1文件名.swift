@@ -13,7 +13,7 @@ import Foundation
 ///     所有日记都缩掉"日记"两个字
 ///
 /// 纯函数, 不碰 UI —— 以后挪进 DogKit 或单独测都方便。
-enum 日记名工具 {
+enum 日记名f {
 
   static func 缩写(
     _ fileName: String, today: Date = Date(),

@@ -29,7 +29,7 @@ struct 脑图V: View {
           .font(.title2)
           .foregroundStyle(Theme.primaryText)
 
-        Text(DiaryNameAbbreviator.abbreviate(日记.文件名))
+        Text(日记名f.缩写(日记.文件名))
           .font(.headline)
           .foregroundStyle(Theme.accent)
 
@@ -41,13 +41,13 @@ struct 脑图V: View {
           .font(.footnote)
           .foregroundStyle(Theme.secondaryText)
 
-        Text("代码在 Keyios/p2详情.swift")
+        Text("代码在 Keyios/p2脑图.swift")
           .font(.footnote)
           .foregroundStyle(Theme.accent)
       }
       .padding()
     }
-    .navigationTitle(DiaryNameAbbreviator.abbreviate(日记.文件名))
+    .navigationTitle(日记名f.缩写(日记.文件名))
     .navigationBarTitleDisplayMode(.inline)
     .preferredColorScheme(.dark)
   }
@@ -61,7 +61,7 @@ struct 脑图V: View {
 // ────────────────────────────────────────────────────────────────────────────
 #Preview {
   NavigationStack {
-    DiaryDetailView(日记: 日记表["26-10-16_日记"]!)
+    脑图V(日记: 日记表["26-10-16_日记"]!)
   }
   .preferredColorScheme(.dark)
 }

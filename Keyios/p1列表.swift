@@ -32,7 +32,7 @@ struct 列表v: View {
   /// 文件名里没有日期的（比如 "摩托车"）排在最后，它们之间按名字排。
   private var 按日期排: [日记] {
     日记表.values.sorted { a, b in
-      switch (日记名工具.日期(a.文件名), 日记名工具.日期(b.文件名)) {
+      switch (日记名f.日期(a.文件名), 日记名f.日期(b.文件名)) {
       case (let x?, let y?): return x > y
       case (nil, _?): return false  // 没日期的沉底
       case (_?, nil): return true
@@ -48,7 +48,7 @@ struct 列表v: View {
     guard isSearching, !searchText.isEmpty else { return 按日期排 }
     return 按日期排.filter { d in
       d.文件名.contains(searchText)  // 磁盘文件名
-        || 日记名工具.缩写(d.文件名).contains(searchText)  // 缩减后的名字
+        || 日记名f.缩写(d.文件名).contains(searchText)  // 缩减后的名字
         || d.摘要.contains { $0.contains(searchText) }  // 任一条摘要
     }
   }
@@ -79,12 +79,12 @@ struct 列表v: View {
 
       // 点列表某行 -> path 里加一条 -> 自动推进详情页
       .navigationDestination(for: 日记.self) { d in
-        DiaryDetailView(日记: d)
+        脑图V(日记: d)
       }
 
       // `+` 按钮 -> 从底部升起新建页
       .sheet(isPresented: $showingNewNote) {
-        NewNoteView()
+        新建V()
       }
 
       // 这一页不要系统"顶部"导航栏 —— 设计里头部不放任何东西。
@@ -93,7 +93,7 @@ struct 列表v: View {
 
       // 底部那条按钮。内容在 p1_底部按钮.swift 里定义。
       .toolbar {
-        BottomBar(
+        Bar(
           onSearch: { isSearching = true },
           onNew: { showingNewNote = true }
         )
@@ -113,7 +113,7 @@ struct 列表v: View {
     ScrollView {
       LazyVStack(spacing: 8) {
         ForEach(过滤后) { d in
-          DiaryRowView(日记: d)
+          单行V(日记: d)
             .contentShape(Capsule())  // 让整条胶囊都可点（默认只有文字可点）
             .onTapGesture { path.append(d) }
         }
@@ -157,5 +157,5 @@ private struct MinimizedSearchField: ViewModifier {
 // 习惯上每个界面文件末尾都配一个。
 // ────────────────────────────────────────────────────────────────────────────
 #Preview {
-  DiaryListView(日记表: 日记表)
+  列表v(日记表: 日记表)
 }

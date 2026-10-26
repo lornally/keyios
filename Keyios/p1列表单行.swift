@@ -27,7 +27,7 @@ struct 单行V: View {
     HStack(spacing: 10) {
 
       // 文件名：缩减过的，主色绿，加粗
-      Text(DiaryNameAbbreviator.abbreviate(日记.文件名))
+      Text(日记名f.缩写(日记.文件名))
         .foregroundStyle(Theme.accent)
         .fontWeight(.semibold)
 
@@ -82,9 +82,9 @@ private func 拆时间(_ 摘要: String) -> (时间: String?, 正文: String) {
   ZStack {
     Theme.background.ignoresSafeArea()
     VStack(spacing: 8) {
-      DiaryRowView(日记: 日记表["26-10-16_日记"]!)
-      DiaryRowView(日记: 日记表["26-10-14_日记"]!)
-      DiaryRowView(日记: 日记表["26-09-16_日记"]!)
+      单行V(日记: 日记表["26-10-16_日记"]!)
+      单行V(日记: 日记表["26-10-14_日记"]!)
+      单行V(日记: 日记表["26-09-16_日记"]!)
     }
     .padding(.horizontal, 12)
   }

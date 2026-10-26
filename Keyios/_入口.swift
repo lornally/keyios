@@ -40,10 +40,10 @@ struct KeyiosApp: App {
         // WindowGroup 里放的就是第一屏。
         // ── 想改"打开 app 看到什么"，改的就是这一行 ──
         WindowGroup {
-            DiaryListView(日记表: 日记表)
+            列表v(日记表: 日记表)
         }
         // ↑ `日记表` 是 d1日记表.swift 里的假数据（字典: 文件名 -> 那一篇）。
-        //   以后接上真的"遍历 iCloud 目录"，换掉这个参数即可，DiaryListView 本身不用动。
+        //   以后接上真的"遍历 iCloud 目录"，换掉这个参数即可，列表v 本身不用动。
     }
 }
 
@@ -52,7 +52,7 @@ struct KeyiosApp: App {
 // ============================================================================
 //
 // 1. 这里没有"启动时要做点啥"的地方？
-//    想加的话：`WindowGroup { ... }.onAppear { ... }` 或者给 DiaryListView 加 .task {}。
+//    想加的话：`WindowGroup { ... }.onAppear { ... }` 或者给 列表v 加 .task {}。
 //    打开文件、读 iCloud、初始化数据库，以后都放那儿。
 //
 // 2. 为什么没有 Info.plist？
@@ -63,7 +63,7 @@ struct KeyiosApp: App {
 //    Keyios/p1列表.swift      —— 日记列表页（唯一做完的页）
 //    Keyios/p1列表单行.swift  —— 列表里的"一行"长什么样
 //    Keyios/p1_底部按钮.swift —— 底部那条浮动按钮栏
-//    Keyios/p2详情.swift      —— 详情页（占位）
+//    Keyios/p2脑图.swift      —— 脑图页（占位）
 //    Keyios/p3新建.swift      —— 新建页（占位）
 //    Keyios/f1文件名.swift    —— 文件名缩减（纯函数，无界面）
 //    Keyios/d1日记表.swift    —— 内存数据（日记表字典 + 临时的假数据）

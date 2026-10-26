@@ -33,7 +33,7 @@ import SwiftUI
 
 struct Bar: ToolbarContent {
 
-  /// 动作由外面（DiaryListView）传进来。这叫"闭包参数" ——
+  /// 动作由外面（列表v）传进来。这叫"闭包参数" ——
   /// 相当于把"点了我该干嘛"当参数传，好测试也好复用。
   var onSearch: () -> Void = {}
   var onNew: () -> Void = {}

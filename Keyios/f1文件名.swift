@@ -14,7 +14,7 @@ import Foundation
 ///
 /// 纯函数, 不碰 UI —— 以后挪进 DogKit 或单独测都方便。
 enum 日记名f {
-
+  //static方法是为了 日记名f.缩写("26-10-11_日记") 这种写法, 不用先 new 一个实例。
   static func 缩写(
     _ fileName: String, today: Date = Date(),
     calendar: Calendar = .current

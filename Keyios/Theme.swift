@@ -17,6 +17,9 @@ enum Theme {
   ///     Color(red: 0.19, green: 0.82, blue: 0.35)      // 0~1 的 RGB
   ///     Color(hex: "#30D158")                            // 或者自己加个扩展
   static let accent = Color(hex: "#4ECDC4")
+
+  /// 底部那排"文字按钮"的颜色（p1列表.swift 里的 .tint 生效）。
+  /// 注意：toolbar 里的图标按钮（🔍、＋）不吃 tint，默认是白色。
   static let 底部胶囊 = Color(hex: "#98D8C8")
   /// 正文文字：白
   static let primaryText = Color.white

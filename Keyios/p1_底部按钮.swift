@@ -67,7 +67,7 @@ struct Bar: ToolbarContent {
 
     // ＋ 新建
     BarButton {
-      Button(action: onNew) { Image(systemName: "plus") }
+      Button(action: onNew) { Image(systemName: "plus").foregroundStyle(Color.white) }
     }
 
     // 待办分类们，一个按钮一个胶囊

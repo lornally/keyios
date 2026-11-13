@@ -23,19 +23,19 @@ enum 日记名f {
       return 干净名(fileName)  // 没有日期(比如 "摩托车")就显示干净的名字
     }
 
-    let days =
+    let 距今 =
       calendar.dateComponents(
         [.day], from: calendar.startOfDay(for: date),
         to: calendar.startOfDay(for: today)
       ).day ?? 0
-    let day = calendar.component(.day, from: date)
+    let 日 = calendar.component(.day, from: date)
 
-    switch days {
+    switch 距今 {
     case ..<0: return full(date)  // 未来日期(不该出现), 老实显示
     case 0: return "今天"
     case 1: return "昨天"
     case 2: return "前天"
-    case 3...6: return String(format: "%02d周%@", day, weekday(date, calendar))
+    case 3...6: return String(format: "%02d周%@", 日, weekday(date, calendar))
     default: break
     }
 
@@ -44,7 +44,7 @@ enum 日记名f {
     let y = calendar.component(.year, from: date)
     let m = calendar.component(.month, from: date)
 
-    if y == nowYear, m == nowMonth { return "本月\(day)日" }
+    if y == nowYear, m == nowMonth { return "本月\(日)日" }
 
     // 上个月 = 今天所在月的上一个月
     let lastMonthEnd = calendar.date(
@@ -55,10 +55,10 @@ enum 日记名f {
     if calendar.component(.year, from: lastMonthEnd) == y,
       calendar.component(.month, from: lastMonthEnd) == m
     {
-      return "上月\(day)日"
+      return "上月\(日)日"
     }
 
-    if y == nowYear { return String(format: "%02d-%02d", m, day) }
+    if y == nowYear { return String(format: "%02d-%02d", m, 日) }
 
     return full(date)  // 跨年, 保留年份
   }

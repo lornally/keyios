@@ -52,6 +52,10 @@ echo "==> 模拟器 $UDID"
 # 3. 启动它 (已经在跑就立刻返回)
 xcrun simctl bootstatus "$UDID" -b >/dev/null
 
+# 3.5 把界面弹出来。Xcode 27 没有 Simulator.app, 看模拟器窗口的是 Device Hub
+#     (Xcode.app/Contents/Applications/DeviceHub.app)。已经开着就只提到前面, 不会开第二份。
+open -b com.apple.dt.Devices
+
 # 4. 构建。增量构建, 第一次慢后面快
 echo "==> 构建"
 xcodebuild -project "$PROJECT.xcodeproj" -scheme "$SCHEME" -configuration Debug \

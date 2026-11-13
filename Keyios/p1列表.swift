@@ -98,10 +98,10 @@ struct 列表v: View {
           onNew: { showingNewNote = true }
         )
       }
-      // `.tint` 是"告诉系统这一片的主色是什么"：底栏的文字按钮（待办/持续…）
-      // 和搜索光标会用它。正文文字不受影响 —— 文件名在 p1列表单行.swift 里
-      // 直接写死了 Theme.accent，所以两处可以各是各的颜色。
-      // （图标按钮 🔍、＋ 也不吃 tint，说明见 p1_底部按钮.swift。）
+      // `.tint` 是"告诉系统这一片的主色是什么"：底栏的文字按钮和图标按钮
+      // 都会用它。正文文字不受影响 —— 文件名在 p1列表单行.swift 里直接
+      // 写死了 Theme.accent，所以两处可以各是各的颜色。
+      // 例外：系统搜索项 🔍 是单色，不吃 tint。
       .tint(Theme.底部胶囊)
     }
     .preferredColorScheme(.dark)  // 强制深色（我们的设计本来就是黑底）

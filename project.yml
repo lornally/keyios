@@ -27,6 +27,11 @@ targets:
         ENABLE_PREVIEWS: YES                 # 给 Xcode 的 #Preview / axe 用
         ONLY_ACTIVE_ARCH: YES                # 只编当前架构, 别浪费一半时间编 x86_64
         CODE_SIGN_STYLE: Automatic
-        # 模拟器构建不需要签名, 省掉开发者账号依赖; 上真机时去掉这两行
-        CODE_SIGNING_ALLOWED: NO
-        CODE_SIGNING_REQUIRED: NO
+        # 和 macOS 版 Keydog 同一个开发者团队 (见 macOS 仓库的 打包/______需提示AI必读______.md)
+        DEVELOPMENT_TEAM: S6C429H97P
+        # iCloud 能力声明。模拟器关了签名, 这份 entitlements 不会生效,
+        # 所以模拟器走 f2读日记.swift 里的宿主机目录回退; 真机签名后才会用 iCloud 容器。
+        CODE_SIGN_ENTITLEMENTS: Keyios/Keyios.entitlements
+        # 只有模拟器免签名 (省掉开发者账号依赖); 真机保持签名, 交给 Automatic 去要 profile
+        CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]: NO
+        CODE_SIGNING_REQUIRED[sdk=iphonesimulator*]: NO

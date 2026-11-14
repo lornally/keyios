@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- 和 macOS 版 Keydog 共用同一个 iCloud 容器: 双端看到同一份日记。
+	     给 App ID 关联容器的网页操作见 macOS 仓库:
+	     00操作文档/mac和apple环境人类操作精华.md §B (团队 S6C429H97P) -->
+	<key>com.apple.developer.icloud-container-identifiers</key>
+	<array>
+		<string>iCloud.cn.isuyu.keydog</string>
+	</array>
+	<key>com.apple.developer.ubiquity-container-identifiers</key>
+	<array>
+		<string>iCloud.cn.isuyu.keydog</string>
+	</array>
+	<key>com.apple.developer.ubiquity-kvstore-identifier</key>
+	<string>$(TeamIdentifierPrefix)cn.isuyu.keydog</string>
+	<!-- CloudDocuments = iCloud Drive 文件 (不用 CloudKit 数据库) -->
+	<key>com.apple.developer.icloud-services</key>
+	<array>
+		<string>CloudDocuments</string>
+	</array>
+</dict>
+</plist>

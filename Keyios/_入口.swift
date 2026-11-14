@@ -11,7 +11,7 @@ struct KeyiosApp: App {  // App 是个协议(protocol), 这里表示 KeyiosApp �
     WindowGroup {  // WindowGroup 是 SwiftUI 提供的场景类型, 这里创建它的一个匿名实例
       // 这个花括号是尾随闭包, 也就是 WindowGroup 初始化器的 content 参数
 
-      列表v(日记表: 日记表)  // 闭包里的内容: 第一屏要显示的那个视图
+      根V()  // 先从 iCloud 目录读出日记表, 再交给列表页
       // 闭包和 body 都只有一条表达式, Swift 允许省略 return, 直接把它当返回值
     }
   }
@@ -21,21 +21,23 @@ struct KeyiosApp: App {  // App 是个协议(protocol), 这里表示 KeyiosApp �
 // 几件可能想知道的事
 // ============================================================================
 //
-// 1. 这里没有"启动时要做点啥"的地方？
-//    想加的话：`WindowGroup { ... }.onAppear { ... }` 或者给 列表v 加 .task {}。
-//    打开文件、读 iCloud、初始化数据库，以后都放那儿。
+// 1. 启动时要做的"读 iCloud"在哪？
+//    在 p0根.swift。它先把日记表读出来，再交给 列表v 显示。
 //
 // 2. 为什么没有 Info.plist？
 //    project.yml 里开了 `GENERATE_INFOPLIST_FILE: YES`，Xcode 按构建设置现生成。
-//    要加自己的项（比如 iCloud capability），改成在 project.yml 里填。
+//    iCloud 能力写在 Keyios/Keyios.entitlements 里，由 project.yml 引用。
 //
 // 3. 界面代码在哪？（文件名规则：`pN` = 第 N 页, `fN` = 函数, `_` 开头 = 入口）
+//    Keyios/p0根.swift       —— 启动时读日记表，读完交给列表页
 //    Keyios/p1列表.swift      —— 日记列表页（唯一做完的页）
 //    Keyios/p1列表单行.swift  —— 列表里的"一行"长什么样
 //    Keyios/p1_底部按钮.swift —— 底部那条浮动按钮栏
 //    Keyios/p2脑图.swift      —— 脑图页（占位）
 //    Keyios/p3新建.swift      —— 新建页（占位）
 //    Keyios/f1文件名.swift    —— 文件名缩减（纯函数，无界面）
-//    Keyios/d1日记表.swift    —— 内存数据（日记表字典 + 临时的假数据）
+//    Keyios/f2读日记.swift    —— 遍历 iCloud 目录读日记表（纯函数，无界面）
+//    Keyios/d1日记表.swift    —— 日记的数据结构（内存里长什么样）
+//    Keyios/t1样例测试数据.swift —— 假数据，只给 #Preview 用
 //    Keyios/Theme.swift       —— 配色
 // ============================================================================

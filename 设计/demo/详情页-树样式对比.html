@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keyios 详情页 · 两种树样式</title>
+<style>
+  /* ── 页面底座 ─────────────────────────────────────────────── */
+  * { box-sizing: border-box; }
+  :root {
+    --黄: #FFEAA7;
+    --白: #F2F2F4;
+    --灰: #8C8C92;
+  }
+  html { color-scheme: dark; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(760px 380px at 12% -8%, rgba(255,234,167,.055), transparent 62%),
+      radial-gradient(680px 380px at 88% 0%, rgba(168,199,255,.045), transparent 62%),
+      #0a0a0c;
+    color: var(--白);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Hiragino Sans GB", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+
+  /* ── 页头 ─────────────────────────────────────────────────── */
+  .页头 {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 28px;
+    flex-wrap: wrap;
+    padding: 26px clamp(20px, 5vw, 64px) 20px;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+  }
+  .眉 { font-size: 10px; letter-spacing: .2em; color: var(--黄); opacity: .75; font-weight: 600; }
+  h1 { margin: 8px 0 7px; font-size: clamp(20px, 2.4vw, 26px); font-weight: 650; letter-spacing: -.01em; color: #fff; }
+  .副 { margin: 0; color: var(--灰); font-size: 12.5px; line-height: 1.65; }
+  .副 b { color: #C9C9CE; font-weight: 500; }
+
+  .工具 { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+  .图例 { display: flex; align-items: center; gap: 6px; }
+  .图例字 { font-size: 11.5px; color: var(--灰); margin-right: 2px; }
+  .色点 {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--c);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 10%, transparent);
+  }
+  .按钮组 { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+  .按钮 {
+    font-size: 12px; color: #C7C7CC;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(255,255,255,.035);
+    padding: 7px 12px; border-radius: 99px;
+    transition: background .15s, border-color .15s, color .15s;
+  }
+  .按钮:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.22); color: #fff; }
+  .按钮.主 { color: var(--黄); border-color: color-mix(in srgb, var(--黄) 30%, transparent); }
+  .按钮.主:hover { background: color-mix(in srgb, var(--黄) 10%, transparent); }
+
+  /* ── 两台手机并排 ─────────────────────────────────────────── */
+  .舞台 {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: clamp(24px, 4vw, 54px);
+    padding: 24px 20px 24px;
+    flex-wrap: wrap;
+  }
+  .设备列 { width: 392px; max-width: 100%; }
+  .方案头 { display: flex; gap: 10px; align-items: flex-start; margin: 0 2px 12px; }
+  .序号 {
+    flex: none; width: 22px; height: 22px; margin-top: 1px;
+    border: 1px solid rgba(255,255,255,.16); border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 11px; color: var(--黄);
+  }
+  .方案头 h2 { margin: 0; font-size: 14.5px; font-weight: 600; color: #fff; letter-spacing: .01em; }
+  .方案头 p { margin: 4px 0 0; font-size: 11.8px; line-height: 1.5; color: var(--灰); }
+
+  .手机 {
+    height: clamp(580px, calc(100vh - 240px), 780px);
+    padding: 10px;
+    border-radius: 54px;
+    background: linear-gradient(150deg, #2a2a2e 0%, #151517 45%, #202024 100%);
+    box-shadow:
+      0 30px 70px rgba(0,0,0,.55),
+      0 0 0 1px rgba(255,255,255,.07),
+      inset 0 0 0 1px rgba(255,255,255,.05);
+  }
+  .屏幕 {
+    height: 100%;
+    background: #000;
+    border-radius: 44px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
+  }
+
+  .状态栏 {
+    flex: none; height: 46px;
+    padding: 8px 24px 0 27px;
+    display: flex; justify-content: space-between; align-items: center;
+    color: #fff; font-size: 14px; font-weight: 600; letter-spacing: .01em;
+  }
+  .状态图标 { display: flex; align-items: center; gap: 6px; opacity: .95; }
+  .状态图标 svg { display: block; }
+
+  .导航栏 {
+    flex: none; height: 44px;
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    padding: 0 8px;
+    border-bottom: .5px solid rgba(255,255,255,.07);
+  }
+  .返回 { justify-self: start; color: var(--黄); display: flex; align-items: center; padding: 8px 8px 8px 4px; }
+  .导航标题 { font-size: 16px; font-weight: 600; color: #fff; }
+  .编辑按钮 { justify-self: end; color: var(--黄); font-size: 15px; padding: 8px 8px; }
+
+  .滚动区 {
+    flex: 1; overflow-y: auto; overscroll-behavior: contain;
+    padding: 6px 14px 38px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,.16) transparent;
+  }
+  .滚动区::-webkit-scrollbar { width: 3px; }
+  .滚动区::-webkit-scrollbar-thumb { background: rgba(255,255,255,.16); border-radius: 9px; }
+
+  /* ── 方案 1: 左轴树 ───────────────────────────────────────── */
+  .树 { position: relative; }
+  .树.v1 { padding-bottom: 24px; }
+  .连线层 { position: absolute; left: 0; top: 0; pointer-events: none; z-index: 0; overflow: visible; }
+  .v1节点 { position: relative; z-index: 1; }
+  .v1节点.顶层 { margin-top: 16px; }
+  .v1节点.顶层:first-of-type { margin-top: 0; }
+  .v1子群 { padding-left: 26px; }
+
+  .v1行, .v2行 {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 5px 8px 5px 4px;
+    border-radius: 9px;
+  }
+  .v1行:hover, .v2行:hover { background: rgba(255,255,255,.04); }
+
+  .点按钮 {
+    flex: none; width: 26px; height: 26px;
+    display: grid; place-items: center;
+    padding: 0; border: 0; background: none; cursor: default;
+  }
+  button.点按钮 { cursor: pointer; }
+  .点按钮::after {
+    content: '';
+    width: var(--点); height: var(--点);
+    border-radius: 50%;
+    background: var(--c);
+    transition: transform .14s ease, box-shadow .14s ease;
+  }
+  button.点按钮:hover::after { transform: scale(1.25); }
+  .折叠 > .v1行 > .点按钮::after {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 18%, transparent);
+  }
+
+  /* ── 两种样式共用的文字 ───────────────────────────────────── */
+  .内容 { flex: 1; min-width: 0; font-size: 15.8px; line-height: 26px; color: #EDEDF0; overflow-wrap: anywhere; }
+  .正文 { color: #EDEDF0; }
+  .v1节点.顶层 > .v1行 .正文,
+  .v2行.顶层 .正文 { font-size: 16.5px; font-weight: 600; color: #fff; }
+  .时间 { font-size: 12.5px; color: #8C8C92; font-variant-numeric: tabular-nums; margin-right: 6px; }
+  .图标 {
+    display: inline-block; margin-left: 6px; padding: 1.5px 5px;
+    border-radius: 4.5px;
+    background: rgba(255,255,255,.08); color: #BDBDC3;
+    font-size: 10px; font-weight: 600; letter-spacing: .05em; line-height: 1.35;
+    vertical-align: 1px;
+  }
+  .折叠数 {
+    display: inline-block; margin-left: 6px; padding: 1px 6px;
+    border-radius: 99px;
+    color: var(--c); background: color-mix(in srgb, var(--c) 14%, transparent);
+    font-size: 10.5px; font-weight: 600; vertical-align: 1px;
+  }
+  .正文[contenteditable] {
+    outline: none;
+    border-bottom: 1px dashed color-mix(in srgb, var(--黄) 40%, transparent);
+    cursor: text; caret-color: var(--黄);
+  }
+  .正文[contenteditable]:focus {
+    border-bottom-color: var(--黄);
+    background: color-mix(in srgb, var(--黄) 7%, transparent);
+    border-radius: 2px;
+  }
+
+  /* ── 方案 2: 列表 + 圆点阶梯 ──────────────────────────────── */
+  .v2行 { gap: 10px; }
+  .v2行.顶层 { margin-top: 16px; }
+  .v2行.顶层:first-of-type { margin-top: 0; }
+  .v2标记区 {
+    flex: none; height: 26px;
+    display: flex; align-items: center; gap: 5px;
+    padding: 0; border: 0; background: none; cursor: default;
+  }
+  button.v2标记区 { cursor: pointer; }
+  .v2点 {
+    display: block; flex: none;
+    width: var(--s); height: var(--s);
+    border-radius: 50%;
+    background: var(--c);
+    transition: transform .14s ease;
+  }
+  button.v2标记区:hover .v2点 { transform: scale(1.08); }
+
+  /* ── 注脚 ─────────────────────────────────────────────────── */
+  .注 { margin: 12px 4px 0; color: #85858B; font-size: 11.5px; line-height: 1.65; }
+  .注 b { color: #B8B8BE; font-weight: 500; }
+  .页脚 { text-align: center; color: #5E5E64; font-size: 11px; padding: 0 20px 40px; }
+  .Home条 {
+    position: absolute; bottom: 7px; left: 50%; transform: translateX(-50%);
+    width: 132px; height: 5px; border-radius: 99px;
+    background: rgba(255,255,255,.32); pointer-events: none;
+  }
+
+  @media (max-width: 880px) {
+    .页头 { align-items: flex-start; }
+    .工具 { align-items: flex-start; }
+    .舞台 { flex-direction: column; align-items: center; }
+    .设备列 { width: min(392px, calc(100vw - 28px)); }
+    .手机 { height: min(760px, 78vh); }
+  }
+</style>
+</head>
+<body>
+
+<header class="页头">
+  <div class="标题块">
+    <div class="眉">KEYIOS · 详情页 DEMO</div>
+    <h1>两种树样式</h1>
+    <p class="副">
+      同一份日记数据, 两边状态互通 · <b>点圆点折叠</b> · <b>双击正文改字</b>
+    </p>
+  </div>
+  <div class="工具">
+    <div class="图例">
+      <span class="图例字">一级节点 = 一丛 = 一色</span>
+      <span class="色点" style="--c:#FFEAA7"></span>
+      <span class="色点" style="--c:#A8D8C9"></span>
+      <span class="色点" style="--c:#A9C7FF"></span>
+      <span class="色点" style="--c:#F3B7C6"></span>
+      <span class="色点" style="--c:#F6C28B"></span>
+      <span class="色点" style="--c:#C9B6FF"></span>
+    </div>
+    <div class="按钮组">
+      <button class="按钮" id="展开">全部展开</button>
+      <button class="按钮" id="收起">全部收起</button>
+      <button class="按钮 主" id="重置">重置</button>
+    </div>
+  </div>
+</header>
+
+<main class="舞台">
+
+  <!-- 方案 1 -->
+  <section class="设备列">
+    <div class="方案头">
+      <span class="序号">1</span>
+      <div>
+        <h2>左轴顺序树</h2>
+        <p>儿子在右下方, 弟弟在哥哥的正下方</p>
+      </div>
+    </div>
+    <div class="手机">
+      <div class="屏幕">
+        <div class="状态栏">
+          <span>21:51</span>
+          <div class="状态图标">
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="6" width="3" height="6" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+            <svg width="17" height="12" viewBox="0 0 17 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.5a10 10 0 0 1 14 0"/><path d="M4.3 7.2a6 6 0 0 1 8.4 0"/><circle cx="8.5" cy="10.2" r="1.2" fill="currentColor" stroke="none"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3" stroke="currentColor" opacity=".5"/><rect x="2" y="2" width="18" height="8" rx="1.8" fill="currentColor"/><path d="M23 4v4a2 2 0 0 0 0-4Z" fill="currentColor" opacity=".5"/></svg>
+          </div>
+        </div>
+        <div class="导航栏">
+          <button class="返回" aria-label="返回">
+            <svg width="11" height="19" viewBox="0 0 11 19" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 1.5 2 9.5l7.5 8"/></svg>
+          </button>
+          <span class="导航标题">今天</span>
+          <button class="编辑按钮">编辑</button>
+        </div>
+        <div class="滚动区" id="滚动1">
+          <div class="树 v1" id="树1"></div>
+        </div>
+        <div class="Home条"></div>
+      </div>
+    </div>
+    <p class="注"><b>圆点 + 连线</b>把父子关系直接画出来; 兄弟共用同一列, 纵向读就是大纲.</p>
+  </section>
+
+  <!-- 方案 2 -->
+  <section class="设备列">
+    <div class="方案头">
+      <span class="序号">2</span>
+      <div>
+        <h2>列表 · 圆点阶梯</h2>
+        <p>星号数量决定父子关系, 这里用圆点</p>
+      </div>
+    </div>
+    <div class="手机">
+      <div class="屏幕">
+        <div class="状态栏">
+          <span>21:51</span>
+          <div class="状态图标">
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="6" width="3" height="6" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+            <svg width="17" height="12" viewBox="0 0 17 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.5a10 10 0 0 1 14 0"/><path d="M4.3 7.2a6 6 0 0 1 8.4 0"/><circle cx="8.5" cy="10.2" r="1.2" fill="currentColor" stroke="none"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3" stroke="currentColor" opacity=".5"/><rect x="2" y="2" width="18" height="8" rx="1.8" fill="currentColor"/><path d="M23 4v4a2 2 0 0 0 0-4Z" fill="currentColor" opacity=".5"/></svg>
+          </div>
+        </div>
+        <div class="导航栏">
+          <button class="返回" aria-label="返回">
+            <svg width="11" height="19" viewBox="0 0 11 19" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 1.5 2 9.5l7.5 8"/></svg>
+          </button>
+          <span class="导航标题">今天</span>
+          <button class="编辑按钮">编辑</button>
+        </div>
+        <div class="滚动区" id="滚动2">
+          <div class="树 v2" id="树2"></div>
+        </div>
+        <div class="Home条"></div>
+      </div>
+    </div>
+    <p class="注"><b>每深一级多一个更小的圆点</b>; 第一个点最大, 逐级缩小, 两个点仍比一个点宽.</p>
+  </section>
+
+</main>
+
+<div class="页脚">数据格式参考 T1.dog · 根节点是文件名, 不占正文 · 本 demo 不读写真实文件</div>
+
+<script>
+/* ── 颜色与圆点大小 ─────────────────────────────────────────── */
+const 色板 = ['#FFEAA7', '#A8D8C9', '#A9C7FF', '#F3B7C6', '#F6C28B', '#C9B6FF'];
+const 点径1 = [11, 8.5, 6.5, 5, 4];   // 方案 1: 每行一个点, 逐级缩小
+const 点径2 = [11, 8, 6.5, 5, 4];     // 方案 2: 每深一级多一个点
+
+/* ── 样例数据 ───────────────────────────────────────────────── */
+const 原始数据 = [
+  { 文本: '08:30 晨跑', 子: [
+    { 文本: '沿江 5 公里' },
+    { 文本: '回来买了豆浆' },
+  ]},
+  { 文本: '10:12 买菜', 子: [
+    { 文本: '牛奶 2 盒' },
+    { 文本: '鸡蛋 一板', 子: [
+      { 文本: '看保质期', 子: [
+        { 文本: '散装的那盒先吃' },
+      ]},
+    ]},
+  ]},
+  { 文本: '14:00 修门锁 ing', 子: [
+    { 文本: '门锁型号 已拍照' },
+    { 文本: '换锁芯报价 180' },
+  ]},
+  { 文本: '19:00 聚餐', 子: [
+    { 文本: '火锅', 子: [ { 文本: '微辣' } ] },
+  ]},
+  { 文本: '待办框 26-11-15 交房租 todo', 子: [
+    { 文本: '房东只收现金' },
+    { 文本: '房租 3800 done' },
+  ]},
+  { 文本: '读书 《漫长的告别》 ing', 子: [
+    { 文本: '摘抄 22 页' },
+    { 文本: '这段文字故意写得比较长, 用来看两种样式的折行是否都从文字起点对齐' },
+  ]},
+];
+
+/* ── 状态 ───────────────────────────────────────────────────── */
+const 状态 = { 编辑中: false, 折叠: new Set() };
+let 数据 = 建数据();
+
+const 树1 = document.getElementById('树1');
+const 树2 = document.getElementById('树2');
+const 滚动1 = document.getElementById('滚动1');
+const 滚动2 = document.getElementById('滚动2');
+
+/* ── 构建数据: 拆出时间前缀 / 图标尾缀, 给每个节点一个稳定 id ── */
+function 建数据() {
+  const 表 = new Map();
+  let 序 = 0;
+
+  const 造 = (原始, 层, 颜色) => {
+    const 拆 = 拆文本(原始.文本);
+    const 节点 = {
+      id: 'n' + (序++),
+      层, 颜色,
+      时间: 拆.时间,
+      正文: 拆.正文,
+      图标: 拆.图标,
+      子: null,
+    };
+    表.set(节点.id, 节点);
+    if (原始.子) 节点.子 = 原始.子.map(子 => 造(子, 层 + 1, 颜色));
+    return 节点;
+  };
+
+  const 顶层 = 原始数据.map((原始, i) => 造(原始, 0, 色板[i % 色板.length]));
+  return { 表, 顶层 };
+}
+
+function 拆文本(文本) {
+  let 时间 = null;
+  let 正文 = 文本.trim();
+  let 图标 = null;
+
+  const 时间匹配 = 正文.match(/^(\d{1,2}:\d{2})\s+([\s\S]*)$/);
+  if (时间匹配) {
+    时间 = 时间匹配[1];
+    正文 = 时间匹配[2];
+  }
+
+  const 图标匹配 = 正文.match(/^(.*?)\s+(ing|todo|done|!!)$/);
+  if (图标匹配) {
+    正文 = 图标匹配[1];
+    图标 = 图标匹配[2];
+  }
+
+  return { 时间, 正文, 图标 };
+}
+
+function 后代数(节点) {
+  if (!节点.子) return 0;
+  return 节点.子.reduce((和, 子) => 和 + 1 + 后代数(子), 0);
+}
+
+/* ── 方案 1: 左轴树 ─────────────────────────────────────────── */
+function 建v1节点(节点) {
+  const 盒 = document.createElement('div');
+  盒.className = 'v1节点';
+  if (节点.层 === 0) 盒.classList.add('顶层');
+  if (节点.子 && 状态.折叠.has(节点.id)) 盒.classList.add('折叠');
+  盒.dataset.id = 节点.id;
+  盒.style.setProperty('--c', 节点.颜色);
+  盒.style.setProperty('--点', (点径1[节点.层] ?? 4) + 'px');
+
+  const 行 = document.createElement('div');
+  行.className = 'v1行';
+
+  const 点 = 节点.子 ? document.createElement('button') : document.createElement('span');
+  点.className = '点按钮';
+  if (节点.子) {
+    点.type = 'button';
+    点.tabIndex = -1;
+    点.title = 状态.折叠.has(节点.id) ? '展开' : '折叠';
+    点.setAttribute('aria-label', 点.title);
+    点.addEventListener('click', () => 切换折叠(节点));
+  } else {
+    点.setAttribute('aria-hidden', 'true');
+  }
+
+  行.append(点, 造内容(节点));
+  盒.append(行);
+
+  if (节点.子 && !状态.折叠.has(节点.id)) {
+    const 群 = document.createElement('div');
+    群.className = 'v1子群';
+    for (const 子 of 节点.子) 群.append(建v1节点(子));
+    盒.append(群);
+  }
+  return 盒;
+}
+
+function 画v1() {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.classList.add('连线层');
+  svg.setAttribute('fill', 'none');
+  树1.replaceChildren(svg);
+  for (const 节点 of 数据.顶层) 树1.append(建v1节点(节点));
+}
+
+/* 连接线用测出来的圆点中心画: 竖向主干 + 每个儿子的横向分支 */
+function 画线() {
+  const svg = 树1.querySelector('.连线层');
+  if (!svg) return;
+
+  const 树盒 = 树1.getBoundingClientRect();
+  const 点位置 = new Map();
+
+  树1.querySelectorAll('.v1节点').forEach(节点盒 => {
+    const 点 = 节点盒.querySelector(':scope > .v1行 .点按钮');
+    if (!点) return;
+    const 盒 = 点.getBoundingClientRect();
+    点位置.set(节点盒.dataset.id, {
+      x: 盒.left + 盒.width / 2 - 树盒.left,
+      y: 盒.top + 盒.height / 2 - 树盒.top,
+    });
+  });
+
+  const 路 = [];
+
+  // 左轴: 把所有一级节点串起来
+  const 一级 = 数据.顶层;
+  if (一级.length > 1) {
+    const 首 = 点位置.get(一级[0].id);
+    const 尾 = 点位置.get(一级[一级.length - 1].id);
+    if (首 && 尾) {
+      路.push(`<path d="M${首.x} ${首.y}V${尾.y}" stroke="rgba(255,255,255,.10)" stroke-width="1"/>`);
+    }
+  }
+
+  const 走 = 节点 => {
+    if (!节点.子 || 状态.折叠.has(节点.id)) return;
+    const 父 = 点位置.get(节点.id);
+    const 末 = 点位置.get(节点.子[节点.子.length - 1].id);
+    if (!父 || !末) return;
+
+    路.push(`<path d="M${父.x} ${父.y}V${末.y}" stroke="${节点.颜色}" stroke-opacity=".62" stroke-width="1.4" stroke-linecap="round"/>`);
+
+    for (const 子 of 节点.子) {
+      const 子点 = 点位置.get(子.id);
+      if (!子点) continue;
+      路.push(`<path d="M${父.x} ${子点.y}H${子点.x}" stroke="${节点.颜色}" stroke-opacity=".62" stroke-width="1.4" stroke-linecap="round"/>`);
+      走(子);
+    }
+  };
+
+  一级.forEach(走);
+
+  const 宽 = 树1.scrollWidth;
+  const 高 = 树1.scrollHeight;
+  svg.setAttribute('viewBox', `0 0 ${宽} ${高}`);
+  svg.setAttribute('width', 宽);
+  svg.setAttribute('height', 高);
+  svg.innerHTML = 路.join('');
+}
+
+/* ── 方案 2: 列表 + 圆点阶梯 ────────────────────────────────── */
+function 展平(列表, 出 = []) {
+  for (const 节点 of 列表) {
+    出.push(节点);
+    if (节点.子 && !状态.折叠.has(节点.id)) 展平(节点.子, 出);
+  }
+  return 出;
+}
+
+function 建v2行(节点) {
+  const 行 = document.createElement('div');
+  行.className = 'v2行';
+  if (节点.层 === 0) 行.classList.add('顶层');
+  行.dataset.id = 节点.id;
+  行.style.setProperty('--c', 节点.颜色);
+
+  const 标 = 节点.子 ? document.createElement('button') : document.createElement('span');
+  标.className = 'v2标记区';
+  if (节点.子) {
+    标.type = 'button';
+    标.tabIndex = -1;
+    标.title = 状态.折叠.has(节点.id) ? '展开' : '折叠';
+    标.setAttribute('aria-label', 标.title);
+    标.addEventListener('click', () => 切换折叠(节点));
+  } else {
+    标.setAttribute('aria-hidden', 'true');
+  }
+
+  // 一层一个点: 数量 = 层级 + 1, 大小逐级递减
+  for (let i = 0; i <= 节点.层; i++) {
+    const 点 = document.createElement('i');
+    点.className = 'v2点';
+    点.style.setProperty('--s', (点径2[i] ?? 3.5) + 'px');
+    标.append(点);
+  }
+
+  行.append(标, 造内容(节点));
+  return 行;
+}
+
+function 画v2() {
+  树2.replaceChildren(...展平(数据.顶层).map(建v2行));
+}
+
+/* ── 两种样式共用的行内容 ───────────────────────────────────── */
+function 造内容(节点) {
+  const 内容 = document.createElement('div');
+  内容.className = '内容';
+
+  if (节点.时间) {
+    const 时 = document.createElement('span');
+    时.className = '时间';
+    时.textContent = 节点.时间;
+    内容.append(时);
+  }
+
+  const 正 = document.createElement('span');
+  正.className = '正文';
+  正.dataset.id = 节点.id;
+  正.textContent = 节点.正文;
+
+  if (状态.编辑中) {
+    正.contentEditable = 'true';
+    正.spellcheck = false;
+    绑定编辑(正);
+  } else {
+    正.title = '双击编辑';
+    正.addEventListener('dblclick', () => 进入编辑(节点.id, 正.closest('.树')));
+  }
+  内容.append(正);
+
+  if (节点.图标) {
+    const 标 = document.createElement('span');
+    标.className = '图标';
+    标.textContent = 节点.图标;
+    内容.append(标);
+  }
+
+  if (节点.子 && 状态.折叠.has(节点.id)) {
+    const 数 = document.createElement('span');
+    数.className = '折叠数';
+    数.textContent = '+' + 后代数(节点);
+    内容.append(数);
+  }
+
+  return 内容;
+}
+
+/* ── 编辑 ───────────────────────────────────────────────────── */
+function 绑定编辑(正) {
+  let 旧 = 正.textContent;
+
+  正.addEventListener('focus', () => { 旧 = 正.textContent; });
+
+  正.addEventListener('keydown', e => {
+    if (e.isComposing) return;
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      正.blur();
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      正.textContent = 旧;
+      正.blur();
+    }
+  });
+
+  正.addEventListener('blur', () => {
+    const 新 = 正.textContent.trim();
+    const 节点 = 数据.表.get(正.dataset.id);
+    if (!节点) return;
+
+    节点.正文 = 新 || 旧;
+    正.textContent = 节点.正文;
+
+    document.querySelectorAll(`.正文[data-id="${正.dataset.id}"]`).forEach(其它 => {
+      if (其它 !== 正) 其它.textContent = 节点.正文;
+    });
+
+    requestAnimationFrame(画线);
+  });
+}
+
+function 进入编辑(id, 来源树) {
+  if (document.activeElement && document.activeElement.isContentEditable) {
+    document.activeElement.blur();
+  }
+
+  状态.编辑中 = true;
+  重绘();
+
+  requestAnimationFrame(() => {
+    const 正 = (来源树 || 树1).querySelector(`.正文[data-id="${id}"]`);
+    if (!正) return;
+    正.focus();
+
+    const 选区 = window.getSelection();
+    const 范围 = document.createRange();
+    范围.selectNodeContents(正);
+    范围.collapse(false);   // 光标放到末尾
+    选区.removeAllRanges();
+    选区.addRange(范围);
+  });
+}
+
+/* ── 折叠 / 重绘 ────────────────────────────────────────────── */
+function 切换折叠(节点) {
+  if (!节点.子) return;
+  if (document.activeElement && document.activeElement.isContentEditable) {
+    document.activeElement.blur();
+  }
+  if (状态.折叠.has(节点.id)) 状态.折叠.delete(节点.id);
+  else 状态.折叠.add(节点.id);
+  重绘();
+}
+
+function 重绘() {
+  const 位1 = 滚动1.scrollTop;
+  const 位2 = 滚动2.scrollTop;
+
+  画v1();
+  画v2();
+
+  滚动1.scrollTop = 位1;
+  滚动2.scrollTop = 位2;
+
+  document.querySelectorAll('.编辑按钮').forEach(按钮 => {
+    按钮.textContent = 状态.编辑中 ? '完成' : '编辑';
+  });
+
+  requestAnimationFrame(画线);
+}
+
+/* ── 工具栏 ─────────────────────────────────────────────────── */
+document.querySelectorAll('.编辑按钮').forEach(按钮 => {
+  按钮.addEventListener('click', () => {
+    if (document.activeElement && document.activeElement.isContentEditable) {
+      document.activeElement.blur();
+    }
+    状态.编辑中 = !状态.编辑中;
+    重绘();
+  });
+});
+
+document.getElementById('展开').addEventListener('click', () => {
+  状态.折叠.clear();
+  重绘();
+});
+
+document.getElementById('收起').addEventListener('click', () => {
+  状态.折叠.clear();
+  const 收 = 列表 => 列表.forEach(节点 => {
+    if (节点.子) {
+      状态.折叠.add(节点.id);
+      收(节点.子);
+    }
+  });
+  收(数据.顶层);
+  重绘();
+});
+
+document.getElementById('重置').addEventListener('click', () => {
+  if (document.activeElement && document.activeElement.isContentEditable) {
+    document.activeElement.blur();
+  }
+  状态.折叠.clear();
+  状态.编辑中 = false;
+  数据 = 建数据();
+  重绘();
+});
+
+/* ── 起跑 ───────────────────────────────────────────────────── */
+重绘();
+document.fonts?.ready.then(() => requestAnimationFrame(画线));
+window.addEventListener('resize', () => requestAnimationFrame(画线));
+new ResizeObserver(() => requestAnimationFrame(画线)).observe(树1);
+</script>
+</body>
+</html>

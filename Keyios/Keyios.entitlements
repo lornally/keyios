@@ -14,7 +14,7 @@
 		<string>iCloud.cn.isuyu.keydog</string>
 	</array>
 	<key>com.apple.developer.ubiquity-kvstore-identifier</key>
-	<string>$(TeamIdentifierPrefix)cn.isuyu.keydog</string>
+	<string>$(TeamIdentifierPrefix)$(CFBundleIdentifier)</string>
 	<!-- CloudDocuments = iCloud Drive 文件 (不用 CloudKit 数据库) -->
 	<key>com.apple.developer.icloud-services</key>
 	<array>

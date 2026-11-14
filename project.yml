@@ -3,7 +3,7 @@
 name: Keyios
 
 options:
-  bundleIdPrefix: com.lornally
+  bundleIdPrefix: cn.isuyu
   deploymentTarget:
     iOS: "17.0"
   createIntermediateGroups: true
@@ -16,7 +16,7 @@ targets:
       - path: Keyios
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.lornally.keyios
+        PRODUCT_BUNDLE_IDENTIFIER: cn.isuyu.keyios
         SWIFT_VERSION: "6.0"
         # Info.plist 由 Xcode 按下面的键现生成, 不用手写文件
         GENERATE_INFOPLIST_FILE: YES
@@ -26,6 +26,8 @@ targets:
         TARGETED_DEVICE_FAMILY: "1"          # 1 = 只 iPhone
         ENABLE_PREVIEWS: YES                 # 给 Xcode 的 #Preview / axe 用
         ONLY_ACTIVE_ARCH: YES                # 只编当前架构, 别浪费一半时间编 x86_64
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon  # 图标在 Keyios/Assets.xcassets
+        INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO  # 没自己写加密, 上传时不用再答出口合规
         CODE_SIGN_STYLE: Automatic
         # 和 macOS 版 Keydog 同一个开发者团队 (见 macOS 仓库的 打包/______需提示AI必读______.md)
         DEVELOPMENT_TEAM: S6C429H97P

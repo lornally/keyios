@@ -206,14 +206,14 @@ struct 脑图V: View {
   private func 显示内容(_ 行: 行项) -> some View {
     let 顶层 = 行.层 == 0
     let 正 = Text(行.节点.正文)
-      .font(.system(size: 顶层 ? 16.5 : 15.8, weight: 顶层 ? .semibold : .regular))
+      .font(顶层 ? .headline : .body)  // 17pt: 顶层加粗, 正文常规
       .foregroundStyle(正文颜色(行))
 
     return HStack(alignment: .firstTextBaseline, spacing: 0) {
       // 时间只做前缀, 和正文拼成同一段文字 —— 折行才会从内容左边对齐
       if let 时间 = 行.节点.时间 {
         (Text(时间 + "  ")
-          .font(.system(size: 12.5))
+          .font(.footnote)  // 13pt
           .monospacedDigit()
           .foregroundStyle(时间颜色(行)) + 正)
           .lineSpacing(7)
@@ -237,13 +237,13 @@ struct 脑图V: View {
     return HStack(alignment: .firstTextBaseline, spacing: 0) {
       if let 时间 = 行.节点.时间 {
         Text(时间 + "  ")
-          .font(.system(size: 12.5))
+          .font(.footnote)  // 13pt
           .monospacedDigit()
           .foregroundStyle(时间颜色(行))
       }
       TextField("", text: 正文绑定(行.id), axis: .vertical)
         .textFieldStyle(.plain)
-        .font(.system(size: 顶层 ? 16.5 : 15.8, weight: 顶层 ? .semibold : .regular))
+        .font(顶层 ? .headline : .body)  // 和显示态一致
         .foregroundStyle(正文颜色(行))
         .focused($焦点, equals: 行.id)
         .onSubmit { 焦点 = nil }

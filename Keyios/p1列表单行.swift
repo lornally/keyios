@@ -42,7 +42,7 @@ struct 单行V: View {
         }
       }
     }
-    .font(.system(size: 15))
+    .font(.body)  // 系统正文 17pt, 且跟随"文字大小"设置
     .lineLimit(1)  // 一行放不下就截断（不折行）。想改成允许折两行就删掉这行。
     .frame(maxWidth: .infinity, alignment: .leading)
 

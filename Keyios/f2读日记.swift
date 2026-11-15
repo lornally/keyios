@@ -48,23 +48,57 @@ enum 日记读取 {
 
   // MARK: - 读整张表
 
-  /// 遍历目录, 每个 .dog 读成一篇日记。
-  /// 只读正文前几行 —— 列表页只需要 3 条摘要, 整棵树是详情页的事。
-  static func 读表() -> [String: 日记] {
-    guard let 目录 = 目录() else { return [:] }
+  /// 读表过程中发生的事。界面收到一件就改一点, 不用等整张表读完。
+  enum 读表事件: Sendable {
+    /// 目录列完了: 这些名字可以马上画成一行行空壳 (只有日期, 摘要待填)
+    case 名单([String])
+    /// 某一篇读完了: 把摘要填进那一行
+    case 读到一篇(名: String, 摘要: [String])
+  }
 
+  /// 遍历目录, 每个 .dog 整篇读进内存 (日记都很小), 但只取前 3 个一级节点当摘要
+  /// —— 解析到第 3 个一级节点就停, 不是文件只读了一半。
+  ///
+  /// 目录由调用方传进来: `url(forUbiquityContainerIdentifier:)` 在真机第一次
+  /// 可能要等好几秒 (iCloud 先要把容器认出来), 一次启动只该问一遍。
+  ///
+  /// 事件 = 边读边报: 先报名单 (行先摆出来), 再一篇一篇报摘要。
+  /// 界面因此像 Apple Notes 一样, 不用等全部读完才有东西看。
+  ///
+  /// 几十篇是一起读的, 不是一篇一篇排队: 第一次打开时每篇可能都要等 iCloud
+  /// 下载, 排队的话几十次等待会相加; 一起发出去, 等的时间能叠在一起。
+  static func 读表(
+    目录: URL, 事件: (@Sendable (读表事件) -> Void)? = nil
+  ) async -> [String: 日记] {
     // .skipsHiddenFiles 顺手排掉 .versions(版本目录)和 .DS_Store
-    let 文件们 =
+    let 全部 =
       (try? FileManager.default.contentsOfDirectory(
         at: 目录, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles])) ?? []
+    let 文件们 = 全部.filter { $0.pathExtension.lowercased() == "dog" }
+
+    // 名单先给出去: 界面可以先把所有行摆出来, 摘要慢慢填
+    事件?(.名单(文件们.map { $0.deletingPathExtension().lastPathComponent }))
 
     var 表: [String: 日记] = [:]
-    for 文件 in 文件们 where 文件.pathExtension.lowercased() == "dog" {
-      let 名 = 文件.deletingPathExtension().lastPathComponent
-      // 读不出来(还没从 iCloud 下载下来/编码不对)也照样收录, 只是摘要空着 ——
-      // 不然一篇没下载的日记会从列表里消失, 用户以为丢了。
-      let 文本 = try? String(contentsOf: 文件, encoding: .utf8)
-      表[名] = 日记(文件名: 名, 摘要: 文本.map { 摘要($0) } ?? [])
+    表.reserveCapacity(文件们.count)
+
+    // 子任务只负责"读一篇 -> 算摘要"; 往表里放仍在当前任务做, 不用加锁。
+    await withTaskGroup(of: (名: String, 摘要: [String]).self) { 组 in
+      for 文件 in 文件们 {
+        let 名 = 文件.deletingPathExtension().lastPathComponent
+        组.addTask {
+          // 读不出来(还没从 iCloud 下载下来/编码不对)也照样收录, 摘要空着 ——
+          // 不然一篇没下载的日记会从列表里消失, 用户以为丢了。
+          let 文本 = try? String(contentsOf: 文件, encoding: .utf8)
+          return (名, 文本.map { 摘要($0) } ?? [])
+        }
+      }
+
+      // 谁先读完谁先报, 所以列表是一行一行填出来的
+      for await (名, 摘要) in 组 {
+        表[名] = 日记(文件名: 名, 摘要: 摘要)
+        事件?(.读到一篇(名: 名, 摘要: 摘要))
+      }
     }
     return 表
   }

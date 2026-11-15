@@ -12,7 +12,7 @@ cd "$(dirname "$0")"
 
 PROJECT=Keyios
 SCHEME=Keyios
-BUNDLE_ID=com.lornally.keyios
+BUNDLE_ID=cn.isuyu.keyios
 DERIVED=.build/DerivedData          # DerivedData 放项目里, 不污染 ~/Library
 SHOTS=shots
 

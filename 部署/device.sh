@@ -9,6 +9,7 @@
 # 前提:
 #   * iPhone 用数据线连着 Mac, 已解锁, 已在"访达/Xcode"里点过"信任"
 #   * iPhone 已开 设置 -> 隐私与安全性 -> 开发者模式 (开的时候会要求重启一次)
+#   * 第一次装开发签名包还要信任一次开发者证书, 见脚本末尾的提示
 #   * 自动签名会用 project.yml 里的 DEVELOPMENT_TEAM 去拉开发 profile
 #
 # 和 build.sh 的分工:
@@ -55,4 +56,19 @@ echo "==> 安装"
 xcrun devicectl device install app --device "$DEVICE" "$APP"
 
 echo "==> 启动"
-xcrun devicectl device process launch --terminate-existing --device "$DEVICE" "$BUNDLE_ID"
+if ! LAUNCH_OUT=$(xcrun devicectl device process launch --terminate-existing \
+  --device "$DEVICE" "$BUNDLE_ID" 2>&1); then
+  echo "$LAUNCH_OUT"
+  cat >&2 <<'EOF'
+
+启动被系统拒了。开发签名的 app 第一次装到手机上, 要先让系统登记 + 信任证书:
+  1. 点桌面上的 Keyios -> 弹"无法验证的App" -> 取消
+  2. 设置 -> 通用 -> VPN与设备管理 -> 开发者App
+     -> "Apple Development: ..." -> 信任 (iOS 26+ 可能叫"允许并重新启动")
+     这一步要联网验证, ppq.apple.com 要能通 (国内网络可能要代理)
+  3. 再跑一次 ./device.sh, 或直接点桌面图标
+找不到"开发者App": 重启手机再看; 还是没有就是 iOS 的坑, 先用 TestFlight 测。
+EOF
+  exit 1
+fi
+echo "$LAUNCH_OUT" | tail -3

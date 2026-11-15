@@ -1,6 +1,6 @@
 import Foundation
 
-// 从磁盘读日记表: 遍历目录 -> 每篇读正文开头的几行 -> 组织成 [文件名: 日记]。
+// 从磁盘读日记表: 遍历目录 -> 每篇整篇解析成树 -> 取前 3 个一级节点当摘要。
 //
 // 目录在哪里, 见 `目录()`: 真机走 iCloud 容器; 模拟器直接读 Mac 上的那份,
 // 免得开发时非要先给模拟器登录 iCloud。
@@ -56,8 +56,7 @@ enum 日记读取 {
     case 读到一篇(名: String, 摘要: [String])
   }
 
-  /// 遍历目录, 每个 .dog 整篇读进内存 (日记都很小), 但只取前 3 个一级节点当摘要
-  /// —— 解析到第 3 个一级节点就停, 不是文件只读了一半。
+  /// 遍历目录, 每个 .dog 整篇读进内存并解析 (日记都很小), 取前 3 个一级节点当摘要。
   ///
   /// 目录由调用方传进来: `url(forUbiquityContainerIdentifier:)` 在真机第一次
   /// 可能要等好几秒 (iCloud 先要把容器认出来), 一次启动只该问一遍。
@@ -105,77 +104,15 @@ enum 日记读取 {
 
   // MARK: - 取摘要
 
-  /// 取前 3 个一级节点当摘要。规则见 设计/dog格式细节.md:
-  ///   * 缩进用栈推层级: 遇到比当前浅的就退栈, 退到顶就是一级
-  ///   * `----- 昭 -----` 是左右子树分隔, 跳过, 栈也要重来
-  ///   * `----- 父 -----` / `----- 形 -----` 之后是尾部区, 不是正文, 到此为止
-  ///   * 行首 `●` 是折叠标记, 显示时去掉
-  ///   * `[[[ ... ]]]` 包装块整体当一个节点, 多行内容先拼成一行
+  /// 前 3 个一级节点, 每条 = 「时间 正文 图标」。
+  /// 树和详情页共用 dog解析 —— 原来这里另有一套只取头部的浅解析, 规则重复, 删了。
   static func 摘要(_ 文本: String) -> [String] {
-    var 结果: [String] = []
-    var 栈: [Int] = []  // 当前这条路径上每一层的缩进量
-    let 行们 = 文本.split(separator: "\n", omittingEmptySubsequences: false).map(String.init)
-
-    var i = 0
-    while i < 行们.count, 结果.count < 3 {
-      let 原行 = 行们[i]
-      i += 1
-
-      let 去空 = 原行.trimmingCharacters(in: .whitespaces)
-      if 去空.isEmpty { continue }
-
-      if 去空 == "----- 父 -----" || 去空 == "----- 形 -----" { break }
-      if 去空 == "----- 昭 -----" {
-        栈.removeAll()
-        continue
-      }
-
-      var 正文 = 去空
-      if 正文.hasPrefix("●") { 正文.removeFirst() }
-      正文 = 正文.trimmingCharacters(in: .whitespaces)
-
-      // 包装块: 开括号独占一行, 内容到闭括号结束
-      if 是括号行(正文, "[") {
-        var 块内: [String] = []
-        while i < 行们.count {
-          let 内行 = 行们[i].trimmingCharacters(in: .whitespaces)
-          i += 1
-          if 是括号行(内行, "]") { break }
-          块内.append(内行)
-        }
-        正文 = 块内.filter { !$0.isEmpty }.joined(separator: " ")
-      }
-
-      if 正文.isEmpty { continue }
-
-      // 缩进栈: 先退到比自己浅的那一层, 自己再入栈
-      let 缩进 = 数缩进(原行)
-      while let 顶 = 栈.last, 缩进 <= 顶 { 栈.removeLast() }
-      let 层级 = 栈.count  // 0 = 一级节点
-      栈.append(缩进)
-
-      if 层级 == 0 { 结果.append(正文) }
+    dog解析.解析(文本).树.prefix(3).map { 节点 in
+      [节点.时间, 节点.正文, 节点.图标]
+        .compactMap { $0 }
+        .filter { !$0.isEmpty }
+        .joined(separator: " ")
+        .replacingOccurrences(of: "\n", with: " ")
     }
-    return 结果
-  }
-
-  /// 这一行是不是至少 3 个连续的开/闭中括号 (包装块的边界行)
-  private static func 是括号行(_ 文本: String, _ 括号: Character) -> Bool {
-    文本.count >= 3 && 文本.allSatisfy { $0 == 括号 }
-  }
-
-  /// 行首缩进量, tab 当 2 个空格 (和落盘规则一致)
-  private static func 数缩进(_ 行: String) -> Int {
-    var 数 = 0
-    for 字符 in 行 {
-      if 字符 == " " {
-        数 += 1
-      } else if 字符 == "\t" {
-        数 += 2
-      } else {
-        break
-      }
-    }
-    return 数
   }
 }

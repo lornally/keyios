@@ -209,12 +209,19 @@ enum dog解析 {
     + "|\\d{2}[_-](?:0?[1-9]|1[0-2])[_-](?:0?[1-9]|[12]\\d|3[01])"
     + "|\\d{1,2}[_:]\\d{1,2}"
 
-  /// 修饰符分词: 中括号组 / 时间戳 / 其余按空白和 `_` 切 (RD20 §1: `_` 也是分隔符).
+  /// 修饰符分词: 中括号组 / 链接 / 时间戳 / 其余按空白和 `_` 切 (RD20 §1: `_` 也是分隔符).
+  /// 链接先于时间戳匹配: 文件名里藏的日期 (`26-8-9-5_03_奶茶.dog`) 不算节点的时间戳.
+  /// 正则是常量, 编译一次全篇共用.
+  private static let 分词正则 = try! NSRegularExpression(
+    pattern:
+      "\\[[^\\[\\]]*\\]"
+      + "|[^\\s/\\\\]+\\.dog(?=[\\s_]|$)"
+      + "|(?:\(时间戳模式))(?=[\\s_]|$)"
+      + "|[^\\s_]+")
+
   private static func 分词(_ 文本: String) -> [词] {
-    let 模式 = "\\[[^\\[\\]]*\\]|(?:\(时间戳模式))(?=[\\s_]|$)|[^\\s_]+"
-    guard let 正则 = try? NSRegularExpression(pattern: 模式) else { return [] }
     let ns = 文本 as NSString
-    return 正则.matches(in: 文本, range: NSRange(location: 0, length: ns.length)).compactMap { m in
+    return 分词正则.matches(in: 文本, range: NSRange(location: 0, length: ns.length)).compactMap { m in
       guard let r = Range(m.range, in: 文本) else { return nil }
       let tok = String(文本[r])
       return 词(类: 归类(tok), 文: tok, 范围: r)
@@ -231,10 +238,9 @@ enum dog解析 {
 
   /// 两端贪心吞修饰符 (修饰符 = 戳/框/图/链, 文是正文).
   /// 返回 (时间, 图标, 正文). 框词和链接不拆走, 留在正文里.
-  private static func 拆两端(_ 原文: String) -> (String?, String?, String) {
-    let 文本 = 包链接(原文)  // 名字带 `_` 的裸链接先包成中括号, 否则会被当多个 token
+  private static func 拆两端(_ 文本: String) -> (String?, String?, String) {
     let 词们 = 分词(文本)
-    guard !词们.isEmpty else { return (nil, nil, 原文.trimmingCharacters(in: 两端空白)) }
+    guard !词们.isEmpty else { return (nil, nil, 文本.trimmingCharacters(in: 两端空白)) }
 
     var 头 = 0
     while 头 < 词们.count, 词们[头].类 != .文 { 头 += 1 }
@@ -259,8 +265,7 @@ enum dog解析 {
 
     // 正文: 原文去掉拆走的戳/图标. 框词、链接原样留着.
     let 去 = Set(时间位 + 图标位)
-    var 正文 = 去.isEmpty ? 文本 : 去掉(文本, 词们: 词们, 位: 去)
-    正文 = 去链接括号(正文)
+    let 正文 = 去.isEmpty ? 文本 : 去掉(文本, 词们: 词们, 位: 去)
     return (时间, 图标, 正文.trimmingCharacters(in: 两端空白))
   }
 
@@ -318,81 +323,43 @@ enum dog解析 {
     return 是链接(String(末))
   }
 
-  /// 磁盘→内存 (s9text.转内存): 裸链接的名字里含 `_`/空白时包中括号, 保住它是一个 token.
-  /// 显示前会由 去链接括号 把中括号摘掉.
-  private static func 包链接(_ 文本: String) -> String {
-    guard let 正则 = try? NSRegularExpression(pattern: "\\[[^\\[\\]]*\\]|\\S+") else { return 文本 }
-    let ns = 文本 as NSString
-    var 出 = ""
-    var 到 = 0
-    for m in 正则.matches(in: 文本, range: NSRange(location: 0, length: ns.length)) {
-      let tok = ns.substring(with: m.range)
-      let 新: String
-      if tok.hasPrefix("["), tok.hasSuffix("]") {
-        新 = tok
-      } else if 是链接(tok), tok.contains("_") {
-        新 = "[\(tok)]"
-      } else {
-        新 = tok
-      }
-      出 += ns.substring(with: NSRange(location: 到, length: m.range.location - 到))
-      出 += 新
-      到 = m.range.location + m.range.length
-    }
-    出 += ns.substring(from: 到)
-    return 出
-  }
-
-  /// 显示用: 把链接组的中括号摘掉 (`[牛奶.dog]` → `牛奶.dog`), 用户自己的 `[笔记]` 不动.
-  private static func 去链接括号(_ 文本: String) -> String {
-    guard let 正则 = try? NSRegularExpression(pattern: "\\[[^\\[\\]]*\\]") else { return 文本 }
-    let ns = 文本 as NSString
-    var 出 = ""
-    var 到 = 0
-    for m in 正则.matches(in: 文本, range: NSRange(location: 0, length: ns.length)) {
-      let tok = ns.substring(with: m.range)
-      出 += ns.substring(with: NSRange(location: 到, length: m.range.location - 到))
-      出 += 是链接组(tok) ? String(tok.dropFirst().dropLast()) : tok
-      到 = m.range.location + m.range.length
-    }
-    出 += ns.substring(from: 到)
-    return 出
-  }
+  private static let 戳正则 = try! NSRegularExpression(
+    pattern: "^(?:\(时间戳模式))$")
+  private static let 日期区正则 = try! NSRegularExpression(
+    pattern: "^\\d{2}[_-]\\d{1,2}[_-]\\d{1,2}$")
+  private static let 全戳正则 = try! NSRegularExpression(
+    pattern: "^(\\d{2})[_-](\\d{1,2})[_-](\\d{1,2})(?:[ -](\\d{1,2})[_:](\\d{1,2}))?$")
+  private static let 时分正则 = try! NSRegularExpression(
+    pattern: "^(\\d{1,2})[_:](\\d{1,2})$")
 
   private static func 是时间戳(_ tok: String) -> Bool {
-    guard let 正则 = try? NSRegularExpression(pattern: "^(?:\(时间戳模式))$") else { return false }
-    let ns = tok as NSString
-    guard let m = 正则.firstMatch(in: tok, range: NSRange(location: 0, length: ns.length)) else {
-      return false
-    }
-    return m.range == NSRange(location: 0, length: ns.length)
+    分组匹配(tok, 戳正则) != nil
   }
 
   /// 戳里有时刻段. 日期内部的 `_` 不算 (`26_8_9` 是日期, `5_03` 是时分).
   private static func 有时刻(_ 戳: String) -> Bool {
     if 戳.contains(":") { return true }
     guard 戳.contains("_") else { return false }
-    return 戳.range(of: "^\\d{2}[_-]\\d{1,2}[_-]\\d{1,2}$", options: .regularExpression) == nil
+    return 分组匹配(戳, 日期区正则) == nil
   }
 
   /// 灰字展示 (f7_stamp.格式化时间戳): 月日时分补零, `_` 换成 `:`.
   private static func 格式化(_ 戳: String) -> String {
-    if let m = 分组匹配(戳, "^(\\d{2})[_-](\\d{1,2})[_-](\\d{1,2})(?:[ -](\\d{1,2})[_:](\\d{1,2}))?$") {
+    if let m = 分组匹配(戳, 全戳正则) {
       var 出 = String(format: "%@-%02d-%02d", m[1], Int(m[2])!, Int(m[3])!)
       if m[4] != "", m[5] != "" {
         出 += String(format: " %02d:%02d", Int(m[4])!, Int(m[5])!)
       }
       return 出
     }
-    if let m = 分组匹配(戳, "^(\\d{1,2})[_:](\\d{1,2})$") {
+    if let m = 分组匹配(戳, 时分正则) {
       return String(format: "%02d:%02d", Int(m[1])!, Int(m[2])!)
     }
     return 戳
   }
 
   /// 正则匹配并按捕获组切开; 下标 0 是整串. 匹配不上返回 nil.
-  private static func 分组匹配(_ 文本: String, _ 模式: String) -> [String]? {
-    guard let 正则 = try? NSRegularExpression(pattern: 模式) else { return nil }
+  private static func 分组匹配(_ 文本: String, _ 正则: NSRegularExpression) -> [String]? {
     let ns = 文本 as NSString
     guard let m = 正则.firstMatch(in: 文本, range: NSRange(location: 0, length: ns.length)) else {
       return nil

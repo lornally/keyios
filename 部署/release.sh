@@ -2,18 +2,19 @@
 #
 # 归档 → 导出 ipa → 上传 App Store Connect。不用打开 Xcode。
 #
-#   ./release.sh                 归档 + 导出 + 上传
-#   ./release.sh --no-upload     只归档 + 导出, 不传 (先本地看能不能签过)
+#   ./部署/release.sh                 归档 + 导出 + 上传
+#   ./部署/release.sh --no-upload     只归档 + 导出, 不传 (先本地看能不能签过)
 #
 # 版本号:
-#   VERSION=1.0.1 ./release.sh   商店版本号 (默认 1.0.0)
-#   BUILD=123 ./release.sh       构建号 (默认当前时间 YYYYMMDDHHMM, 只会越来越大)
+#   VERSION=1.0.1 ./部署/release.sh   商店版本号 (默认 1.0.0)
+#   BUILD=123 ./部署/release.sh       构建号 (默认当前时间 YYYYMMDDHHMM, 只会越来越大)
 #
 # 上传用的是 macOS 打包那套 ASC API key (和 macOS 版 Keydog 同一把)。
 # 前提: App ID cn.isuyu.keyios 已在后台开好 iCloud + CloudDocuments,
 #       并且 App Store Connect 里已经建了同名 app 记录。
 set -euo pipefail
-cd "$(dirname "$0")"
+# 脚本归档在 部署/ 里, 工程 (project.yml) 在上一级
+cd "$(dirname "$0")/.."
 
 PROJECT=Keyios
 SCHEME=Keyios

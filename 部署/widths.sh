@@ -3,16 +3,18 @@
 # 在多个**屏宽**的 iPhone 上各截一张图 —— 用来确认底部条在不同宽度下
 # "露几个、收几个进 ···"。
 #
-#   ./widths.sh        构建一次，然后在下面所有机型上依次截图
+#   ./部署/widths.sh        构建一次，然后在下面所有机型上依次截图
 #
 # 截图落在 shots/widths/，文件名就是机型名。
 # 机器会自动创建（如果还没有），截完关机省内存 —— 但设备会留下，
 # 你想在 Device Hub 里手动戳哪台都行。
 #
 set -euo pipefail
-cd "$(dirname "$0")"
+# 脚本归档在 部署/ 里, 工程 (project.yml) 在上一级; HERE 留着找同目录的 build.sh
+HERE="$(cd "$(dirname "$0")" && pwd)"
+cd "$HERE/.."
 
-BUNDLE_ID=com.lornally.keyios
+BUNDLE_ID=cn.isuyu.keyios
 APP=".build/DerivedData/Build/Products/Debug-iphonesimulator/Keyios.app"
 OUT="shots/widths"
 RUNTIME_ID=$(xcrun simctl list runtimes | grep -o 'com\.apple\.CoreSimulator\.SimRuntime\.iOS-[0-9-]*' | head -1)
@@ -35,7 +37,7 @@ newest_iphones() {
 }
 
 # 先构建一次（后面的机型共用这个产物）
-./build.sh --no-gen >/dev/null
+"$HERE/build.sh" --no-gen >/dev/null
 
 mkdir -p "$OUT"
 

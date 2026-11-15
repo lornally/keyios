@@ -2,9 +2,9 @@
 #
 # 真机: 构建 -> 安装 -> 启动。不用等 TestFlight (上传+处理), 插上 iPhone 就能测。
 #
-#   ./device.sh             Release 构建, 和 TestFlight 同一份配置
-#   ./device.sh --debug     Debug 构建
-#   DEVICE=<UDID> ./device.sh   多台真机时指定用哪台
+#   ./部署/device.sh             Release 构建, 和 TestFlight 同一份配置
+#   ./部署/device.sh --debug     Debug 构建
+#   DEVICE=<UDID> ./部署/device.sh   多台真机时指定用哪台
 #
 # 前提:
 #   * iPhone 用数据线连着 Mac, 已解锁, 已在"访达/Xcode"里点过"信任"
@@ -16,7 +16,8 @@
 #   build.sh  = 模拟器 (读 Mac 上真实 iCloud 目录, 能测界面, 测不到 iCloud 容器)
 #   device.sh = 真机   (走真的 iCloud 容器, "第一次打开慢"只有这里能复现)
 set -euo pipefail
-cd "$(dirname "$0")"
+# 脚本归档在 部署/ 里, 工程 (project.yml) 在上一级
+cd "$(dirname "$0")/.."
 
 PROJECT=Keyios
 SCHEME=Keyios
@@ -59,16 +60,22 @@ echo "==> 启动"
 if ! LAUNCH_OUT=$(xcrun devicectl device process launch --terminate-existing \
   --device "$DEVICE" "$BUNDLE_ID" 2>&1); then
   echo "$LAUNCH_OUT"
-  cat >&2 <<'EOF'
+  if grep -qi "unlock" <<<"$LAUNCH_OUT"; then
+    echo "手机锁着。解锁 iPhone 后再跑一次 ./部署/device.sh (或直接点桌面图标)。" >&2
+  elif grep -qi "trusted\|Security" <<<"$LAUNCH_OUT"; then
+    cat >&2 <<'EOF'
 
 启动被系统拒了。开发签名的 app 第一次装到手机上, 要先让系统登记 + 信任证书:
   1. 点桌面上的 Keyios -> 弹"无法验证的App" -> 取消
   2. 设置 -> 通用 -> VPN与设备管理 -> 开发者App
      -> "Apple Development: ..." -> 信任 (iOS 26+ 可能叫"允许并重新启动")
      这一步要联网验证, ppq.apple.com 要能通 (国内网络可能要代理)
-  3. 再跑一次 ./device.sh, 或直接点桌面图标
+  3. 再跑一次 ./部署/device.sh, 或直接点桌面图标
 找不到"开发者App": 重启手机再看; 还是没有就是 iOS 的坑, 先用 TestFlight 测。
 EOF
+  else
+    echo "启动失败, 看上面的原始错误。" >&2
+  fi
   exit 1
 fi
 echo "$LAUNCH_OUT" | tail -3

@@ -2,13 +2,14 @@
 #
 # 构建 → 装进模拟器 → 启动 → 截图, 一条龙。
 #
-#   ./build.sh            完整一轮
-#   ./build.sh --no-gen   跳过 xcodegen (工程没动过时省几秒)
+#   ./部署/build.sh            完整一轮
+#   ./部署/build.sh --no-gen   跳过 xcodegen (工程没动过时省几秒)
 #
-# 截图落在 shots/, 不进版本库 (见 .gitignore)。
+# 截图落在仓库根的 shots/, 不进版本库 (见 .gitignore)。
 #
 set -euo pipefail
-cd "$(dirname "$0")"
+# 脚本归档在 部署/ 里, 工程 (project.yml) 在上一级
+cd "$(dirname "$0")/.."
 
 PROJECT=Keyios
 SCHEME=Keyios
@@ -29,7 +30,7 @@ fi
 #    `simctl` 的列表是按版本**升序**排的，直接取"第一台 iPhone"
 #    会拿到老系统那台 —— 踩过。
 #
-#    想指定机型：DEVICE="iPhone 17 Pro" ./build.sh
+#    想指定机型：DEVICE="iPhone 17 Pro" ./部署/build.sh
 newest_iphones() {
   # 反转 -> 取到第一个 "-- iOS" 分组头为止（那就是最新版本那一段）-> 再反转回来
   xcrun simctl list devices available | tail -r | awk '{print} /^-- iOS/{exit}' | tail -r
@@ -69,7 +70,7 @@ xcodebuild -project "$PROJECT.xcodeproj" -scheme "$SCHEME" -configuration Debug 
 #
 #    所以这里对**所有已开机的模拟器**都装一遍（先 terminate 再 launch，
 #    否则可能拍到上一版的旧界面）。
-#    用法：你在 Device Hub 里把想看的机型开机，跑一次 ./build.sh，
+#    用法：你在 Device Hub 里把想看的机型开机，跑一次 ./部署/build.sh，
 #    它们全都拿到最新版 —— 在 Device Hub 里切哪台都是最新的。
 #
 #    一台都没开机时，就开下面那台"主机器"（截图也用它）。

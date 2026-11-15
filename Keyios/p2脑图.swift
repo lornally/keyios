@@ -4,19 +4,22 @@
 // 视觉基准: 设计/demo/详情页-树样式对比-v2.html
 //   左轴: 一级沿左侧轴排, 儿子右下缩进, 每行底线拉到右边缘, 折角圆角
 //   列表: 圆点数量 = 层级, 一级一个大点, 同丛一色
-// 数据现在来自 t2脑图样例.swift 的假数据, 接上 dog 解析后换掉即可。
+// 数据: 按文件名从 iCloud 目录现读同名 .dog, 由 f3解析dog 解析成树。
 // ============================================================================
 
 import SwiftUI
 
 struct 脑图V: View {
 
-  /// 点的是哪一篇(标题用)
+  /// 点的是哪一篇 —— 标题用文件名, 正文按同名 .dog 从磁盘现读
   let 日记: 日记
 
   // ── 状态 ──
-  @State private var 树: [脑图节点] = 脑图样例
+  @State private var 树: [脑图节点] = []
   @State private var 折叠中: Set<String> = []
+  /// 首次解析的结果: "重置"就是回到它 (编辑还没落盘, 磁盘内容不变)
+  @State private var 原始: dog解析.结果?
+  @State private var 加载: 载入状态 = .加载中
   @State private var 样式: 树样式 = .左轴
   @State private var 文字同色 = false
   @State private var 编辑中 = false
@@ -25,26 +28,51 @@ struct 脑图V: View {
   @State private var 编辑快照: [String: String] = [:]
   @FocusState private var 焦点: String?
 
+  private enum 载入状态: Equatable {
+    case 加载中
+    case 失败(String)
+    case 完成
+  }
+
   var body: some View {
     ZStack {
       Theme.background.ignoresSafeArea()
 
-      ScrollView {
-        Group {
-          if 样式 == .左轴 {
-            轴树
-          } else {
-            列表树
-          }
+      switch 加载 {
+      case .加载中:
+        ProgressView()
+          .tint(Theme.accent)
+
+      case .失败(let 说明):
+        VStack(spacing: 10) {
+          Text("读不到日记")
+            .font(.headline)
+            .foregroundStyle(Theme.primaryText)
+          Text(说明)
+            .font(.footnote)
+            .foregroundStyle(Theme.secondaryText)
+            .multilineTextAlignment(.center)
         }
-        .padding(.horizontal, 14)
-        .padding(.top, 6)
-        .padding(.bottom, 38)
+        .padding(24)
+
+      case .完成:
+        ScrollView {
+          Group {
+            if 样式 == .左轴 {
+              轴树
+            } else {
+              列表树
+            }
+          }
+          .padding(.horizontal, 14)
+          .padding(.top, 6)
+          .padding(.bottom, 38)
+        }
       }
     }
     // 编辑时收起控制条, 把屏幕让给键盘和正文
     .safeAreaInset(edge: .bottom, spacing: 0) {
-      if !编辑中 { 控制条 }
+      if !编辑中, 加载 == .完成 { 控制条 }
     }
     .navigationTitle(日记名f.缩写(日记.文件名))
     .navigationBarTitleDisplayMode(.inline)
@@ -56,6 +84,7 @@ struct 脑图V: View {
       }
     }
     .tint(Theme.accent)
+    .task { await 装载() }
     .preferredColorScheme(.dark)
   }
 
@@ -192,7 +221,10 @@ struct 脑图V: View {
         正.lineSpacing(7)
       }
       if let 图标 = 行.节点.图标 {
-        图标徽(图标, 色: 行.色)
+        // 一行可以有多个图标词 (盘上空格隔开), 各画一个小胶囊
+        ForEach(Array(图标.split(separator: " ").enumerated()), id: \.offset) { _, 词 in
+          图标徽(String(词), 色: 行.色)
+        }
       }
       if 行.节点.有子, 折叠中.contains(行.id) {
         折叠徽(行)
@@ -357,9 +389,41 @@ struct 脑图V: View {
   }
 
   private func 重置() {
+    guard let 原始 else { return }
+    应用(原始)
+  }
+
+  // MARK: - 从磁盘装载
+
+  /// 目录探测和读文件都可能等 iCloud, 整体扔到后台线程 (和 根V 同一套路).
+  private func 装载() async {
+    let 名 = 日记.文件名
+    let 结果 = await Task.detached(priority: .userInitiated) {
+      () -> (值: dog解析.结果?, 错: String?) in
+      guard let 目录 = 日记读取.目录() else {
+        return (nil, "找不到 iCloud 日记目录。\n真机要先登录 iCloud 并打开 iCloud Drive。")
+      }
+      let 文件 = 目录.appendingPathComponent(名 + ".dog")
+      guard let 文本 = try? String(contentsOf: 文件, encoding: .utf8) else {
+        return (nil, "读不到 \(文件.lastPathComponent)。\n可能还没从 iCloud 下载下来。")
+      }
+      return (dog解析.解析(文本), nil)
+    }.value
+
+    if let 值 = 结果.值 {
+      原始 = 值
+      应用(值)
+      加载 = .完成
+    } else {
+      加载 = .失败(结果.错 ?? "未知错误")
+    }
+  }
+
+  /// 把一份解析结果铺到界面上 —— 首次装载和"重置"共用
+  private func 应用(_ 值: dog解析.结果) {
     焦点 = nil
-    树 = 脑图样例
-    折叠中 = []
+    树 = 值.树
+    折叠中 = 值.折叠
     待聚焦 = nil
     编辑中 = false
     编辑快照 = [:]
@@ -574,12 +638,5 @@ private extension UIColor {
   }
 }
 
-// ────────────────────────────────────────────────────────────────────────────
-// #Preview
-// ────────────────────────────────────────────────────────────────────────────
-#Preview {
-  NavigationStack {
-    脑图V(日记: 日记表["26-10-16_日记"]!)
-  }
-  .preferredColorScheme(.dark)
-}
+// 这一页的 #Preview 去掉了: 内容现在要从 iCloud 目录读, 预览里没有那份文件.
+// 想看布局跑真机/模拟器 (模拟器会走 日记读取 的宿主机目录回退).

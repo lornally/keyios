@@ -33,6 +33,17 @@ enum Theme {
 
   /// 底部浮动条的底色
   static let barBackground = Color(white: 0.11)
+
+  /// 详情页「脑图」的连线样式。线是辅助, 粗细/深浅都在这里调。
+  /// Swift 里通常就用这种 `enum` 命名空间当配置文件, 不用另开一个文件。
+  enum 脑图 {
+    static let 线宽像素: CGFloat = 2  // 物理像素, 除以屏幕倍率后才是 pt
+    static let 线色深 = 0.5
+    static let 轴x: CGFloat = 12  // 一级横线的起点
+    static let 折角: CGFloat = 7  // 父子拐弯的圆角
+    static let 主干偏移: CGFloat = 12  // 主干在儿子正文左边几 pt
+    static let 底线间距: CGFloat = 4  // 底线画在文字盒下方几 pt
+  }
 }
 
 // SwiftUI 的 Color 没有 hex 初始化，红色波浪线就是因为这个。

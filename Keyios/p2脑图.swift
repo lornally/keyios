@@ -2,7 +2,7 @@
 // 【日记详情页】—— 两种树样式 + 文字同丛色
 // ============================================================================
 // 视觉基准: 设计/demo/详情页-树样式对比-v2.html
-//   左轴: 一级沿左侧轴排, 儿子右下缩进, 每行底线拉到右边缘, 折角圆角
+//   脑图(左轴): 一级从左轴起排, 儿子右下缩进, 底线拉到文字结尾, 折角圆角
 //   列表: 圆点数量 = 层级, 一级一个大点, 同丛一色
 // 数据: 按文件名从 iCloud 目录现读同名 .dog, 由 f3解析dog 解析成树。
 // ============================================================================
@@ -17,11 +17,9 @@ struct 脑图V: View {
   // ── 状态 ──
   @State private var 树: [脑图节点] = []
   @State private var 折叠中: Set<String> = []
-  /// 首次解析的结果: "重置"就是回到它 (编辑还没落盘, 磁盘内容不变)
-  @State private var 原始: dog解析.结果?
   @State private var 加载: 载入状态 = .加载中
   @State private var 样式: 树样式 = .左轴
-  @State private var 文字同色 = false
+  @State private var 文字同色 = true
   @State private var 编辑中 = false
   @State private var 待聚焦: String?
   /// 进编辑态时各节点的正文: 提交时如果被清空, 用它还原
@@ -83,6 +81,8 @@ struct 脑图V: View {
         }
       }
     }
+    // 列表页的系统底栏别跟到详情页来 (否则会多出一组 ···)
+    //.toolbar(.hidden, for: .bottomBar)
     .tint(Theme.accent)
     .task { await 装载() }
     .preferredColorScheme(.dark)
@@ -137,17 +137,20 @@ struct 脑图V: View {
   private func 轴行(_ 行: 行项, 首行: Bool) -> some View {
     let 留白 = 行留白(行.层)
     return 内容(行)
-      .frame(
-        maxWidth: .infinity, minHeight: 行.层 == 0 ? 26 : 0, alignment: .leading)
-      // 量的是"正文盒"的左边缘和底(底线画在底下方 4pt)
+      // 量的是"正文盒"的左/右边缘和底(底线画在底下方 4pt)。
+      // 必须在撑满整行之前量, 右边缘才是文字真正的结尾。
       .background {
         GeometryReader { geo in
           let 框 = geo.frame(in: .named("树"))
           Color.clear.preference(
             key: 脑图锚点键.self,
-            value: [行.id: 脑图锚点(左: 框.minX, 底: 框.maxY + 4)])
+            value: [
+              行.id: 脑图锚点(
+                左: 框.minX, 右: 框.maxX, 底: 框.maxY + Theme.脑图.底线间距)
+            ])
         }
       }
+      .frame(minHeight: 行.层 == 0 ? 26 : 0)
       .padding(.leading, 24 + CGFloat(行.层) * 24)  // 每层右移 24
       .padding(.trailing, 8)
       .padding(.top, 留白.顶)
@@ -182,8 +185,7 @@ struct 脑图V: View {
     return HStack(alignment: .top, spacing: 10) {
       标记区(行)
       内容(行)
-        .frame(
-          maxWidth: .infinity, minHeight: 行.层 == 0 ? 26 : 0, alignment: .leading)
+        .frame(minHeight: 行.层 == 0 ? 26 : 0)
     }
     .padding(.leading, 4)
     .padding(.trailing, 8)
@@ -298,7 +300,7 @@ struct 脑图V: View {
     .alignmentGuide(.firstTextBaseline) { $0[.bottom] - 3 }
   }
 
-  // ── 颜色: 同色开关只换文字/时间/图标, 不换圆点和线 ──
+  // ── 颜色: 上色开关只换文字/时间/图标, 不换圆点和线 ──
   private func 正文颜色(_ 行: 行项) -> Color {
     if 文字同色 { return 行.色 }
     return 行.层 == 0 ? .white : 正文灰白
@@ -403,11 +405,6 @@ struct 脑图V: View {
     折叠中 = 集
   }
 
-  private func 重置() {
-    guard let 原始 else { return }
-    应用(原始)
-  }
-
   // MARK: - 从磁盘装载
 
   /// 目录探测和读文件都可能等 iCloud, 整体扔到后台线程 (和 根V 同一套路).
@@ -426,7 +423,6 @@ struct 脑图V: View {
     }.value
 
     if let 值 = 结果.值 {
-      原始 = 值
       应用(值)
       加载 = .完成
     } else {
@@ -434,7 +430,7 @@ struct 脑图V: View {
     }
   }
 
-  /// 把一份解析结果铺到界面上 —— 首次装载和"重置"共用
+  /// 把解析结果铺到界面上
   private func 应用(_ 值: dog解析.结果) {
     焦点 = nil
     树 = 值.树
@@ -453,21 +449,23 @@ struct 脑图V: View {
       Button {
         文字同色.toggle()
       } label: {
-        小胶囊("同色", 选中: 文字同色)
+        小胶囊("上色", 选中: 文字同色)
       }
       .buttonStyle(.plain)
 
-      Menu {
-        Button("全部展开") { 折叠中 = [] }
-        Button("全部收起") { 全部收起() }
-        Button("重置", role: .destructive) { 重置() }
+      Button {
+        全部收起()
       } label: {
-        Image(systemName: "ellipsis")
-          .font(.system(size: 14, weight: .semibold))
-          .foregroundStyle(Color.white.opacity(0.65))
-          .frame(width: 34, height: 26)
-          .background(Capsule().fill(Color.white.opacity(0.06)))
+        小胶囊("收起", 选中: false)
       }
+      .buttonStyle(.plain)
+
+      Button {
+        折叠中 = []
+      } label: {
+        小胶囊("展开", 选中: false)
+      }
+      .buttonStyle(.plain)
     }
     .padding(5)
     .background(Capsule().fill(Theme.barBackground))
@@ -505,7 +503,7 @@ private enum 树样式: CaseIterable, Identifiable {
   case 列表
 
   var id: Self { self }
-  var 名称: String { self == .左轴 ? "左轴" : "列表" }
+  var 名称: String { self == .左轴 ? "脑图" : "列表" }
 }
 
 private struct 行项: Identifiable {
@@ -520,6 +518,7 @@ private struct 行项: Identifiable {
 
 private struct 脑图锚点: Equatable {
   var 左: CGFloat  // 正文盒左边缘
+  var 右: CGFloat  // 正文盒右边缘 (底线画到文字结尾)
   var 底: CGFloat  // 底线 y
 }
 
@@ -536,35 +535,25 @@ private struct 连线层: View {
 
   @Environment(\.displayScale) private var 显示倍率
 
-  private let 左轴 = 12.0  // 一级节点的竖轴 x
-  private let 圆角 = 7.0
+  private let 左轴 = Theme.脑图.轴x  // 一级横线的起点 x
+  private let 圆角 = Theme.脑图.折角
 
   var body: some View {
-    // 线的宽度按物理像素算: 3x 屏 0.33pt, 2x 屏 0.5pt。
+    // 线宽按物理像素算, 除以屏幕倍率后才是 pt。
     // 线是辅助, 不能比字更显眼。
-    let 线宽 = 2 / 显示倍率
+    let 线宽 = Theme.脑图.线宽像素 / 显示倍率
 
-    return Canvas { 画布, 尺寸 in
+    return Canvas { 画布, _ in
       let 一级们 = 行们.filter { $0.层 == 0 }
 
-      // 左轴: 从第一个一级到底线最后一个一级
-      if let 首 = 一级们.first.flatMap({ 锚点[$0.id] }),
-        let 尾 = 一级们.last.flatMap({ 锚点[$0.id] }),
-        一级们.count > 1
-      {
-        var 轴 = Path()
-        轴.move(to: CGPoint(x: 左轴, y: 首.底))
-        轴.addLine(to: CGPoint(x: 左轴, y: 尾.底))
-        画布.stroke(轴, with: .color(.white.opacity(0.10)), lineWidth: 线宽)
-      }
-
-      // 一级行的底线: 从轴一路拉到右边缘, 圆点在交点收口
+      // 一级行的底线: 从轴拉到文字结尾, 圆点在交点收口
       for 行 in 一级们 {
         guard let 点 = 锚点[行.id] else { continue }
         var 线 = Path()
         线.move(to: CGPoint(x: 左轴, y: 点.底))
-        线.addLine(to: CGPoint(x: 尺寸.width, y: 点.底))
-        画布.stroke(线, with: .color(行.色.opacity(0.25)), lineWidth: 线宽)
+        线.addLine(to: CGPoint(x: 点.右, y: 点.底))
+        画布.stroke(
+          线, with: .color(行.色.opacity(Theme.脑图.线色深)), lineWidth: 线宽)
       }
 
       // 父子: 主干 + 每个儿子一个圆角拐弯, 横线当该行的底线
@@ -575,12 +564,14 @@ private struct 连线层: View {
           let 末点 = 锚点[行们[最后].id]
         else { continue }
 
-        let 干 = 父点.左 + 12  // 主干在儿子正文左边 12pt
+        let 干 = 父点.左 + Theme.脑图.主干偏移
         var 主干 = Path()
         主干.move(to: CGPoint(x: 干, y: 父点.底))
         // 止于最后一个儿子圆角的起点, 不在角里多出一截
         主干.addLine(to: CGPoint(x: 干, y: 末点.底 - 圆角))
-        画布.stroke(主干, with: .color(行们[父序].色.opacity(0.25)), lineWidth: 线宽)
+        画布.stroke(
+          主干, with: .color(行们[父序].色.opacity(Theme.脑图.线色深)),
+          lineWidth: 线宽)
 
         for 子序 in 子们 {
           guard let 子点 = 锚点[行们[子序].id] else { continue }
@@ -589,8 +580,10 @@ private struct 连线层: View {
           拐.addQuadCurve(
             to: CGPoint(x: 干 + 圆角, y: 子点.底),
             control: CGPoint(x: 干, y: 子点.底))
-          拐.addLine(to: CGPoint(x: 尺寸.width, y: 子点.底))
-          画布.stroke(拐, with: .color(行们[子序].色.opacity(0.25)), lineWidth: 线宽)
+          拐.addLine(to: CGPoint(x: 子点.右, y: 子点.底))
+          画布.stroke(
+            拐, with: .color(行们[子序].色.opacity(Theme.脑图.线色深)),
+            lineWidth: 线宽)
         }
       }
 

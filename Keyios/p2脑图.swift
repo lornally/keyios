@@ -124,9 +124,21 @@ struct 脑图V: View {
     }
   }
 
+  /// 各层上下留白。一级保持宽松, 二级略收, 三级及以下贴成一块 ——
+  /// 行与行之间就是字体默认行高, 不再额外加 lineSpacing。
+  private func 行留白(_ 层: Int) -> (顶: CGFloat, 底: CGFloat) {
+    switch 层 {
+    case 0: return (5, 8)
+    case 1: return (2, 3)
+    default: return (0, 0)
+    }
+  }
+
   private func 轴行(_ 行: 行项, 首行: Bool) -> some View {
-    内容(行)
-      .frame(maxWidth: .infinity, minHeight: 26, alignment: .leading)
+    let 留白 = 行留白(行.层)
+    return 内容(行)
+      .frame(
+        maxWidth: .infinity, minHeight: 行.层 == 0 ? 26 : 0, alignment: .leading)
       // 量的是"正文盒"的左边缘和底(底线画在底下方 4pt)
       .background {
         GeometryReader { geo in
@@ -138,8 +150,8 @@ struct 脑图V: View {
       }
       .padding(.leading, 24 + CGFloat(行.层) * 24)  // 每层右移 24
       .padding(.trailing, 8)
-      .padding(.top, 5)
-      .padding(.bottom, 8)
+      .padding(.top, 留白.顶)
+      .padding(.bottom, 留白.底)
       .padding(.top, 行.层 == 0 && !首行 ? 16 : 0)  // 两丛之间留空
       .frame(maxWidth: .infinity, alignment: .leading)
       // 折叠热区: 行首 22pt 宽的隐形竖条, 一级正好盖住圆点
@@ -166,14 +178,17 @@ struct 脑图V: View {
   }
 
   private func 列表行(_ 行: 行项, 首行: Bool) -> some View {
-    HStack(alignment: .top, spacing: 10) {
+    let 留白 = 行留白(行.层)
+    return HStack(alignment: .top, spacing: 10) {
       标记区(行)
       内容(行)
-        .frame(maxWidth: .infinity, minHeight: 26, alignment: .leading)
+        .frame(
+          maxWidth: .infinity, minHeight: 行.层 == 0 ? 26 : 0, alignment: .leading)
     }
     .padding(.leading, 4)
     .padding(.trailing, 8)
-    .padding(.vertical, 5)
+    .padding(.top, 留白.顶)
+    .padding(.bottom, 留白.底)
     .padding(.top, 行.层 == 0 && !首行 ? 16 : 0)
     .frame(maxWidth: .infinity, alignment: .leading)
   }
@@ -186,7 +201,7 @@ struct 脑图V: View {
         Circle().fill(行.色).frame(width: 径, height: 径)
       }
     }
-    .frame(height: 26)
+    .frame(height: 行.层 == 0 ? 26 : 22)  // 圆点跟着第一行文字的高度走
     .contentShape(Rectangle())
     .onTapGesture { 切换折叠(行.节点) }
   }
@@ -211,14 +226,14 @@ struct 脑图V: View {
 
     return HStack(alignment: .firstTextBaseline, spacing: 0) {
       // 时间只做前缀, 和正文拼成同一段文字 —— 折行才会从内容左边对齐
+      // 不额外加 lineSpacing: 用系统字体的默认行高, 和备忘录正文一致。
       if let 时间 = 行.节点.时间 {
-        (Text(时间 + "  ")
+        Text(时间 + "  ")
           .font(.footnote)  // 13pt
           .monospacedDigit()
-          .foregroundStyle(时间颜色(行)) + 正)
-          .lineSpacing(7)
+          .foregroundStyle(时间颜色(行)) + 正
       } else {
-        正.lineSpacing(7)
+        正
       }
       if let 图标 = 行.节点.图标 {
         // 一行可以有多个图标词 (盘上空格隔开), 各画一个小胶囊
@@ -519,11 +534,17 @@ private struct 连线层: View {
   let 行们: [行项]
   let 锚点: [String: 脑图锚点]
 
+  @Environment(\.displayScale) private var 显示倍率
+
   private let 左轴 = 12.0  // 一级节点的竖轴 x
   private let 圆角 = 7.0
 
   var body: some View {
-    Canvas { 画布, 尺寸 in
+    // 线的宽度按物理像素算: 3x 屏 0.33pt, 2x 屏 0.5pt。
+    // 线是辅助, 不能比字更显眼。
+    let 线宽 = 2 / 显示倍率
+
+    return Canvas { 画布, 尺寸 in
       let 一级们 = 行们.filter { $0.层 == 0 }
 
       // 左轴: 从第一个一级到底线最后一个一级
@@ -534,7 +555,7 @@ private struct 连线层: View {
         var 轴 = Path()
         轴.move(to: CGPoint(x: 左轴, y: 首.底))
         轴.addLine(to: CGPoint(x: 左轴, y: 尾.底))
-        画布.stroke(轴, with: .color(.white.opacity(0.16)), lineWidth: 1)
+        画布.stroke(轴, with: .color(.white.opacity(0.10)), lineWidth: 线宽)
       }
 
       // 一级行的底线: 从轴一路拉到右边缘, 圆点在交点收口
@@ -543,7 +564,7 @@ private struct 连线层: View {
         var 线 = Path()
         线.move(to: CGPoint(x: 左轴, y: 点.底))
         线.addLine(to: CGPoint(x: 尺寸.width, y: 点.底))
-        画布.stroke(线, with: .color(行.色.opacity(0.62)), lineWidth: 1.4)
+        画布.stroke(线, with: .color(行.色.opacity(0.25)), lineWidth: 线宽)
       }
 
       // 父子: 主干 + 每个儿子一个圆角拐弯, 横线当该行的底线
@@ -559,7 +580,7 @@ private struct 连线层: View {
         主干.move(to: CGPoint(x: 干, y: 父点.底))
         // 止于最后一个儿子圆角的起点, 不在角里多出一截
         主干.addLine(to: CGPoint(x: 干, y: 末点.底 - 圆角))
-        画布.stroke(主干, with: .color(行们[父序].色.opacity(0.62)), lineWidth: 1.4)
+        画布.stroke(主干, with: .color(行们[父序].色.opacity(0.25)), lineWidth: 线宽)
 
         for 子序 in 子们 {
           guard let 子点 = 锚点[行们[子序].id] else { continue }
@@ -569,7 +590,7 @@ private struct 连线层: View {
             to: CGPoint(x: 干 + 圆角, y: 子点.底),
             control: CGPoint(x: 干, y: 子点.底))
           拐.addLine(to: CGPoint(x: 尺寸.width, y: 子点.底))
-          画布.stroke(拐, with: .color(行们[子序].色.opacity(0.62)), lineWidth: 1.4)
+          画布.stroke(拐, with: .color(行们[子序].色.opacity(0.25)), lineWidth: 线宽)
         }
       }
 

@@ -47,13 +47,10 @@ struct 单行V: View {
     .frame(maxWidth: .infinity, alignment: .leading)
 
     // 内边距：上下 13、左右 14。数字直接改就能看效果。
+    // 背景不在这里画 —— 一整个分块共用一张圆角底, 行与行之间只隔一根线
+    // (见 p1列表.swift 的 分块/listContent)。
     .padding(.vertical, 13)
     .padding(.horizontal, 14)
-
-    // 背景：圆角胶囊。Capsule() 是"两头半圆"的形状。
-    // 想改成"描边"就把 fill 换成 stroke：
-    //     Capsule().stroke(Theme.accent)
-    .background(Capsule().fill(Theme.rowBackground))
   }
 }
 
@@ -81,11 +78,17 @@ private func 拆时间(_ 摘要: String) -> (时间: String?, 正文: String) {
 #Preview {
   ZStack {
     Theme.background.ignoresSafeArea()
-    VStack(spacing: 8) {
+    VStack(spacing: 0) {
       单行V(日记: 日记表["26-10-16_日记"]!)
+      Rectangle().fill(Color.white.opacity(0.08)).frame(height: 0.5).padding(.leading, 14)
       单行V(日记: 日记表["26-10-14_日记"]!)
+      Rectangle().fill(Color.white.opacity(0.08)).frame(height: 0.5).padding(.leading, 14)
       单行V(日记: 日记表["26-09-16_日记"]!)
     }
+    .background(
+      RoundedRectangle(cornerRadius: 16, style: .continuous)
+        .fill(Theme.rowBackground))
+    .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
     .padding(.horizontal, 12)
   }
   .preferredColorScheme(.dark)

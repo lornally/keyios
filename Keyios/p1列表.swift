@@ -28,11 +28,17 @@ struct 列表v: View {
   @State private var showingNewNote = false  // 新建页弹出来了吗？
   @State private var path: [日记] = []  // 导航栈：点进详情页时往里塞一条
 
+  /// 分组用的日期: 文件名里的日期优先, 解不出来就用文件的修改时间。
+  /// 文件名优先是因为"改过一次"不该让一篇 10 月的日记跳到今天。
+  private func 归组日期(_ d: 日记) -> Date? {
+    日记名f.日期(d.文件名) ?? d.修改日
+  }
+
   /// 字典 -> 列表。按日期**倒序**（新的在上）。
-  /// 文件名里没有日期的（比如 "摩托车"）排在最后，它们之间按名字排。
+  /// 两样日期都没有的（正常不会发生）排在最后，它们之间按名字排。
   private var 按日期排: [日记] {
     日记表.values.sorted { a, b in
-      switch (日记名f.日期(a.文件名), 日记名f.日期(b.文件名)) {
+      switch (归组日期(a), 归组日期(b)) {
       case (let x?, let y?): return x > y
       case (nil, _?): return false  // 没日期的沉底
       case (_?, nil): return true
@@ -51,6 +57,29 @@ struct 列表v: View {
         || 日记名f.缩写(d.文件名).contains(searchText)  // 缩减后的名字
         || d.摘要.contains { $0.contains(searchText) }  // 任一条摘要
     }
+  }
+
+  /// 分块顺序: 本周在最前, 其余按月倒序。
+  /// 今年的月份标题只写「11月」; 去年及更早写「2025年12月」。
+  private var 分块: [列表块] {
+    let 历 = Calendar.current
+    let 今年 = 历.component(.year, from: Date())
+    let 本周起点 = 历.dateInterval(of: .weekOfYear, for: Date())?.start
+
+    // 排序键: 本周 = Int.max, 月份 = 年*100+月, 无日期 = 0。
+    // 过滤后已经是日期倒序, 同一块里的顺序也就保住了。
+    let 分组 = Dictionary(grouping: 过滤后) { d -> 分块键 in
+      guard let 日 = 归组日期(d) else { return 分块键(排序: 0, 标题: "无日期") }
+      if let 本周起点, 日 >= 本周起点 {
+        return 分块键(排序: .max, 标题: "本周")
+      }
+      let 年 = 历.component(.year, from: 日)
+      let 月 = 历.component(.month, from: 日)
+      let 标题 = 年 == 今年 ? "\(月)月" : "\(年)年\(月)月"
+      return 分块键(排序: 年 * 100 + 月, 标题: 标题)
+    }
+    return 分组.sorted { $0.key.排序 > $1.key.排序 }
+      .map { 列表块(标题: $0.key.标题, 日记们: $0.value) }
   }
 
   var body: some View {
@@ -110,21 +139,48 @@ struct 列表v: View {
   // MARK: - 列表本体
 
   private var listContent: some View {
-    // ScrollView + LazyVStack：自己拼的滚动列，行样式完全自由。
-    // Lazy = 只渲染屏幕上看得见的行，长列表才不卡。
-    ScrollView {
-      LazyVStack(spacing: 8) {
-        ForEach(过滤后) { d in
-          单行V(日记: d)
-            .contentShape(Capsule())  // 让整条胶囊都可点（默认只有文字可点）
-            .onTapGesture { path.append(d) }
+    // 分块 + 吸顶标题 + 行间发丝线 + 整块圆角, 都是 List(.insetGrouped) 自带的行为,
+    // 不用自己拼 ScrollView。
+    List {
+      ForEach(分块) { 块 in
+        Section {
+          ForEach(块.日记们) { d in
+            单行V(日记: d)
+              .contentShape(Rectangle())  // 整行都可点（默认只有文字可点）
+              .onTapGesture { path.append(d) }
+              .listRowInsets(EdgeInsets())  // 行内边距由 单行V 自己给
+              .listRowBackground(Theme.rowBackground)
+              .listRowSeparatorTint(Color.white.opacity(0.08))
+              .alignmentGuide(.listRowSeparatorLeading) { _ in 14 }
+          }
+        } header: {
+          Text(块.标题)
+            .font(.footnote.weight(.semibold))
+            .foregroundStyle(Theme.secondaryText)
+            .textCase(nil)
         }
       }
-      .padding(.horizontal, 12)
-      .padding(.top, 8)
-      .padding(.bottom, 8)  // 底部条的避让由系统自己处理，这里只要一点余量
     }
+    .listStyle(.insetGrouped)
+    .listSectionSpacing(.compact)  // 系统给紧凑档, 不自己编数值
+    .scrollContentBackground(.hidden)
   }
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// 【分块列表用的小东西】
+// ────────────────────────────────────────────────────────────────────────────
+
+private struct 列表块: Identifiable {
+  let 标题: String
+  let 日记们: [日记]
+
+  var id: String { 标题 }
+}
+
+private struct 分块键: Hashable {
+  let 排序: Int
+  let 标题: String
 }
 
 // ────────────────────────────────────────────────────────────────────────────

@@ -48,12 +48,19 @@ enum 日记读取 {
 
   // MARK: - 读整张表
 
+  /// 目录里的一个文件: 名字 + 修改时间。
+  /// 文件名可能没有日期 (比如 "摩托车"), 列表分组就用修改时间兜底。
+  struct 文件项: Sendable {
+    let 名: String
+    let 修改日: Date?
+  }
+
   /// 读表过程中发生的事。界面收到一件就改一点, 不用等整张表读完。
   enum 读表事件: Sendable {
-    /// 目录列完了: 这些名字可以马上画成一行行空壳 (只有日期, 摘要待填)
-    case 名单([String])
+    /// 目录列完了: 这些文件可以马上画成一行行空壳 (只有名字/日期, 摘要待填)
+    case 名单([文件项])
     /// 某一篇读完了: 把摘要填进那一行
-    case 读到一篇(名: String, 摘要: [String])
+    case 读到一篇(名: String, 摘要: [String], 修改日: Date?)
   }
 
   /// 遍历目录, 每个 .dog 整篇读进内存并解析 (日记都很小), 取前 3 个一级节点当摘要。
@@ -72,34 +79,45 @@ enum 日记读取 {
     // .skipsHiddenFiles 顺手排掉 .versions(版本目录)和 .DS_Store
     let 全部 =
       (try? FileManager.default.contentsOfDirectory(
-        at: 目录, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles])) ?? []
+        at: 目录, includingPropertiesForKeys: [.contentModificationDateKey],
+        options: [.skipsHiddenFiles])) ?? []
     let 文件们 = 全部.filter { $0.pathExtension.lowercased() == "dog" }
+    let 项们 = 文件们.map {
+      文件项(
+        名: $0.deletingPathExtension().lastPathComponent,
+        修改日: 修改日(of: $0))
+    }
 
     // 名单先给出去: 界面可以先把所有行摆出来, 摘要慢慢填
-    事件?(.名单(文件们.map { $0.deletingPathExtension().lastPathComponent }))
+    事件?(.名单(项们))
 
     var 表: [String: 日记] = [:]
     表.reserveCapacity(文件们.count)
 
     // 子任务只负责"读一篇 -> 算摘要"; 往表里放仍在当前任务做, 不用加锁。
-    await withTaskGroup(of: (名: String, 摘要: [String]).self) { 组 in
-      for 文件 in 文件们 {
-        let 名 = 文件.deletingPathExtension().lastPathComponent
+    await withTaskGroup(of: (名: String, 摘要: [String], 修改日: Date?).self) { 组 in
+      for (文件, 项) in zip(文件们, 项们) {
         组.addTask {
           // 读不出来(还没从 iCloud 下载下来/编码不对)也照样收录, 摘要空着 ——
           // 不然一篇没下载的日记会从列表里消失, 用户以为丢了。
           let 文本 = try? String(contentsOf: 文件, encoding: .utf8)
-          return (名, 文本.map { 摘要($0) } ?? [])
+          return (项.名, 文本.map { 摘要($0) } ?? [], 项.修改日)
         }
       }
 
       // 谁先读完谁先报, 所以列表是一行一行填出来的
-      for await (名, 摘要) in 组 {
-        表[名] = 日记(文件名: 名, 摘要: 摘要)
-        事件?(.读到一篇(名: 名, 摘要: 摘要))
+      for await (名, 摘要, 修改日) in 组 {
+        表[名] = 日记(文件名: 名, 摘要: 摘要, 修改日: 修改日)
+        事件?(.读到一篇(名: 名, 摘要: 摘要, 修改日: 修改日))
       }
     }
     return 表
+  }
+
+  /// 文件的最后修改时间。iCloud 占位文件也有这份本地元数据。
+  private static func 修改日(of 文件: URL) -> Date? {
+    (try? 文件.resourceValues(forKeys: [.contentModificationDateKey]))?
+      .contentModificationDate
   }
 
   // MARK: - 取摘要

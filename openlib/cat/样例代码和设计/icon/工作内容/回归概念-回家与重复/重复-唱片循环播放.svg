@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="重复-唱片循环播放">
+  <defs>
+    <radialGradient id="disc" cx="256" cy="256" r="160" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF2C2"/>
+      <stop offset=".28" stop-color="#243856"/>
+      <stop offset="1" stop-color="#101827"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="72" fill="#DCE8EA"/>
+  <circle cx="236" cy="270" r="166" fill="url(#disc)"/>
+  <circle cx="236" cy="270" r="74" fill="none" stroke="#FFFFFF" stroke-width="8" opacity=".22"/>
+  <circle cx="236" cy="270" r="118" fill="none" stroke="#FFFFFF" stroke-width="7" opacity=".16"/>
+  <circle cx="236" cy="270" r="28" fill="#FFD166"/>
+  <path d="M330 124l72 36l-96 176" stroke="#7B4E83" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="306" cy="336" r="18" fill="#E75757"/>
+  <path d="M95 254c32-87 105-137 199-132" fill="none" stroke="#FFD166" stroke-width="12" stroke-linecap="round" stroke-dasharray="1 24"/>
+  <path d="M294 122l-37-24l42-17" fill="none" stroke="#FFD166" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

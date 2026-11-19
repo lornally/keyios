@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="重复-电梯往复">
+  <rect width="512" height="512" rx="72" fill="#E7F0EF"/>
+  <rect x="138" y="80" width="236" height="352" rx="28" fill="#243856"/>
+  <rect x="170" y="120" width="172" height="272" rx="18" fill="#F8F2E8"/>
+  <path d="M256 120v272M170 214h172M170 300h172" stroke="#C7D7D5" stroke-width="9"/>
+  <rect x="206" y="234" width="100" height="46" rx="12" fill="#FFD166"/>
+  <path d="M99 165c41-61 94-89 159-82" fill="none" stroke="#E75757" stroke-width="12" stroke-linecap="round" stroke-dasharray="1 24"/>
+  <path d="M258 83l-34-26l41-15" fill="none" stroke="#E75757" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M413 347c-42 61-95 89-160 82" fill="none" stroke="#2E8C8A" stroke-width="12" stroke-linecap="round" stroke-dasharray="1 24"/>
+  <path d="M253 429l34 26l-41 15" fill="none" stroke="#2E8C8A" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

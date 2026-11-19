@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="回家-凤蝶迁徙归林">
+  <defs>
+    <linearGradient id="bg" x1="74" y1="24" x2="450" y2="502" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFE6B5"/>
+      <stop offset=".5" stop-color="#B6E3BC"/>
+      <stop offset="1" stop-color="#526F4D"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="72" fill="url(#bg)"/>
+  <path d="M0 390c84-54 166-63 247-29c71 30 157 20 265-31v182H0z" fill="#3C7A4E"/>
+  <g fill="#244B34">
+    <path d="M326 410V250l-65 160z"/>
+    <path d="M385 410V214l-84 196z"/>
+    <path d="M444 410V274l-58 136z"/>
+  </g>
+  <path d="M75 275c84-86 178-106 280-59" fill="none" stroke="#FFF2C2" stroke-width="10" stroke-linecap="round" stroke-dasharray="1 23"/>
+  <path d="M355 216l-39-5l25-30" fill="none" stroke="#FFF2C2" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <g transform="translate(130 276) rotate(-12)">
+    <path d="M0 0c-50-46-104-19-94 29c9 42 52 55 94 8c42 47 85 34 94-8c10-48-44-75-94-29z" fill="#E75757"/>
+    <path d="M0 0c-25-24-53-10-47 15c5 21 26 28 47 5c21 23 42 16 47-5c6-25-22-39-47-15z" fill="#FFD166" opacity=".75"/>
+    <path d="M0-6v74" stroke="#243856" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="0" cy="-14" r="7" fill="#243856"/>
+  </g>
+  <g transform="translate(253 232) rotate(8) scale(.58)">
+    <path d="M0 0c-50-46-104-19-94 29c9 42 52 55 94 8c42 47 85 34 94-8c10-48-44-75-94-29z" fill="#F2A65A"/>
+    <path d="M0-6v74" stroke="#243856" stroke-width="8" stroke-linecap="round"/>
+  </g>
+</svg>

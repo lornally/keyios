@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 16 128 96" width="128" height="96" role="img" aria-label="回归">
+  <defs>
+    <linearGradient id="regressTrack" x1="12" y1="24" x2="116" y2="108" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFD5E3"/>
+      <stop offset=".45" stop-color="#FF7AB6"/>
+      <stop offset="1" stop-color="#D43F84"/>
+    </linearGradient>
+    <linearGradient id="regressCream" x1="26" y1="29" x2="102" y2="42" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".92"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity=".35"/>
+    </linearGradient>
+  </defs>
+  <path d="M48 16H80A48 48 0 0 1 80 112H48A48 48 0 0 1 48 16Z M48 42H80A22 22 0 0 1 80 86H48A22 22 0 0 1 48 42Z" fill="url(#regressTrack)" fill-rule="evenodd"/>
+  <path d="M30 42c20-16 48-17 68-3" fill="none" stroke="url(#regressCream)" stroke-width="9" stroke-linecap="round" opacity=".88"/>
+  <path d="M91 96c-18 11-46 11-64-1" fill="none" stroke="#B9296F" stroke-width="7" stroke-linecap="round" opacity=".38"/>
+  <path d="M26 64c0-22 17-39 40-39" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity=".58"/>
+  <path d="M103 64c0 22-17 39-40 39" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity=".46"/>
+  <g fill="#243856" stroke="#243856" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <g transform="translate(30 67) rotate(-87)">
+      <circle cx="0" cy="0" r="5.2"/>
+      <circle cx="9" cy="0" r="4.8"/>
+      <circle cx="17" cy="0" r="4.1"/>
+      <path d="M4 4l-5 8M10 4v9M16 3l7 6M4-4l-6-7M10-4v-9M16-3l7-6"/>
+    </g>
+    <g transform="translate(64 30) rotate(2)">
+      <circle cx="0" cy="0" r="5.2"/>
+      <circle cx="9" cy="0" r="4.8"/>
+      <circle cx="17" cy="0" r="4.1"/>
+      <path d="M4 4l-5 8M10 4v9M16 3l7 6M4-4l-6-7M10-4v-9M16-3l7-6"/>
+    </g>
+    <g transform="translate(98 66) rotate(87)">
+      <circle cx="0" cy="0" r="5.2"/>
+      <circle cx="9" cy="0" r="4.8"/>
+      <circle cx="17" cy="0" r="4.1"/>
+      <path d="M4 4l-5 8M10 4v9M16 3l7 6M4-4l-6-7M10-4v-9M16-3l7-6"/>
+    </g>
+  </g>
+</svg>

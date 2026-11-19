@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="里程碑 圆顶石碑">
+  <defs>
+    <linearGradient id="roundStoneBg" x1="14" y1="12" x2="114" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F1F5F9"/>
+      <stop offset="1" stop-color="#E0F2FE"/>
+    </linearGradient>
+    <linearGradient id="roundStoneBody" x1="38" y1="22" x2="90" y2="108" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#CBD5E1"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#roundStoneBg)"/>
+  <path d="M64 24c-17 0-31 14-31 31v49h62V55c0-17-14-31-31-31z" fill="url(#roundStoneBody)" stroke="#334155" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M28 104h72" stroke="#334155" stroke-width="7" stroke-linecap="round"/>
+  <path d="M48 58h32M46 72h36M51 86h26" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
+  <path d="M50 43c8-6 20-6 28 0" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <path d="M40 97c12-15 29-19 48-16" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+</svg>

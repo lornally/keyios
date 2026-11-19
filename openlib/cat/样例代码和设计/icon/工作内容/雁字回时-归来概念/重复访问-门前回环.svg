@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="重复访问-门前回环">
+  <defs>
+    <linearGradient id="wall" x1="74" y1="40" x2="440" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF4D9"/>
+      <stop offset=".55" stop-color="#F6CFA1"/>
+      <stop offset="1" stop-color="#8CB8BE"/>
+    </linearGradient>
+    <linearGradient id="door" x1="196" y1="126" x2="320" y2="418" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7B4E83"/>
+      <stop offset="1" stop-color="#243856"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="72" fill="url(#wall)"/>
+  <path d="M148 418V170c0-28 22-50 50-50h116c28 0 50 22 50 50v248" fill="#FFFFFF" opacity=".62"/>
+  <path d="M185 420V172c0-12 10-22 22-22h98c12 0 22 10 22 22v248z" fill="url(#door)"/>
+  <circle cx="300" cy="286" r="9" fill="#FFD166"/>
+  <path d="M105 416h302" stroke="#243856" stroke-width="16" stroke-linecap="round" opacity=".28"/>
+  <path d="M112 334c72 52 181 67 264 18c47-28 48-78 3-101c-54-27-128 19-106 68c15 33 76 45 116 23" fill="none" stroke="#E75757" stroke-width="12" stroke-linecap="round" stroke-dasharray="2 26"/>
+  <path d="M389 342l-42 4l18-38" fill="none" stroke="#E75757" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#243856" opacity=".72">
+    <ellipse cx="154" cy="376" rx="11" ry="20" transform="rotate(-65 154 376)"/>
+    <ellipse cx="196" cy="389" rx="11" ry="20" transform="rotate(-74 196 389)"/>
+    <ellipse cx="241" cy="391" rx="11" ry="20" transform="rotate(-86 241 391)"/>
+    <ellipse cx="287" cy="382" rx="11" ry="20" transform="rotate(-105 287 382)"/>
+    <ellipse cx="329" cy="365" rx="11" ry="20" transform="rotate(-118 329 365)"/>
+  </g>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="地图里程碑 折叠地图石碑">
+  <defs>
+    <linearGradient id="mapMilestoneFoldBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E0F2FE"/>
+      <stop offset="1" stop-color="#DCFCE7"/>
+    </linearGradient>
+    <linearGradient id="mapMilestoneFoldStone" x1="63" y1="32" x2="94" y2="99" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#CBD5E1"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#mapMilestoneFoldBg)"/>
+  <path d="M24 37l26-10l28 10l26-10v64l-26 10l-28-10l-26 10z" fill="#F8FAFC" stroke="#475569" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M50 27v64M78 37v64" stroke="#CBD5E1" stroke-width="4"/>
+  <path d="M31 80c13-19 30-7 44-27s24-10 25-9" fill="none" stroke="#2563EB" stroke-width="7" stroke-linecap="round"/>
+  <path d="M31 80c13-19 30-7 44-27s24-10 25-9" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 8"/>
+  <path d="M83 44c-10 0-18 8-18 18v33h36V62c0-10-8-18-18-18z" fill="url(#mapMilestoneFoldStone)" stroke="#475569" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M67 95h32" stroke="#475569" stroke-width="5" stroke-linecap="round"/>
+  <text x="83" y="70" font-family="Arial, sans-serif" font-size="14" font-weight="900" text-anchor="middle" fill="#334155">12</text>
+  <path d="M74 82h18" stroke="#64748B" stroke-width="3" stroke-linecap="round"/>
+</svg>

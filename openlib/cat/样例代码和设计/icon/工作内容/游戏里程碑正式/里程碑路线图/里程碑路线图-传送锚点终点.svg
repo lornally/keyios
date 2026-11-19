@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="里程碑路线图 传送锚点终点">
+  <defs>
+    <radialGradient id="routeAnchorBg" cx="50%" cy="45%" r="62%">
+      <stop offset="0" stop-color="#BAE6FD"/>
+      <stop offset=".65" stop-color="#ECFEFF"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </radialGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#routeAnchorBg)"/>
+  <path d="M25 91h18c10 0 15-5 15-13s-5-13-15-13h-6c-9 0-14-5-14-12s5-12 14-12h42" fill="none" stroke="#1E293B" stroke-width="10" stroke-linecap="round"/>
+  <path d="M25 91h18c10 0 15-5 15-13s-5-13-15-13h-6c-9 0-14-5-14-12s5-12 14-12h42" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 9"/>
+  <circle cx="25" cy="91" r="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="4"/>
+  <circle cx="23" cy="53" r="8" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="4"/>
+  <path d="M92 28l21 21l-21 47l-21-47z" fill="#E0F2FE" stroke="#0369A1" stroke-width="5" stroke-linejoin="round"/>
+  <circle cx="92" cy="56" r="12" fill="#FFFFFF" stroke="#0284C7" stroke-width="5"/>
+  <path d="M92 44v24M80 56h24" stroke="#0EA5E9" stroke-width="4" stroke-linecap="round"/>
+  <path d="M76 96h32l8 9H68z" fill="#0369A1" stroke="#075985" stroke-width="4"/>
+</svg>

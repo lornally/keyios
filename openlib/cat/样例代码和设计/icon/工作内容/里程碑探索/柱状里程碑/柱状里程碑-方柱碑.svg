@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="柱状里程碑 方柱碑">
+  <defs>
+    <linearGradient id="squarePillarBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ECFDF5"/>
+      <stop offset="1" stop-color="#E0F2FE"/>
+    </linearGradient>
+    <linearGradient id="squarePillarFront" x1="48" y1="26" x2="82" y2="106" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D1D5DB"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#squarePillarBg)"/>
+  <path d="M20 104c19-29 43-40 88-58" fill="none" stroke="#1E293B" stroke-width="14" stroke-linecap="round"/>
+  <path d="M20 104c19-29 43-40 88-58" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 11"/>
+  <path d="M48 31l14-7h26l-14 7z" fill="#F8FAFC" stroke="#475569" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M48 31h26v73H48z" fill="url(#squarePillarFront)" stroke="#475569" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M74 31l14-7v73l-14 7z" fill="#CBD5E1" stroke="#475569" stroke-width="4" stroke-linejoin="round"/>
+  <text x="61" y="65" font-family="Arial, sans-serif" font-size="16" font-weight="900" text-anchor="middle" fill="#334155">5</text>
+  <path d="M54 79h14M54 88h14" stroke="#64748B" stroke-width="3" stroke-linecap="round"/>
+  <path d="M43 105h45" stroke="#475569" stroke-width="7" stroke-linecap="round"/>
+</svg>

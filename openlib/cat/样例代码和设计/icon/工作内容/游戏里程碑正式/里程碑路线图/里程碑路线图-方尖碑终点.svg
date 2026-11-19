@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="里程碑路线图 方尖碑终点">
+  <defs>
+    <radialGradient id="routeObeliskBg" cx="50%" cy="42%" r="64%">
+      <stop offset="0" stop-color="#DBEAFE"/>
+      <stop offset=".65" stop-color="#EEF2FF"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </radialGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#routeObeliskBg)"/>
+  <path d="M24 91h19c10 0 15-5 15-13s-5-13-15-13h-6c-9 0-14-5-14-12s5-12 14-12h42" fill="none" stroke="#1E293B" stroke-width="10" stroke-linecap="round"/>
+  <path d="M24 91h19c10 0 15-5 15-13s-5-13-15-13h-6c-9 0-14-5-14-12s5-12 14-12h42" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 9"/>
+  <circle cx="24" cy="91" r="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="4"/>
+  <circle cx="23" cy="53" r="8" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="4"/>
+  <path d="M91 23l-12 24h19z" fill="#F8FAFC" stroke="#334155" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M91 23l22 24H98z" fill="#CBD5E1" stroke="#334155" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M79 47h19v49H79z" fill="#F8FAFC" stroke="#334155" stroke-width="4"/>
+  <path d="M98 47h15v49H98z" fill="#94A3B8" stroke="#334155" stroke-width="4"/>
+  <path d="M74 96h43l7 10H67z" fill="#64748B" stroke="#334155" stroke-width="4"/>
+</svg>

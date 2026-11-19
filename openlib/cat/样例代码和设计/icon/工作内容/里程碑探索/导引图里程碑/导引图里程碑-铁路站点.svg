@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="导引图里程碑 铁路站点">
+  <defs>
+    <linearGradient id="railMilestoneBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F1F5F9"/>
+      <stop offset="1" stop-color="#E0F2FE"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#railMilestoneBg)"/>
+  <path d="M28 101L56 27M100 101L72 27" stroke="#334155" stroke-width="6" stroke-linecap="round"/>
+  <path d="M43 61h42M35 82h58" stroke="#334155" stroke-width="5" stroke-linecap="round"/>
+  <path d="M54 39h20" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="64" cy="61" r="14" fill="#FFFFFF" stroke="#2563EB" stroke-width="5"/>
+  <path d="M55 61h18M64 52v18" stroke="#2563EB" stroke-width="4" stroke-linecap="round"/>
+  <path d="M88 30c-9 0-16 7-16 16v32h32V46c0-9-7-16-16-16z" fill="#F8FAFC" stroke="#475569" stroke-width="4" stroke-linejoin="round"/>
+  <text x="88" y="57" font-family="Arial, sans-serif" font-size="13" font-weight="900" text-anchor="middle" fill="#334155">站</text>
+</svg>

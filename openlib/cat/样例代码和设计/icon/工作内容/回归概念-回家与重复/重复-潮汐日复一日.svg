@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="重复-潮汐日复一日">
+  <defs>
+    <linearGradient id="bg" x1="80" y1="22" x2="440" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#172B54"/>
+      <stop offset=".52" stop-color="#4B79A1"/>
+      <stop offset="1" stop-color="#F2A65A"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="72" fill="url(#bg)"/>
+  <circle cx="378" cy="116" r="46" fill="#FFF2BE"/>
+  <path d="M0 350c66-36 130-38 192-6c58 30 116 27 174-9c49-30 98-32 146-5v182H0z" fill="#2E8C8A"/>
+  <path d="M0 414c70-27 137-28 202-3c67 26 134 22 201-12c40-20 76-24 109-12v125H0z" fill="#F4D7A1"/>
+  <path d="M78 318c65-51 127-57 186-17c48 32 92 33 132 1" fill="none" stroke="#FFF2BE" stroke-width="12" stroke-linecap="round" stroke-dasharray="1 24"/>
+  <path d="M396 302l-42 3l19-38" fill="none" stroke="#FFF2BE" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M116 430c59 14 129 13 210-3" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity=".44"/>
+</svg>

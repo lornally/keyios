@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="路边距离牌 景区出口 2km">
+  <defs>
+    <linearGradient id="parkExit2Bg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FEF3C7"/>
+      <stop offset="1" stop-color="#ECFDF5"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#parkExit2Bg)"/>
+  <path d="M62 104V80" stroke="#475569" stroke-width="8" stroke-linecap="round"/>
+  <path d="M20 32h88v48H36L20 56z" fill="#A16207" stroke="#451A03" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M35 64l12-15l9 11l8-10l15 14z" fill="#FEF3C7"/>
+  <text x="80" y="53" font-family="Arial, sans-serif" font-size="14" font-weight="900" text-anchor="middle" fill="#FFFFFF">景区出口</text>
+  <text x="80" y="70" font-family="Arial, sans-serif" font-size="12" font-weight="800" text-anchor="middle" fill="#FEF3C7">2 km</text>
+  <path d="M27 96h76" stroke="#64748B" stroke-width="8" stroke-linecap="round"/>
+</svg>

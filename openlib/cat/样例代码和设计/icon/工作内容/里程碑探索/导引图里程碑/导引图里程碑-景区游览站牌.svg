@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="导引图里程碑 景区游览站牌">
+  <defs>
+    <linearGradient id="parkGuidePostBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ECFDF5"/>
+      <stop offset="1" stop-color="#FEF3C7"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#parkGuidePostBg)"/>
+  <path d="M24 92c15-25 34-13 50-33s28-13 34-8" fill="none" stroke="#16A34A" stroke-width="7" stroke-linecap="round"/>
+  <path d="M24 92c15-25 34-13 50-33s28-13 34-8" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 8"/>
+  <path d="M78 34v65" stroke="#7C2D12" stroke-width="6" stroke-linecap="round"/>
+  <path d="M48 34h47l10 11l-10 11H48z" fill="#F97316" stroke="#9A3412" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M54 45h35" stroke="#FFF7ED" stroke-width="4" stroke-linecap="round"/>
+  <path d="M58 61h45l-10 11l10 11H58z" fill="#22C55E" stroke="#15803D" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M64 72h27" stroke="#F0FDF4" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="24" cy="92" r="8" fill="#FFFFFF" stroke="#16A34A" stroke-width="4"/>
+</svg>

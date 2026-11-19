@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="归来-灯塔航线">
+  <defs>
+    <linearGradient id="seaSky" x1="91" y1="35" x2="436" y2="511" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#12324C"/>
+      <stop offset=".5" stop-color="#3F7190"/>
+      <stop offset="1" stop-color="#F1A65A"/>
+    </linearGradient>
+    <radialGradient id="beam" cx="326" cy="190" r="190" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF0B8" stop-opacity=".95"/>
+      <stop offset=".62" stop-color="#FFF0B8" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#FFF0B8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="72" fill="url(#seaSky)"/>
+  <path d="M244 205L478 95v224z" fill="url(#beam)"/>
+  <path d="M286 424l26-220h58l26 220z" fill="#F8F2E8"/>
+  <path d="M301 296h80M292 372h98" stroke="#D65A4A" stroke-width="22"/>
+  <path d="M303 204h76l-16-46h-44z" fill="#243856"/>
+  <path d="M320 158h42" stroke="#F8F2E8" stroke-width="14" stroke-linecap="round"/>
+  <path d="M0 389c63-23 126-22 190 3c58 22 116 22 174 0c51-20 100-23 148-8v128H0z" fill="#10263A" opacity=".58"/>
+  <path d="M64 325c65-78 160-90 223-31c48 45 37 102-28 123c-48 16-108 2-142-34" fill="none" stroke="#FFE6A8" stroke-width="12" stroke-linecap="round" stroke-dasharray="2 24"/>
+  <path d="M117 383l-10-43l43 11" fill="none" stroke="#FFE6A8" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M139 252c13 12 28 20 45 23c-18 3-34 0-49-8c-15 8-31 11-49 8c17-3 32-11 45-23c2-3 6-3 8 0z" fill="#F8F2E8"/>
+</svg>

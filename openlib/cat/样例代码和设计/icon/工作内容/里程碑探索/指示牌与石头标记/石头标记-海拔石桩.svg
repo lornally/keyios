@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="石头标记 海拔石桩">
+  <defs>
+    <linearGradient id="altStonePostBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E0F2FE"/>
+      <stop offset="1" stop-color="#DCFCE7"/>
+    </linearGradient>
+    <linearGradient id="altStonePostBody" x1="43" y1="24" x2="89" y2="108" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#CBD5E1"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#altStonePostBg)"/>
+  <path d="M18 101l28-42l17 23l21-35l27 54z" fill="#BBF7D0" stroke="#16A34A" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M66 29c-14 0-25 11-25 25v51h50V54c0-14-11-25-25-25z" fill="url(#altStonePostBody)" stroke="#475569" stroke-width="5" stroke-linejoin="round"/>
+  <text x="66" y="58" font-family="Arial, sans-serif" font-size="13" font-weight="900" text-anchor="middle" fill="#334155">ALT</text>
+  <text x="66" y="76" font-family="Arial, sans-serif" font-size="14" font-weight="900" text-anchor="middle" fill="#2563EB">2150</text>
+  <text x="66" y="91" font-family="Arial, sans-serif" font-size="9" font-weight="900" text-anchor="middle" fill="#64748B">m</text>
+  <path d="M37 105h58" stroke="#475569" stroke-width="6" stroke-linecap="round"/>
+</svg>

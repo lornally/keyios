@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="项目 架构依赖图">
+  <defs>
+    <linearGradient id="archBg" x1="16" y1="14" x2="112" y2="112" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F1F5F9"/>
+      <stop offset="1" stop-color="#EDE9FE"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#archBg)"/>
+  <g stroke="#475569" stroke-width="4" stroke-linecap="round">
+    <path d="M42 48l20-14l24 14"/>
+    <path d="M42 48v28l20 18l24-18V48"/>
+    <path d="M62 34v60"/>
+    <path d="M42 76h44"/>
+  </g>
+  <g stroke-width="4">
+    <circle cx="42" cy="48" r="12" fill="#DBEAFE" stroke="#2563EB"/>
+    <circle cx="86" cy="48" r="12" fill="#DCFCE7" stroke="#16A34A"/>
+    <circle cx="62" cy="34" r="12" fill="#FEF3C7" stroke="#F59E0B"/>
+    <circle cx="42" cy="76" r="12" fill="#FAE8FF" stroke="#A855F7"/>
+    <circle cx="86" cy="76" r="12" fill="#FFE4E6" stroke="#E11D48"/>
+    <circle cx="62" cy="94" r="12" fill="#CCFBF1" stroke="#0F766E"/>
+  </g>
+  <g fill="#FFFFFF">
+    <rect x="36" y="45" width="12" height="6" rx="2"/>
+    <rect x="80" y="45" width="12" height="6" rx="2"/>
+    <rect x="56" y="31" width="12" height="6" rx="2"/>
+    <rect x="36" y="73" width="12" height="6" rx="2"/>
+    <rect x="80" y="73" width="12" height="6" rx="2"/>
+    <rect x="56" y="91" width="12" height="6" rx="2"/>
+  </g>
+</svg>

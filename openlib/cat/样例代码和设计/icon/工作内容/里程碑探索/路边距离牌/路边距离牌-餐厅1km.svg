@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="路边距离牌 餐厅 1km">
+  <defs>
+    <linearGradient id="restaurant1Bg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF7ED"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#restaurant1Bg)"/>
+  <path d="M32 101V78M96 101V78" stroke="#475569" stroke-width="7" stroke-linecap="round"/>
+  <rect x="18" y="28" width="92" height="54" rx="8" fill="#C2410C" stroke="#7C2D12" stroke-width="5"/>
+  <path d="M36 43v27M44 43v27M36 53h8M55 43v27c8-4 8-20 0-27z" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <text x="82" y="55" font-family="Arial, sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#FFFFFF">餐厅</text>
+  <text x="82" y="72" font-family="Arial, sans-serif" font-size="12" font-weight="800" text-anchor="middle" fill="#FFEDD5">1 km</text>
+  <path d="M24 93h80" stroke="#64748B" stroke-width="8" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="重复-织布往返">
+  <rect width="512" height="512" rx="72" fill="#F1E9D8"/>
+  <rect x="98" y="104" width="316" height="304" rx="24" fill="#FFF8EA"/>
+  <g stroke-linecap="round">
+    <path d="M140 144v224M184 144v224M228 144v224M272 144v224M316 144v224M360 144v224" stroke="#D8C39D" stroke-width="10"/>
+    <path d="M126 178h260M126 222h260M126 266h260M126 310h260M126 354h260" stroke="#8CB8BE" stroke-width="14"/>
+    <path d="M130 200h252M130 288h252M130 376h252" stroke="#E75757" stroke-width="10"/>
+  </g>
+  <rect x="128" y="238" width="132" height="44" rx="22" fill="#243856"/>
+  <path d="M127 238c68-49 157-51 225-4" fill="none" stroke="#FFD166" stroke-width="11" stroke-linecap="round" stroke-dasharray="1 23"/>
+  <path d="M352 234l-40-15l31-29" fill="none" stroke="#FFD166" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M130 430h252" stroke="#243856" stroke-width="12" stroke-linecap="round" opacity=".24"/>
+</svg>

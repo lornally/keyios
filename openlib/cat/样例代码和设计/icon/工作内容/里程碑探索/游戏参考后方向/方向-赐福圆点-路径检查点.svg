@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="赐福圆点 路径检查点">
+  <defs>
+    <linearGradient id="graceCheckpointBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF7ED"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#graceCheckpointBg)"/>
+  <path d="M25 91c16-34 39-16 52-43c8-17 22-19 32-16" fill="none" stroke="#1E293B" stroke-width="11" stroke-linecap="round"/>
+  <path d="M25 91c16-34 39-16 52-43c8-17 22-19 32-16" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 9"/>
+  <circle cx="25" cy="91" r="9" fill="#FFFFFF" stroke="#64748B" stroke-width="4"/>
+  <circle cx="64" cy="62" r="18" fill="#FFFFFF" stroke="#D97706" stroke-width="5"/>
+  <circle cx="64" cy="62" r="7" fill="#FACC15" stroke="#92400E" stroke-width="3"/>
+  <circle cx="103" cy="34" r="9" fill="#FFFFFF" stroke="#16A34A" stroke-width="4"/>
+  <path d="M64 40v-10M64 84v10M42 62H32M86 62h10" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
+</svg>

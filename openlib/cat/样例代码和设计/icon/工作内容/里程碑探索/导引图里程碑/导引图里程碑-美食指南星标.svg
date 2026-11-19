@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="导引图里程碑 美食指南星标">
+  <defs>
+    <linearGradient id="foodGuideMilestoneBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF7ED"/>
+      <stop offset="1" stop-color="#FEF3C7"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#foodGuideMilestoneBg)"/>
+  <path d="M25 40l27-10l26 10l25-10v58l-25 10l-26-10l-27 10z" fill="#FFFFFF" stroke="#92400E" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M52 30v58M78 40v58" stroke="#FED7AA" stroke-width="4"/>
+  <path d="M35 79c16-21 37 2 58-25" fill="none" stroke="#F97316" stroke-width="6" stroke-linecap="round"/>
+  <path d="M70 28l5.4 11l12.1 1.8l-8.8 8.5l2.1 12l-10.8-5.7l-10.8 5.7l2.1-12l-8.8-8.5l12.1-1.8z" fill="#FACC15" stroke="#A16207" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M50 73c-9 0-16 7-16 16v13h32V89c0-9-7-16-16-16z" fill="#F8FAFC" stroke="#92400E" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M43 91h14" stroke="#92400E" stroke-width="3" stroke-linecap="round"/>
+</svg>

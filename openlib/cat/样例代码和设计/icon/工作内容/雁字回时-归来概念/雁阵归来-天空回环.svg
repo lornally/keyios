@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="雁阵归来-天空回环">
+  <defs>
+    <linearGradient id="sky" x1="86" y1="18" x2="430" y2="490" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8D7A4"/>
+      <stop offset=".45" stop-color="#9FD6E8"/>
+      <stop offset="1" stop-color="#49689E"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="170" cy="128" r="130" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF3BE"/>
+      <stop offset=".72" stop-color="#F4A86B"/>
+      <stop offset="1" stop-color="#F4A86B" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#1E335C" flood-opacity=".28"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="72" fill="url(#sky)"/>
+  <circle cx="170" cy="128" r="130" fill="url(#sun)"/>
+  <path d="M44 350c104-52 182-57 266-18c55 26 103 27 158-8" fill="none" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round" opacity=".18"/>
+  <path d="M88 297C180 172 357 139 423 244c49 79-23 168-137 154c-74-9-123-59-112-112c9-42 51-67 99-61" fill="none" stroke="#FFE7BA" stroke-width="13" stroke-linecap="round" stroke-dasharray="3 28"/>
+  <path d="M424 244l-51-12l32-40" fill="none" stroke="#FFE7BA" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <g filter="url(#softShadow)" fill="#17213D">
+    <path d="M226 149c18 17 37 28 59 33c-23 4-45 0-66-12c-19 12-41 16-65 12c23-5 43-16 60-33c3-4 8-4 12 0z"/>
+    <path d="M300 191c14 14 30 22 48 26c-19 4-36 0-52-9c-16 9-33 13-52 9c18-4 34-12 48-26c2-3 6-3 8 0z"/>
+    <path d="M152 211c13 12 27 20 43 24c-17 3-32 0-47-8c-14 8-29 11-46 8c17-4 31-12 43-24c2-2 5-2 7 0z"/>
+    <path d="M360 253c11 10 23 17 37 20c-14 3-28 1-40-7c-12 8-25 10-40 7c14-3 26-10 37-20c2-2 4-2 6 0z"/>
+  </g>
+  <path d="M94 407c69 23 132 25 189 6c46-15 88-42 126-80" fill="none" stroke="#243856" stroke-width="10" stroke-linecap="round" opacity=".32"/>
+</svg>

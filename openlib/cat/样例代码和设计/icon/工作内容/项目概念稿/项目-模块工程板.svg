@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="项目 模块工程板">
+  <defs>
+    <linearGradient id="moduleBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#E0E7FF"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="18" fill="url(#moduleBg)"/>
+  <rect x="24" y="26" width="80" height="76" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3"/>
+  <path d="M24 44h80" stroke="#CBD5E1" stroke-width="3"/>
+  <circle cx="35" cy="35" r="3" fill="#EF4444"/>
+  <circle cx="46" cy="35" r="3" fill="#F59E0B"/>
+  <circle cx="57" cy="35" r="3" fill="#22C55E"/>
+  <g stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M48 62h32M64 62v16M48 78h32" stroke="#64748B"/>
+    <rect x="34" y="53" width="24" height="18" rx="5" fill="#DBEAFE" stroke="#2563EB"/>
+    <rect x="70" y="53" width="24" height="18" rx="5" fill="#DCFCE7" stroke="#16A34A"/>
+    <rect x="52" y="77" width="24" height="18" rx="5" fill="#FAE8FF" stroke="#A855F7"/>
+  </g>
+  <path d="M40 61h12M76 61h12M58 86h12" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+</svg>

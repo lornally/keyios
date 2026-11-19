@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 8 112 112" width="112" height="112" role="img" aria-label="逻辑运算">
+  <circle cx="29" cy="35" r="14" fill="#38BDF8"/>
+  <circle cx="29" cy="93" r="14" fill="#38BDF8"/>
+  <path d="M48 22h15c24 0 43 19 43 42s-19 42-43 42H48c11-25 11-59 0-84Z" fill="#A78BFA" stroke="#6D28D9" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M43 35h23M43 93h23M101 64h16" stroke="#334155" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="104" cy="64" r="11" fill="#F97316"/>
+</svg>

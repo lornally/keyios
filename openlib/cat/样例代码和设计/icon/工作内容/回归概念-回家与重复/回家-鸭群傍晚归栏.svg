@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="回家-鸭群傍晚归栏">
+  <defs>
+    <linearGradient id="bg" x1="64" y1="28" x2="448" y2="502" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FBCB8F"/>
+      <stop offset=".48" stop-color="#C7D9A5"/>
+      <stop offset="1" stop-color="#586F7C"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="72" fill="url(#bg)"/>
+  <path d="M0 380c83-45 161-51 235-17c74 33 166 24 277-28v177H0z" fill="#517B4C"/>
+  <path d="M330 396V278l54-48l54 48v118z" fill="#FFF1C2"/>
+  <path d="M314 284l70-62l70 62" fill="none" stroke="#243856" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M72 414c63-51 135-68 216-51c43 9 79 8 108-3" fill="none" stroke="#FFE9B5" stroke-width="11" stroke-linecap="round" stroke-dasharray="2 23"/>
+  <path d="M396 360l-43-8l29-32" fill="none" stroke="#FFE9B5" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#FFD166" stroke="#243856" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M94 394c22-18 52-11 66 13c-26 15-55 9-73-9z"/><path d="M151 389c11-17 31-15 40 0c-13 9-28 9-40 0z"/><path d="M190 389h19"/>
+    <path d="M185 368c20-17 48-10 61 12c-24 14-51 9-67-8z"/><path d="M237 363c10-16 29-14 37 0c-12 8-26 8-37 0z"/><path d="M273 363h18"/>
+    <path d="M238 421c19-16 46-10 59 11c-23 14-49 9-65-8z"/><path d="M288 416c10-15 28-13 36 0c-12 8-25 8-36 0z"/><path d="M323 416h17"/>
+  </g>
+</svg>

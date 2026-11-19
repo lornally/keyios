@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="糖果跑道-糖豆拼圈">
+  <rect width="512" height="512" rx="72" fill="#F8EFD6"/>
+  <path d="M80 270c0-94 76-170 170-170h12c94 0 170 76 170 170s-76 170-170 170h-12c-94 0-170-76-170-170z" fill="#E9D8B8"/>
+  <path d="M136 270c0-63 51-114 114-114h12c63 0 114 51 114 114s-51 114-114 114h-12c-63 0-114-51-114-114z" fill="#F8EFD6"/>
+  <g>
+    <ellipse cx="255" cy="104" rx="22" ry="16" fill="#E75757"/>
+    <ellipse cx="312" cy="118" rx="22" ry="16" fill="#FFD166" transform="rotate(20 312 118)"/>
+    <ellipse cx="363" cy="154" rx="22" ry="16" fill="#73C66D" transform="rotate(43 363 154)"/>
+    <ellipse cx="401" cy="210" rx="22" ry="16" fill="#42B7D6" transform="rotate(72 401 210)"/>
+    <ellipse cx="420" cy="272" rx="22" ry="16" fill="#7B4E83" transform="rotate(90 420 272)"/>
+    <ellipse cx="401" cy="334" rx="22" ry="16" fill="#E75757" transform="rotate(112 401 334)"/>
+    <ellipse cx="360" cy="390" rx="22" ry="16" fill="#FFD166" transform="rotate(136 360 390)"/>
+    <ellipse cx="306" cy="426" rx="22" ry="16" fill="#73C66D" transform="rotate(160 306 426)"/>
+    <ellipse cx="250" cy="436" rx="22" ry="16" fill="#42B7D6"/>
+    <ellipse cx="194" cy="422" rx="22" ry="16" fill="#7B4E83" transform="rotate(20 194 422)"/>
+    <ellipse cx="140" cy="386" rx="22" ry="16" fill="#E75757" transform="rotate(43 140 386)"/>
+    <ellipse cx="101" cy="328" rx="22" ry="16" fill="#FFD166" transform="rotate(72 101 328)"/>
+    <ellipse cx="92" cy="266" rx="22" ry="16" fill="#73C66D" transform="rotate(90 92 266)"/>
+    <ellipse cx="110" cy="203" rx="22" ry="16" fill="#42B7D6" transform="rotate(112 110 203)"/>
+    <ellipse cx="153" cy="148" rx="22" ry="16" fill="#7B4E83" transform="rotate(136 153 148)"/>
+    <ellipse cx="207" cy="115" rx="22" ry="16" fill="#E75757" transform="rotate(160 207 115)"/>
+  </g>
+  <path d="M96 270c0-86 70-156 156-156h8c86 0 156 70 156 156s-70 156-156 156h-8c-86 0-156-70-156-156z" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-dasharray="1 20" stroke-linecap="round" opacity=".8"/>
+  <g fill="#243856" stroke="#243856" stroke-width="4" stroke-linecap="round">
+    <g transform="translate(334 416) rotate(-160)"><circle cx="0" cy="0" r="9"/><circle cx="15" cy="0" r="8"/><circle cx="29" cy="0" r="7"/><path d="M8 7l-7 13M18 7v14M30 6l12 9M8-7L-3-18M18-7v-14M30-6l12-9"/></g>
+    <g transform="translate(126 198) rotate(-55) scale(.82)"><circle cx="0" cy="0" r="9"/><circle cx="15" cy="0" r="8"/><circle cx="29" cy="0" r="7"/><path d="M8 7l-7 13M18 7v14M30 6l12 9M8-7L-3-18M18-7v-14M30-6l12-9"/></g>
+  </g>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="一直回来-年轮归线">
+  <defs>
+    <linearGradient id="ringBg" x1="74" y1="44" x2="452" y2="496" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F4E7C5"/>
+      <stop offset=".52" stop-color="#D6A66F"/>
+      <stop offset="1" stop-color="#506A5A"/>
+    </linearGradient>
+    <radialGradient id="wood" cx="256" cy="260" r="190" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFE9B7"/>
+      <stop offset=".42" stop-color="#D79A55"/>
+      <stop offset="1" stop-color="#855A3A"/>
+    </radialGradient>
+    <filter id="ringShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#3C2B25" flood-opacity=".24"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="72" fill="url(#ringBg)"/>
+  <circle cx="256" cy="260" r="176" fill="url(#wood)" filter="url(#ringShadow)"/>
+  <g fill="none" stroke="#5A3627" stroke-linecap="round" opacity=".38">
+    <path d="M256 142c74 3 121 45 129 101c9 67-49 124-126 124c-72 0-125-42-132-99c-9-71 54-123 129-126z" stroke-width="8"/>
+    <path d="M258 178c52 1 86 32 91 72c5 43-35 82-90 82c-51 0-88-30-93-72c-5-48 38-80 92-82z" stroke-width="7"/>
+    <path d="M256 215c30 0 54 18 57 42c3 28-21 51-55 51c-31 0-55-18-58-43c-3-28 23-50 56-50z" stroke-width="6"/>
+  </g>
+  <path d="M121 283c58-92 151-129 225-82c60 38 62 111 5 152c-50 36-132 33-179-11" fill="none" stroke="#FFF1C2" stroke-width="13" stroke-linecap="round" stroke-dasharray="2 27"/>
+  <path d="M172 342l-42-1l23-35" fill="none" stroke="#FFF1C2" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#243856">
+    <path d="M192 128c12 11 26 18 41 21c-16 3-31 0-44-7c-14 7-29 10-45 7c15-3 29-10 41-21c2-2 5-2 7 0z"/>
+    <path d="M291 127c10 10 22 16 35 18c-14 3-27 1-39-6c-12 7-25 9-39 6c14-2 25-8 35-18c2-2 6-2 8 0z"/>
+  </g>
+</svg>

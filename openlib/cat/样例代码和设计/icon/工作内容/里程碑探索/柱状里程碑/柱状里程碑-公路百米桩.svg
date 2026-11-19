@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="柱状里程碑 公路百米桩">
+  <defs>
+    <linearGradient id="hundredMeterBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F1F5F9"/>
+      <stop offset="1" stop-color="#E0F2FE"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#hundredMeterBg)"/>
+  <path d="M24 104c17-25 36-41 58-55s28-20 35-30" fill="none" stroke="#1E293B" stroke-width="14" stroke-linecap="round"/>
+  <path d="M24 104c17-25 36-41 58-55s28-20 35-30" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 11"/>
+  <path d="M57 36h31v68H57z" fill="#F8FAFC" stroke="#475569" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M57 51h31" stroke="#EF4444" stroke-width="10"/>
+  <text x="72.5" y="79" font-family="Arial, sans-serif" font-size="22" font-weight="900" text-anchor="middle" fill="#334155">3</text>
+  <text x="72.5" y="94" font-family="Arial, sans-serif" font-size="8" font-weight="900" text-anchor="middle" fill="#64748B">100m</text>
+  <path d="M52 105h41" stroke="#475569" stroke-width="6" stroke-linecap="round"/>
+</svg>

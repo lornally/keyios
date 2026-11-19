@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="导引图里程碑 航海灯塔节点">
+  <defs>
+    <linearGradient id="lighthouseWaypointBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#CFFAFE"/>
+      <stop offset="1" stop-color="#DBEAFE"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#lighthouseWaypointBg)"/>
+  <path d="M21 83c18-19 32-19 48-27s27-22 40-14" fill="none" stroke="#0284C7" stroke-width="7" stroke-linecap="round" stroke-dasharray="8 9"/>
+  <path d="M65 43h28l-5 62H70z" fill="#F8FAFC" stroke="#334155" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M69 60h21" stroke="#EF4444" stroke-width="8"/>
+  <path d="M71 78h17" stroke="#EF4444" stroke-width="8"/>
+  <path d="M73 31h12l6 12H67z" fill="#FACC15" stroke="#92400E" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M33 91c11 5 20 5 31 0s21-5 31 0" fill="none" stroke="#0EA5E9" stroke-width="5" stroke-linecap="round"/>
+  <path d="M79 25v-8" stroke="#92400E" stroke-width="4" stroke-linecap="round"/>
+</svg>

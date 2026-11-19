@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="路边距离牌 目的地 5km">
+  <defs>
+    <linearGradient id="dest5Bg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F0FDFA"/>
+      <stop offset="1" stop-color="#E0F2FE"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#dest5Bg)"/>
+  <path d="M28 102V77M100 102V77" stroke="#475569" stroke-width="7" stroke-linecap="round"/>
+  <rect x="17" y="29" width="94" height="53" rx="8" fill="#0F766E" stroke="#134E4A" stroke-width="5"/>
+  <path d="M31 56h20M43 46l10 10l-10 10" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="79" y="55" font-family="Arial, sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#FFFFFF">目的地</text>
+  <text x="79" y="72" font-family="Arial, sans-serif" font-size="12" font-weight="800" text-anchor="middle" fill="#CCFBF1">5 km</text>
+  <path d="M22 94h84" stroke="#64748B" stroke-width="8" stroke-linecap="round"/>
+</svg>

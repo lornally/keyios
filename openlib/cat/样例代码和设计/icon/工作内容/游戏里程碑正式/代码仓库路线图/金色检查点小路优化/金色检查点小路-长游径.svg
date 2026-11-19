@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="金色检查点小路 长游径">
+  <defs>
+    <linearGradient id="goldPathTrailBg" x1="14" y1="14" x2="114" y2="114" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F0FDF4"/>
+      <stop offset=".55" stop-color="#ECFEFF"/>
+      <stop offset="1" stop-color="#FFF7ED"/>
+    </linearGradient>
+    <linearGradient id="goldPathTrailLine" x1="20" y1="99" x2="104" y2="31" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#10B981"/>
+      <stop offset=".3" stop-color="#22D3EE"/>
+      <stop offset=".68" stop-color="#A78BFA"/>
+      <stop offset="1" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#goldPathTrailBg)"/>
+  <path d="M20 99C27 84 43 91 48 76C52 64 37 61 40 49C44 35 61 38 68 48C77 61 58 72 68 84C78 96 101 87 100 67C99 51 84 48 90 36C94 28 102 28 108 34" fill="none" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round"/>
+  <path d="M20 99C27 84 43 91 48 76C52 64 37 61 40 49C44 35 61 38 68 48C77 61 58 72 68 84C78 96 101 87 100 67C99 51 84 48 90 36C94 28 102 28 108 34" fill="none" stroke="url(#goldPathTrailLine)" stroke-width="10" stroke-linecap="round"/>
+  <path d="M20 99C27 84 43 91 48 76C52 64 37 61 40 49C44 35 61 38 68 48C77 61 58 72 68 84C78 96 101 87 100 67C99 51 84 48 90 36C94 28 102 28 108 34" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 10" opacity=".7"/>
+  <circle cx="20" cy="99" r="8" fill="#FFFFFF" stroke="#10B981" stroke-width="4"/>
+  <circle cx="48" cy="76" r="7" fill="#FFFFFF" stroke="#22D3EE" stroke-width="4"/>
+  <circle cx="68" cy="48" r="7" fill="#FFFFFF" stroke="#A78BFA" stroke-width="4"/>
+  <circle cx="68" cy="84" r="7" fill="#FFFFFF" stroke="#F97316" stroke-width="4"/>
+  <circle cx="108" cy="34" r="18" fill="#FFFFFF" stroke="#D97706" stroke-width="5"/>
+  <circle cx="108" cy="34" r="7" fill="#FACC15" stroke="#92400E" stroke-width="3"/>
+  <path d="M108 9v10M108 50v10M82 34h10M124 34h-5" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
+</svg>

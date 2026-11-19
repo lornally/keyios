@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="柱状里程碑 矮圆桩">
+  <defs>
+    <linearGradient id="shortBollardBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ECFDF5"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </linearGradient>
+    <linearGradient id="shortBollardBody" x1="56" y1="48" x2="93" y2="108" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#CBD5E1"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#shortBollardBg)"/>
+  <path d="M18 98c20-29 46-38 91-52" fill="none" stroke="#1E293B" stroke-width="15" stroke-linecap="round"/>
+  <path d="M18 98c20-29 46-38 91-52" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 11"/>
+  <ellipse cx="76" cy="54" rx="19" ry="8" fill="#F8FAFC" stroke="#475569" stroke-width="4"/>
+  <path d="M57 54v43c0 5 9 9 19 9s19-4 19-9V54" fill="url(#shortBollardBody)" stroke="#475569" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M58 67h36" stroke="#EF4444" stroke-width="9"/>
+  <text x="76" y="92" font-family="Arial, sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#334155">7</text>
+</svg>

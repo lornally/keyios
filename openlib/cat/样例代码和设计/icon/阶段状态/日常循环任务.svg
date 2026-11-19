@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="4 4 120 120" width="120" height="120" role="img" aria-label="日常循环任务">
+  <defs>
+    <linearGradient id="dailyRing" x1="18" y1="20" x2="110" y2="108" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22C55E"/>
+      <stop offset=".48" stop-color="#38BDF8"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="dailySun" x1="38" y1="24" x2="67" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FDE68A"/>
+      <stop offset="1" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+  <path d="M94 27a46 46 0 0 1-9 78" fill="none" stroke="url(#dailyRing)" stroke-width="12" stroke-linecap="round"/>
+  <path d="M35 101a46 46 0 0 1 4-75" fill="none" stroke="url(#dailyRing)" stroke-width="12" stroke-linecap="round"/>
+  <path d="M78 103h15l-7 13" fill="#8B5CF6"/>
+  <path d="M50 25H35l8-13" fill="#22C55E"/>
+  <circle cx="52" cy="42" r="16" fill="url(#dailySun)"/>
+  <path d="M82 31c-8 6-9 19-1 27c8 8 21 7 27-1c-6 16-28 20-40 8c-12-12-8-34 14-34z" fill="#7C3AED"/>
+  <path d="M30 74h22l-4 28H34z" fill="#67E8F9"/>
+  <path d="M29 74h24" stroke="#0891B2" stroke-width="6" stroke-linecap="round"/>
+  <path d="M68 87c4 11 29 11 33 0z" fill="#FB923C"/>
+  <path d="M68 86h33" stroke="#EA580C" stroke-width="6" stroke-linecap="round"/>
+</svg>

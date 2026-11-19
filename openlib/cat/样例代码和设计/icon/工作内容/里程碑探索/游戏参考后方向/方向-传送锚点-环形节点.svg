@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="传送锚点 环形节点">
+  <defs>
+    <radialGradient id="ringAnchorBg" cx="50%" cy="45%" r="64%">
+      <stop offset="0" stop-color="#CFFAFE"/>
+      <stop offset=".7" stop-color="#E0F2FE"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </radialGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#ringAnchorBg)"/>
+  <circle cx="64" cy="60" r="34" fill="#E0F2FE" stroke="#0369A1" stroke-width="5"/>
+  <circle cx="64" cy="60" r="18" fill="#FFFFFF" stroke="#0EA5E9" stroke-width="5"/>
+  <path d="M64 20v16M64 84v18M24 60h16M88 60h16" stroke="#38BDF8" stroke-width="5" stroke-linecap="round"/>
+  <path d="M51 60l8 8l18-20" fill="none" stroke="#0284C7" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M42 102h44" stroke="#0369A1" stroke-width="8" stroke-linecap="round"/>
+</svg>

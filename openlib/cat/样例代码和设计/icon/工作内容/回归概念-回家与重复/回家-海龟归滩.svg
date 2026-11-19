@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="回家-海龟归滩">
+  <defs>
+    <linearGradient id="bg" x1="66" y1="24" x2="446" y2="502" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FCE0A6"/>
+      <stop offset=".5" stop-color="#83D2CF"/>
+      <stop offset="1" stop-color="#315E8A"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="72" fill="url(#bg)"/>
+  <path d="M0 292c77-38 147-39 211-2c71 41 151 38 241-9c21-11 41-17 60-19v250H0z" fill="#2AA3A3"/>
+  <path d="M0 382c71-34 142-37 212-8c79 32 158 25 239-23c21-12 41-20 61-23v184H0z" fill="#F4D7A1"/>
+  <path d="M85 407c70-67 148-88 235-63" fill="none" stroke="#FFF6D7" stroke-width="11" stroke-linecap="round" stroke-dasharray="2 24"/>
+  <path d="M320 344l-42-12l31-30" fill="none" stroke="#FFF6D7" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  <g transform="translate(177 396) rotate(-15)">
+    <ellipse cx="0" cy="0" rx="66" ry="45" fill="#3E9B5D"/>
+    <path d="M-36-22c26 16 50 16 72 0M-40 0h80M-28 24c20-10 40-10 56 0" stroke="#24633F" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="73" cy="-4" r="22" fill="#3E9B5D"/>
+    <path d="M-62-15l-32-24M-58 20l-35 20M36-34l27-26M43 30l31 24" stroke="#3E9B5D" stroke-width="16" stroke-linecap="round"/>
+    <circle cx="81" cy="-10" r="4" fill="#243856"/>
+  </g>
+  <g fill="#FFF6D7" opacity=".75">
+    <circle cx="330" cy="418" r="10"/><circle cx="360" cy="400" r="8"/><circle cx="390" cy="388" r="6"/>
+  </g>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="导引图里程碑 导游景点">
+  <defs>
+    <linearGradient id="tourMapBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#DCFCE7"/>
+      <stop offset="1" stop-color="#DBEAFE"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#tourMapBg)"/>
+  <path d="M25 39l26-10l27 10l25-10v60l-25 10l-27-10l-26 10z" fill="#FFFFFF" stroke="#475569" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M51 29v60M78 39v60" stroke="#CBD5E1" stroke-width="4"/>
+  <path d="M34 80c17-23 38 2 59-25" fill="none" stroke="#16A34A" stroke-width="6" stroke-linecap="round"/>
+  <path d="M34 80c17-23 38 2 59-25" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="5 7"/>
+  <path d="M76 79c-13-18-19-30-19-39c0-11 9-20 19-20s19 9 19 20c0 9-6 21-19 39z" fill="#EF4444" stroke="#991B1B" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M68 43h16M70 51h12" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="76" cy="39" r="6" fill="#FFFFFF"/>
+</svg>

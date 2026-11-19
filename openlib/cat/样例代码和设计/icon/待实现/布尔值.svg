@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 8 112 112" width="112" height="112" role="img" aria-label="布尔值">
+  <rect x="13" y="27" width="102" height="74" rx="37" fill="#CBD5E1"/>
+  <rect x="13" y="27" width="52" height="74" rx="26" fill="#22C55E"/>
+  <rect x="63" y="27" width="52" height="74" rx="26" fill="#EF4444"/>
+  <path d="M31 63l10 11l18-25" fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M81 51l18 26M99 51L81 77" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="路边距离牌 景点 2km">
+  <defs>
+    <linearGradient id="scenic2kmBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E0F2FE"/>
+      <stop offset="1" stop-color="#ECFDF5"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#scenic2kmBg)"/>
+  <path d="M32 100V74M96 100V74" stroke="#475569" stroke-width="7" stroke-linecap="round"/>
+  <rect x="18" y="30" width="92" height="48" rx="7" fill="#92400E" stroke="#451A03" stroke-width="5"/>
+  <path d="M30 64l16-20l11 14l10-12l19 18z" fill="#FEF3C7"/>
+  <circle cx="82" cy="43" r="6" fill="#FDE68A"/>
+  <text x="69" y="59" font-family="Arial, sans-serif" font-size="16" font-weight="900" fill="#FFFFFF">景点</text>
+  <text x="68" y="73" font-family="Arial, sans-serif" font-size="11" font-weight="800" fill="#FEF3C7">2 km</text>
+  <path d="M23 88h82" stroke="#64748B" stroke-width="8" stroke-linecap="round"/>
+</svg>

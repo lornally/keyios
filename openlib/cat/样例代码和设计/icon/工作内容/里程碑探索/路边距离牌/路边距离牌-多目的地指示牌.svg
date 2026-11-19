@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="路边距离牌 多目的地指示牌">
+  <defs>
+    <linearGradient id="multiDestBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#E0F2FE"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#multiDestBg)"/>
+  <path d="M64 105V34" stroke="#475569" stroke-width="8" stroke-linecap="round"/>
+  <path d="M28 30h67l13 13l-13 13H28z" fill="#15803D" stroke="#14532D" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M100 59H33L20 72l13 13h67z" fill="#1D4ED8" stroke="#1E3A8A" stroke-width="4" stroke-linejoin="round"/>
+  <text x="55" y="47" font-family="Arial, sans-serif" font-size="12" font-weight="900" text-anchor="middle" fill="#FFFFFF">出口 500m</text>
+  <text x="67" y="76" font-family="Arial, sans-serif" font-size="12" font-weight="900" text-anchor="middle" fill="#FFFFFF">加油站 1km</text>
+  <path d="M31 98h66" stroke="#64748B" stroke-width="8" stroke-linecap="round"/>
+</svg>

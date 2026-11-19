@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 3 114 109" width="114" height="109" role="img" aria-label="项目">
+  <defs>
+    <linearGradient id="routeD" x1="16" y1="104" x2="97" y2="26" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22C55E"/>
+      <stop offset=".5" stop-color="#2DD4BF"/>
+      <stop offset="1" stop-color="#0284C7"/>
+    </linearGradient>
+  </defs>
+  <path d="M16 104H82C106 104 106 72 82 72H47C23 72 23 45 47 45H90C111 45 111 28 97 28" fill="none" stroke="url(#routeD)" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="16" cy="104" r="8" fill="#16A34A"/>
+  <path d="M77 10h40v31H77z" fill="#0891B2"/>
+  <path d="M97 41v18" stroke="#0891B2" stroke-width="9" stroke-linecap="round"/>
+  <path d="M87 26h20" stroke="#ECFEFF" stroke-width="7" stroke-linecap="round"/>
+</svg>

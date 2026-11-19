@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="重复-跑道十圈">
+  <rect width="512" height="512" rx="72" fill="#DDEBE7"/>
+  <path d="M72 260c0-96 78-174 174-174h20c96 0 174 78 174 174s-78 174-174 174h-20c-96 0-174-78-174-174z" fill="#C94A58"/>
+  <path d="M122 260c0-69 56-124 124-124h20c69 0 124 56 124 124s-56 124-124 124h-20c-69 0-124-56-124-124z" fill="#F6F0E2"/>
+  <path d="M164 260c0-46 37-82 82-82h20c46 0 82 37 82 82s-37 82-82 82h-20c-46 0-82-37-82-82z" fill="#B7D8D0"/>
+  <g fill="none" stroke="#F9E6B7" stroke-linecap="round">
+    <path d="M96 260c0-83 67-150 150-150h20c83 0 150 67 150 150s-67 150-150 150h-20c-83 0-150-67-150-150z" stroke-width="7"/>
+    <path d="M144 260c0-56 46-102 102-102h20c56 0 102 46 102 102s-46 102-102 102h-20c-56 0-102-46-102-102z" stroke-width="7"/>
+    <path d="M193 260c0-29 24-54 54-54h18c29 0 54 24 54 54s-24 54-54 54h-18c-29 0-54-24-54-54z" stroke-width="6"/>
+  </g>
+  <path d="M252 88v76" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round"/>
+  <g fill="#243856">
+    <circle cx="100" cy="184" r="6"/><circle cx="112" cy="164" r="5"/><circle cx="128" cy="146" r="4"/>
+    <circle cx="411" cy="336" r="6"/><circle cx="398" cy="358" r="5"/><circle cx="382" cy="376" r="4"/>
+  </g>
+  <path d="M312 418l32-31l12 43" fill="none" stroke="#FFD166" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

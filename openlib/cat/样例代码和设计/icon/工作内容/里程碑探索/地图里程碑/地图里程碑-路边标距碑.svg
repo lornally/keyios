@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="地图里程碑 路边标距碑">
+  <defs>
+    <linearGradient id="mapMilestoneRoadsideBg" x1="14" y1="12" x2="114" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E0F2FE"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </linearGradient>
+    <linearGradient id="mapMilestoneRoadsideStone" x1="60" y1="31" x2="95" y2="103" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#CBD5E1"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#mapMilestoneRoadsideBg)"/>
+  <path d="M18 105c19-28 36-42 61-59c13-9 22-17 30-28" fill="none" stroke="#1E293B" stroke-width="15" stroke-linecap="round"/>
+  <path d="M18 105c19-28 36-42 61-59c13-9 22-17 30-28" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 12"/>
+  <path d="M82 39c-11 0-20 9-20 20v43h40V59c0-11-9-20-20-20z" fill="url(#mapMilestoneRoadsideStone)" stroke="#475569" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M60 102h45" stroke="#475569" stroke-width="6" stroke-linecap="round"/>
+  <path d="M64 59h36" stroke="#EF4444" stroke-width="9"/>
+  <text x="82" y="82" font-family="Arial, sans-serif" font-size="16" font-weight="900" text-anchor="middle" fill="#334155">20</text>
+  <path d="M77 92h10" stroke="#64748B" stroke-width="3" stroke-linecap="round"/>
+</svg>

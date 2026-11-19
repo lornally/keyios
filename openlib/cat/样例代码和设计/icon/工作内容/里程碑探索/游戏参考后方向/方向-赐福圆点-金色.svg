@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="赐福圆点 金色">
+  <defs>
+    <radialGradient id="goldGraceBg" cx="50%" cy="48%" r="62%">
+      <stop offset="0" stop-color="#FEF3C7"/>
+      <stop offset=".6" stop-color="#FFFBEB"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </radialGradient>
+    <filter id="goldGraceGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#goldGraceBg)"/>
+  <circle cx="64" cy="64" r="30" fill="#FACC15" opacity=".45" filter="url(#goldGraceGlow)"/>
+  <circle cx="64" cy="64" r="24" fill="#FFFFFF" stroke="#D97706" stroke-width="5"/>
+  <circle cx="64" cy="64" r="10" fill="#FACC15" stroke="#92400E" stroke-width="4"/>
+  <path d="M64 24v15M64 89v15M24 64h15M89 64h15" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/>
+  <path d="M42 86c16 9 28 9 44 0" fill="none" stroke="#D97706" stroke-width="5" stroke-linecap="round"/>
+</svg>

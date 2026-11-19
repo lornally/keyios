@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="游戏目的地 观景塔">
+  <defs>
+    <linearGradient id="viewpointTowerBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#DBEAFE"/>
+      <stop offset="1" stop-color="#DCFCE7"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#viewpointTowerBg)"/>
+  <path d="M18 101l28-42l17 23l21-35l27 54z" fill="#BBF7D0" stroke="#16A34A" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M49 103l12-55h14l12 55" fill="#F8FAFC" stroke="#475569" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M52 68h32M55 83h26" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+  <path d="M44 41h48v13H44z" fill="#F8FAFC" stroke="#475569" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M53 29h30l7 12H46z" fill="#94A3B8" stroke="#475569" stroke-width="4" stroke-linejoin="round"/>
+  <circle cx="68" cy="34" r="5" fill="#FACC15" stroke="#92400E" stroke-width="3"/>
+  <path d="M34 103h68" stroke="#475569" stroke-width="6" stroke-linecap="round"/>
+</svg>

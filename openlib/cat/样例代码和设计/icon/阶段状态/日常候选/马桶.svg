@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 12 112 104" width="112" height="104" role="img" aria-label="马桶">
+  <path d="M18 18h39c5 0 9 4 9 9v31H18z" fill="#BAE6FD"/>
+  <path d="M25 18h8v-6h38v15H57" fill="#E0F2FE"/>
+  <path d="M59 52h42c9 0 15 6 15 14c0 24-20 43-48 43H45c-15 0-26-11-26-26V58h40z" fill="#38BDF8"/>
+  <path d="M53 58h48c7 0 11 4 11 9c0 8-10 14-25 14H59c-11 0-17-6-17-14c0-5 4-9 11-9z" fill="#E0F2FE"/>
+  <path d="M60 82h30c-4 10-13 16-26 16h-8c-8 0-14-5-14-12v-7c5 2 11 3 18 3z" fill="#0284C7" opacity=".38"/>
+  <path d="M48 103h35l10 13H37z" fill="#0284C7"/>
+  <path d="M24 31h18" stroke="#0EA5E9" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="55" cy="33" r="4" fill="#0891B2"/>
+</svg>

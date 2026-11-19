@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 8 112 112" width="112" height="112" role="img" aria-label="网络">
+  <path d="M31 33l33-12l35 25M31 33l11 55l57-42M42 88l52 15M64 21l-22 67M99 46l-5 57" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="31" cy="33" r="14" fill="#2563EB"/>
+  <circle cx="64" cy="21" r="13" fill="#14B8A6"/>
+  <circle cx="99" cy="46" r="14" fill="#F97316"/>
+  <circle cx="42" cy="88" r="14" fill="#22C55E"/>
+  <circle cx="94" cy="103" r="13" fill="#A78BFA"/>
+  <g fill="#FFFFFF"><circle cx="31" cy="33" r="5"/><circle cx="64" cy="21" r="5"/><circle cx="99" cy="46" r="5"/><circle cx="42" cy="88" r="5"/><circle cx="94" cy="103" r="5"/></g>
+</svg>

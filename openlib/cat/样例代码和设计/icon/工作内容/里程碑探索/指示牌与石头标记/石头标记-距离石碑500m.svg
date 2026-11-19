@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="石头标记 距离石碑 500m">
+  <defs>
+    <linearGradient id="distanceStone500Bg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FEF3C7"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </linearGradient>
+    <linearGradient id="distanceStone500Body" x1="37" y1="24" x2="93" y2="107" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#D1D5DB"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#distanceStone500Bg)"/>
+  <path d="M64 26c-17 0-30 13-30 30v49h60V56c0-17-13-30-30-30z" fill="url(#distanceStone500Body)" stroke="#334155" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M28 105h72" stroke="#334155" stroke-width="7" stroke-linecap="round"/>
+  <path d="M47 55h34" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
+  <text x="64" y="78" font-family="Arial, sans-serif" font-size="18" font-weight="900" text-anchor="middle" fill="#334155">500m</text>
+  <path d="M50 90h28" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
+  <path d="M23 93c13-15 29-21 48-19" fill="none" stroke="#F97316" stroke-width="5" stroke-linecap="round" stroke-dasharray="7 8"/>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="糖果跑道-蜡笔涂鸦">
+  <rect width="512" height="512" rx="72" fill="#FFF4D8"/>
+  <path d="M74 266c0-99 80-179 179-179h6c99 0 179 80 179 179s-80 179-179 179h-6c-99 0-179-80-179-179z" fill="none" stroke="#F08A6B" stroke-width="33" stroke-linecap="round" stroke-dasharray="18 10"/>
+  <path d="M96 266c0-86 70-156 156-156h8c86 0 156 70 156 156s-70 156-156 156h-8c-86 0-156-70-156-156z" fill="none" stroke="#FFD166" stroke-width="26" stroke-linecap="round" stroke-dasharray="16 12"/>
+  <path d="M126 266c0-69 56-126 126-126h8c69 0 126 56 126 126s-56 126-126 126h-8c-69 0-126-56-126-126z" fill="none" stroke="#73C66D" stroke-width="18" stroke-linecap="round" stroke-dasharray="14 12"/>
+  <path d="M164 266c0-49 40-88 88-88h8c49 0 88 40 88 88s-40 88-88 88h-8c-49 0-88-40-88-88z" fill="#FFF4D8"/>
+  <g stroke-linecap="round" opacity=".45">
+    <path d="M96 128l48 22" stroke="#7B4E83" stroke-width="7"/>
+    <path d="M393 145l-38 32" stroke="#42B7D6" stroke-width="7"/>
+    <path d="M110 390l47-31" stroke="#E75757" stroke-width="7"/>
+    <path d="M380 395l-46-24" stroke="#73C66D" stroke-width="7"/>
+  </g>
+  <g fill="#243856" stroke="#243856" stroke-width="4" stroke-linecap="round">
+    <g transform="translate(188 129) rotate(18)"><circle cx="0" cy="0" r="9"/><circle cx="15" cy="0" r="8"/><circle cx="29" cy="0" r="7"/><path d="M8 7l-7 13M18 7v14M30 6l12 9M8-7L-3-18M18-7v-14M30-6l12-9"/></g>
+    <g transform="translate(374 270) rotate(92) scale(.86)"><circle cx="0" cy="0" r="9"/><circle cx="15" cy="0" r="8"/><circle cx="29" cy="0" r="7"/><path d="M8 7l-7 13M18 7v14M30 6l12 9M8-7L-3-18M18-7v-14M30-6l12-9"/></g>
+  </g>
+</svg>

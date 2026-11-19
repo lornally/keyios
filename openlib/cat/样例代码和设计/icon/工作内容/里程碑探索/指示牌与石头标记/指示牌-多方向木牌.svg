@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="指示牌 多方向木牌">
+  <defs>
+    <linearGradient id="woodSignBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ECFDF5"/>
+      <stop offset="1" stop-color="#FEF3C7"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#woodSignBg)"/>
+  <path d="M64 104V28" stroke="#7C2D12" stroke-width="8" stroke-linecap="round"/>
+  <path d="M31 29h48l11 11l-11 11H31z" fill="#D97706" stroke="#92400E" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M97 55H49L38 66l11 11h48z" fill="#B45309" stroke="#7C2D12" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M35 40h36M57 66h30" stroke="#FFF7ED" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="64" cy="52" r="4" fill="#451A03"/>
+  <path d="M31 105h66" stroke="#64748B" stroke-width="8" stroke-linecap="round"/>
+</svg>

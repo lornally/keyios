@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#334155" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="项目 节点树">
+  <circle cx="12" cy="5.5" r="2" />
+  <circle cx="6.5" cy="17" r="2" />
+  <circle cx="17.5" cy="17" r="2" />
+  <path d="M12 7.5v3" />
+  <path d="M12 10.5H6.5v4.5" />
+  <path d="M12 10.5h5.5v4.5" />
+</svg>

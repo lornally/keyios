@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 8 112 112" width="112" height="112" role="img" aria-label="分析">
+  <rect x="16" y="14" width="72" height="86" rx="10" fill="#DBEAFE" stroke="#60A5FA" stroke-width="7"/>
+  <path d="M32 78V58M51 78V43M70 78V65" stroke="#2563EB" stroke-width="9" stroke-linecap="round"/>
+  <path d="M30 84h46" stroke="#93C5FD" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="78" cy="78" r="21" fill="#FFFFFF" fill-opacity=".82" stroke="#F97316" stroke-width="8"/>
+  <path d="M94 94l18 18" stroke="#EA580C" stroke-width="10" stroke-linecap="round"/>
+</svg>

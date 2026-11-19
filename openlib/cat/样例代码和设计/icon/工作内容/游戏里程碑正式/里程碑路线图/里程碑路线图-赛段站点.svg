@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="里程碑路线图 赛段站点">
+  <defs>
+    <linearGradient id="routeStageBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FEF3C7"/>
+      <stop offset="1" stop-color="#FEE2E2"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#routeStageBg)"/>
+  <path d="M24 91h19c10 0 15-5 15-13s-5-13-15-13h-6c-9 0-14-5-14-12s5-12 14-12h42" fill="none" stroke="#111827" stroke-width="10" stroke-linecap="round"/>
+  <path d="M24 91h19c10 0 15-5 15-13s-5-13-15-13h-6c-9 0-14-5-14-12s5-12 14-12h42" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 9"/>
+  <circle cx="24" cy="91" r="8" fill="#FFFFFF" stroke="#F97316" stroke-width="4"/>
+  <circle cx="23" cy="53" r="8" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="4"/>
+  <circle cx="89" cy="41" r="18" fill="#FFFFFF" stroke="#EF4444" stroke-width="5"/>
+  <text x="89" y="47" font-family="Arial, sans-serif" font-size="16" font-weight="900" text-anchor="middle" fill="#EF4444">S3</text>
+  <path d="M105 43v33" stroke="#111827" stroke-width="5" stroke-linecap="round"/>
+  <path d="M105 44h18v18h-18z" fill="#FFFFFF" stroke="#111827" stroke-width="4"/>
+  <path d="M105 53h18M114 44v18" stroke="#111827" stroke-width="3"/>
+</svg>

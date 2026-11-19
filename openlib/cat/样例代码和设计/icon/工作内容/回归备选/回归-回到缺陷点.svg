@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#334155" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="回归-回到缺陷点">
+  <path d="M8.2 7H14a5.8 5.8 0 1 1-4.1 9.9" />
+  <path d="M8.2 7l3-3" />
+  <path d="M8.2 7l3 3" />
+  <path d="M7.2 15.2l3 3" />
+  <path d="M10.2 15.2l-3 3" />
+  <path d="M6 5.2h-.8a1.7 1.7 0 0 0-1.7 1.7v.8" />
+  <path d="M18 18.8h.8a1.7 1.7 0 0 0 1.7-1.7v-.8" />
+</svg>

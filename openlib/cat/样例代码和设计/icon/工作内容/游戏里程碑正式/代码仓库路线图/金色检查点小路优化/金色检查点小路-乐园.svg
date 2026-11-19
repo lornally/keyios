@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="金色检查点小路 乐园">
+  <defs>
+    <linearGradient id="goldPathParkBg" x1="14" y1="14" x2="114" y2="114" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF7ED"/>
+      <stop offset=".5" stop-color="#ECFDF5"/>
+      <stop offset="1" stop-color="#E0F2FE"/>
+    </linearGradient>
+    <linearGradient id="goldPathParkLine" x1="22" y1="94" x2="102" y2="42" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FB7185"/>
+      <stop offset=".38" stop-color="#FBBF24"/>
+      <stop offset=".7" stop-color="#34D399"/>
+      <stop offset="1" stop-color="#60A5FA"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#goldPathParkBg)"/>
+  <path d="M22 94C38 96 49 86 45 74C41 60 26 55 35 42C45 27 69 32 71 48C73 67 94 59 100 43" fill="none" stroke="#FFFFFF" stroke-width="20" stroke-linecap="round"/>
+  <path d="M22 94C38 96 49 86 45 74C41 60 26 55 35 42C45 27 69 32 71 48C73 67 94 59 100 43" fill="none" stroke="url(#goldPathParkLine)" stroke-width="12" stroke-linecap="round"/>
+  <path d="M22 94C38 96 49 86 45 74C41 60 26 55 35 42C45 27 69 32 71 48C73 67 94 59 100 43" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="3 11" opacity=".82"/>
+  <circle cx="22" cy="94" r="8" fill="#FFFFFF" stroke="#FB7185" stroke-width="4"/>
+  <circle cx="45" cy="74" r="7" fill="#FFFFFF" stroke="#F59E0B" stroke-width="4"/>
+  <circle cx="35" cy="42" r="7" fill="#FFFFFF" stroke="#22C55E" stroke-width="4"/>
+  <circle cx="71" cy="48" r="7" fill="#FFFFFF" stroke="#60A5FA" stroke-width="4"/>
+  <circle cx="100" cy="43" r="18" fill="#FFFFFF" stroke="#D97706" stroke-width="5"/>
+  <circle cx="100" cy="43" r="7" fill="#FACC15" stroke="#92400E" stroke-width="3"/>
+  <path d="M100 17v11M100 59v11M73 43h11M116 43h-5" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
+</svg>

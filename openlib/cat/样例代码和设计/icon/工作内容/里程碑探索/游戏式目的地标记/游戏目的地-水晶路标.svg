@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="游戏目的地 水晶路标">
+  <defs>
+    <linearGradient id="crystalMarkerBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F5F3FF"/>
+      <stop offset="1" stop-color="#ECFEFF"/>
+    </linearGradient>
+    <linearGradient id="crystalMarkerFace" x1="50" y1="18" x2="80" y2="101" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F0FDFA"/>
+      <stop offset=".52" stop-color="#67E8F9"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#crystalMarkerBg)"/>
+  <path d="M64 16l24 25l-10 59H50L40 41z" fill="url(#crystalMarkerFace)" stroke="#4338CA" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M64 16v84M40 41h48M50 100l14-59l14 59" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" opacity=".65"/>
+  <path d="M43 100h42l9 11H34z" fill="#5B21B6" stroke="#4338CA" stroke-width="4" stroke-linejoin="round"/>
+  <circle cx="64" cy="62" r="7" fill="#FFFFFF" opacity=".85"/>
+  <path d="M31 75c9-12 18-17 31-17s23-6 34-20" fill="none" stroke="#22D3EE" stroke-width="5" stroke-linecap="round" stroke-dasharray="6 8"/>
+</svg>

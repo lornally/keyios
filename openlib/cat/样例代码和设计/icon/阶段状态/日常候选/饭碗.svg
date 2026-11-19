@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="7 11 114 106" width="114" height="106" role="img" aria-label="饭碗">
+  <path d="M33 20c-7 9 8 15 0 25" fill="none" stroke="#94A3B8" stroke-width="7" stroke-linecap="round"/>
+  <path d="M59 15c-8 10 9 18 0 30" fill="none" stroke="#94A3B8" stroke-width="7" stroke-linecap="round"/>
+  <path d="M85 20c-7 9 8 15 0 25" fill="none" stroke="#94A3B8" stroke-width="7" stroke-linecap="round"/>
+  <path d="M20 62c4-15 23-25 44-25s40 10 44 25z" fill="#FFFFFF"/>
+  <path d="M16 62h96c-3 31-22 50-48 50S19 93 16 62z" fill="#FB923C"/>
+  <path d="M20 62h88" stroke="#EA580C" stroke-width="9" stroke-linecap="round"/>
+  <path d="M31 91c17 10 49 10 66 0" fill="none" stroke="#FED7AA" stroke-width="8" stroke-linecap="round"/>
+</svg>

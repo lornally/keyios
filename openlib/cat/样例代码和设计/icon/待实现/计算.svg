@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="7 7 114 114" width="114" height="114" role="img" aria-label="计算">
+  <rect x="13" y="14" width="102" height="100" rx="10" fill="#FDE68A" stroke="#78350F" stroke-width="9"/>
+  <path d="M13 50h102M40 24v80M64 24v80M88 24v80" stroke="#78350F" stroke-width="9" stroke-linecap="round"/>
+  <g fill="#F97316" stroke="#9A3412" stroke-width="4">
+    <ellipse cx="40" cy="33" rx="11" ry="9"/>
+    <ellipse cx="64" cy="33" rx="11" ry="9"/>
+    <ellipse cx="88" cy="33" rx="11" ry="9"/>
+    <ellipse cx="40" cy="72" rx="12" ry="10"/>
+    <ellipse cx="64" cy="89" rx="12" ry="10"/>
+    <ellipse cx="88" cy="72" rx="12" ry="10"/>
+  </g>
+</svg>

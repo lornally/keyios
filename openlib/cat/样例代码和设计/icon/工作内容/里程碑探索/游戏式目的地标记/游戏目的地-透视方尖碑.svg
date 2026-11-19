@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="游戏目的地 透视方尖碑">
+  <defs>
+    <linearGradient id="gameObeliskBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E0F2FE"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </linearGradient>
+    <linearGradient id="gameObeliskFront" x1="53" y1="28" x2="73" y2="101" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#CBD5E1"/>
+    </linearGradient>
+    <linearGradient id="gameObeliskSide" x1="73" y1="28" x2="92" y2="101" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#CBD5E1"/>
+      <stop offset="1" stop-color="#64748B"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#gameObeliskBg)"/>
+  <ellipse cx="68" cy="105" rx="38" ry="7" fill="#0F172A" opacity=".16"/>
+  <path d="M64 19l-11 23h20z" fill="#F8FAFC" stroke="#475569" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M64 19l28 23H73z" fill="#CBD5E1" stroke="#475569" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M53 42h20v58H53z" fill="url(#gameObeliskFront)" stroke="#475569" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M73 42h19v58H73z" fill="url(#gameObeliskSide)" stroke="#475569" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M47 100h53l7 10H40z" fill="#94A3B8" stroke="#475569" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M63 54v31M58 67h10" stroke="#38BDF8" stroke-width="4" stroke-linecap="round"/>
+  <path d="M64 11v-7M50 24l-5-5M82 24l6-5" stroke="#FACC15" stroke-width="4" stroke-linecap="round" opacity=".9"/>
+</svg>

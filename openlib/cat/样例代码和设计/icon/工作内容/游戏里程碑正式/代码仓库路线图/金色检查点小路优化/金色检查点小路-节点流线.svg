@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="金色检查点小路 节点流线">
+  <defs>
+    <linearGradient id="goldPathNodeBg" x1="14" y1="14" x2="114" y2="114" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#EEF2FF"/>
+    </linearGradient>
+    <linearGradient id="goldPathNodeLine" x1="24" y1="94" x2="100" y2="42" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset=".34" stop-color="#7C3AED"/>
+      <stop offset=".66" stop-color="#06B6D4"/>
+      <stop offset="1" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#goldPathNodeBg)"/>
+  <path d="M24 94C36 82 45 87 55 73C65 59 54 47 69 38C82 30 93 36 100 47" fill="none" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round"/>
+  <path d="M24 94C36 82 45 87 55 73C65 59 54 47 69 38C82 30 93 36 100 47" fill="none" stroke="url(#goldPathNodeLine)" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="24" cy="94" r="9" fill="#FFFFFF" stroke="#2563EB" stroke-width="4"/>
+  <circle cx="55" cy="73" r="9" fill="#FFFFFF" stroke="#7C3AED" stroke-width="4"/>
+  <circle cx="69" cy="38" r="9" fill="#FFFFFF" stroke="#06B6D4" stroke-width="4"/>
+  <circle cx="100" cy="47" r="18" fill="#FFFFFF" stroke="#D97706" stroke-width="5"/>
+  <circle cx="100" cy="47" r="7" fill="#FACC15" stroke="#92400E" stroke-width="3"/>
+  <path d="M100 20v11M100 63v11M73 47h11M116 47h-5" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
+</svg>

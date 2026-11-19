@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="重复-钟摆来回">
+  <defs>
+    <linearGradient id="bg" x1="74" y1="28" x2="448" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8EBD1"/>
+      <stop offset=".5" stop-color="#B7D8D0"/>
+      <stop offset="1" stop-color="#647AA3"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="72" fill="url(#bg)"/>
+  <path d="M126 104h260v338H126z" fill="#FFF8E8"/>
+  <path d="M126 164h260M164 104v338M348 104v338" stroke="#D8C39D" stroke-width="9"/>
+  <circle cx="256" cy="144" r="18" fill="#243856"/>
+  <path d="M256 144l-86 178M256 144l86 178" stroke="#243856" stroke-width="9" stroke-linecap="round" opacity=".2"/>
+  <path d="M256 144l-48 202" stroke="#243856" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="208" cy="346" r="34" fill="#E75757"/>
+  <path d="M149 284c39-63 96-95 171-95" fill="none" stroke="#7B4E83" stroke-width="11" stroke-linecap="round" stroke-dasharray="1 24"/>
+  <path d="M320 189l-37-19l36-22" fill="none" stroke="#7B4E83" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M158 392h196" stroke="#243856" stroke-width="12" stroke-linecap="round" opacity=".28"/>
+</svg>

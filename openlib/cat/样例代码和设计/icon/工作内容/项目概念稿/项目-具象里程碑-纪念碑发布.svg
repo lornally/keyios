@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="项目 具象里程碑 纪念碑发布">
+  <defs>
+    <linearGradient id="monumentReleaseBg" x1="14" y1="14" x2="114" y2="114" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF7ED"/>
+      <stop offset=".6" stop-color="#EEF2FF"/>
+      <stop offset="1" stop-color="#ECFDF5"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#monumentReleaseBg)"/>
+  <path d="M64 22l23 22v50H41V44z" fill="#F8FAFC" stroke="#334155" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M36 94h56l8 12H28z" fill="#CBD5E1" stroke="#334155" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M52 48h24M50 61h28M54 74h20" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
+  <path d="M77 25c8 2 14 8 17 16" fill="none" stroke="#F97316" stroke-width="5" stroke-linecap="round"/>
+  <path d="M86 38h18l-5 6l5 6H86z" fill="#F97316"/>
+  <path d="M23 81c16-10 30-11 43-7s25 1 39-12" fill="none" stroke="#2563EB" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="23" cy="81" r="7" fill="#FFFFFF" stroke="#2563EB" stroke-width="4"/>
+  <circle cx="105" cy="62" r="7" fill="#FFFFFF" stroke="#16A34A" stroke-width="4"/>
+</svg>

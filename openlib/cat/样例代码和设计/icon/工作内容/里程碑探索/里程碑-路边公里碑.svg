@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="里程碑 路边公里碑">
+  <defs>
+    <linearGradient id="kmMarkerBg" x1="12" y1="10" x2="116" y2="118" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#DBEAFE"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </linearGradient>
+    <linearGradient id="kmMarkerStone" x1="50" y1="25" x2="88" y2="108" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#CBD5E1"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#kmMarkerBg)"/>
+  <path d="M18 104c14-24 32-41 55-54s31-19 39-31" fill="none" stroke="#1E293B" stroke-width="14" stroke-linecap="round"/>
+  <path d="M18 104c14-24 32-41 55-54s31-19 39-31" fill="none" stroke="#F8FAFC" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 11"/>
+  <path d="M75 31c-12 0-22 10-22 22v52h44V53c0-12-10-22-22-22z" fill="url(#kmMarkerStone)" stroke="#475569" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M52 105h46" stroke="#475569" stroke-width="7" stroke-linecap="round"/>
+  <path d="M56 53h38" stroke="#EF4444" stroke-width="10"/>
+  <text x="75" y="76" font-family="Arial, sans-serif" font-size="18" font-weight="900" text-anchor="middle" fill="#1E293B">42</text>
+  <text x="75" y="91" font-family="Arial, sans-serif" font-size="9" font-weight="800" text-anchor="middle" fill="#64748B">KM</text>
+</svg>

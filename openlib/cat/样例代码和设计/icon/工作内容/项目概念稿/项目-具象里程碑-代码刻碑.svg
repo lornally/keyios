@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="项目 具象里程碑 代码刻碑">
+  <defs>
+    <linearGradient id="codeStoneBg" x1="14" y1="14" x2="114" y2="114" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ECFEFF"/>
+      <stop offset="1" stop-color="#F1F5F9"/>
+    </linearGradient>
+    <linearGradient id="codeStoneBody" x1="37" y1="22" x2="92" y2="105" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#CBD5E1"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#codeStoneBg)"/>
+  <path d="M64 24c-16 0-29 13-29 29v52h58V53c0-16-13-29-29-29z" fill="url(#codeStoneBody)" stroke="#334155" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M29 105h70" stroke="#334155" stroke-width="7" stroke-linecap="round"/>
+  <path d="M51 58l-8 8l8 8M77 58l8 8l-8 8" fill="none" stroke="#2563EB" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M68 53l-8 28" stroke="#0F766E" stroke-width="5" stroke-linecap="round"/>
+  <path d="M48 88h32" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="30" cy="91" r="8" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="4"/>
+  <circle cx="98" cy="48" r="8" fill="#FFFFFF" stroke="#16A34A" stroke-width="4"/>
+  <path d="M30 91c13-21 42-3 68-43" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 7"/>
+</svg>

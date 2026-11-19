@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="椭圆甜甜圈-椰蓉雪铺流挂">
+  <defs>
+    <linearGradient id="bg" x1="58" y1="24" x2="460" y2="506" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F7F3E8"/>
+      <stop offset=".5" stop-color="#DCEDEA"/>
+      <stop offset="1" stop-color="#AFC9E7"/>
+    </linearGradient>
+    <linearGradient id="bread" x1="82" y1="132" x2="430" y2="422" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E8A950"/>
+      <stop offset=".56" stop-color="#B96D2E"/>
+      <stop offset="1" stop-color="#7A421F"/>
+    </linearGradient>
+    <pattern id="coconut" width="18" height="18" patternUnits="userSpaceOnUse">
+      <path d="M2 5l12-3M5 13l10-5M12 17l4-11M0 16l8-6" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M11 4l5 2" stroke="#E8E1D5" stroke-width="3" stroke-linecap="round"/>
+    </pattern>
+    <mask id="ringMask">
+      <rect width="512" height="512" fill="black"/>
+      <path d="M56 260c0-88 90-160 200-160s200 72 200 160s-90 160-200 160S56 348 56 260z" fill="white"/>
+      <ellipse cx="256" cy="260" rx="104" ry="84" fill="black"/>
+    </mask>
+    <filter id="drop" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="22" stdDeviation="20" flood-color="#5D626C" flood-opacity=".2"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="72" fill="url(#bg)"/>
+  <ellipse cx="256" cy="394" rx="184" ry="28" fill="#5D626C" opacity=".14"/>
+  <g filter="url(#drop)">
+    <path d="M56 260c0-88 90-160 200-160s200 72 200 160s-90 160-200 160S56 348 56 260z" fill="url(#bread)"/>
+    <path d="M82 248c15-74 88-126 176-126c90 0 161 53 174 128c-38-12-76-5-111 16c-42 25-90 25-131 1c-35-21-72-30-108-19z" fill="#F5F1E8" mask="url(#ringMask)"/>
+    <path d="M82 250c30-7 66 0 108 22c43 22 90 21 131-3c35-20 72-29 111-17v34c-23-8-40 6-45 31c-3 16-9 39-29 36c-17-2-18-26-22-43c-5-26-26-23-47-11c-24 13-53 13-78 0c-22-12-41-13-48 12c-6 20-10 52-31 49c-20-3-17-34-20-52c-3-22-14-30-30-25z" fill="#F5F1E8" mask="url(#ringMask)"/>
+    <rect x="48" y="96" width="416" height="330" fill="url(#coconut)" mask="url(#ringMask)"/>
+    <ellipse cx="256" cy="260" rx="104" ry="84" fill="#F7F3E8"/>
+  </g>
+  <path d="M76 260c0-78 81-142 180-142s180 64 180 142s-81 142-180 142S76 338 76 260z" fill="none" stroke="#D7CFC2" stroke-width="9" stroke-linecap="round" stroke-dasharray="2 24"/>
+  <g fill="#243856" stroke="#243856" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <g transform="translate(112 270) rotate(-88)"><circle cx="0" cy="0" r="9"/><circle cx="15" cy="0" r="8"/><circle cx="29" cy="0" r="7"/><path d="M8 7l-7 13M18 7v14M30 6l12 9M8-7L-3-18M18-7v-14M30-6l12-9"/></g>
+    <g transform="translate(336 374) rotate(158) scale(.9)"><circle cx="0" cy="0" r="9"/><circle cx="15" cy="0" r="8"/><circle cx="29" cy="0" r="7"/><path d="M8 7l-7 13M18 7v14M30 6l12 9M8-7L-3-18M18-7v-14M30-6l12-9"/></g>
+  </g>
+</svg>

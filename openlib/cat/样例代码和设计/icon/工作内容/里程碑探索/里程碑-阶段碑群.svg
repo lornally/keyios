@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="里程碑 阶段碑群">
+  <defs>
+    <linearGradient id="stoneGroupBg" x1="12" y1="16" x2="116" y2="112" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F0FDFA"/>
+      <stop offset=".55" stop-color="#DBEAFE"/>
+      <stop offset="1" stop-color="#FAE8FF"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#stoneGroupBg)"/>
+  <path d="M23 99c17-27 39-32 59-28s26-6 34-31" fill="none" stroke="#1E293B" stroke-width="10" stroke-linecap="round"/>
+  <path d="M23 99c17-27 39-32 59-28s26-6 34-31" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="7 8"/>
+  <g stroke="#475569" stroke-width="4" stroke-linejoin="round">
+    <path d="M31 69c-8 0-14 6-14 14v22h28V83c0-8-6-14-14-14z" fill="#E2E8F0"/>
+    <path d="M66 48c-9 0-16 7-16 16v40h32V64c0-9-7-16-16-16z" fill="#FFFFFF"/>
+    <path d="M101 30c-8 0-14 6-14 14v52h28V44c0-8-6-14-14-14z" fill="#E2E8F0"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-weight="900" text-anchor="middle" fill="#334155">
+    <text x="31" y="89" font-size="10">M1</text>
+    <text x="66" y="71" font-size="11">M2</text>
+    <text x="101" y="54" font-size="10">M3</text>
+  </g>
+</svg>

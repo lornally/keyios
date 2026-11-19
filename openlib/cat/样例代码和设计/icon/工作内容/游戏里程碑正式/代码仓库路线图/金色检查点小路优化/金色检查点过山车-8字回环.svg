@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="金色检查点过山车 8字回环">
+  <defs>
+    <linearGradient id="coasterEightBg" x1="14" y1="14" x2="114" y2="114" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#F5F3FF"/>
+    </linearGradient>
+    <linearGradient id="coasterEightLine" x1="23" y1="94" x2="100" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset=".35" stop-color="#A855F7"/>
+      <stop offset=".7" stop-color="#06B6D4"/>
+      <stop offset="1" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#coasterEightBg)"/>
+  <path d="M23 94C45 70 83 101 91 70C98 44 61 35 51 58C41 81 78 88 95 58C104 43 101 34 91 29" fill="none" stroke="#FFFFFF" stroke-width="19" stroke-linecap="round"/>
+  <path d="M23 94C45 70 83 101 91 70C98 44 61 35 51 58C41 81 78 88 95 58C104 43 101 34 91 29" fill="none" stroke="url(#coasterEightLine)" stroke-width="11" stroke-linecap="round"/>
+  <path d="M23 94C45 70 83 101 91 70C98 44 61 35 51 58C41 81 78 88 95 58C104 43 101 34 91 29" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 10" opacity=".75"/>
+  <circle cx="23" cy="94" r="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="4"/>
+  <circle cx="51" cy="58" r="7" fill="#FFFFFF" stroke="#A855F7" stroke-width="4"/>
+  <circle cx="91" cy="70" r="7" fill="#FFFFFF" stroke="#06B6D4" stroke-width="4"/>
+  <circle cx="91" cy="29" r="18" fill="#FFFFFF" stroke="#D97706" stroke-width="5"/>
+  <circle cx="91" cy="29" r="7" fill="#FACC15" stroke="#92400E" stroke-width="3"/>
+  <path d="M91 5v9M91 45v10M65 29h10M107 29h-5" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
+</svg>

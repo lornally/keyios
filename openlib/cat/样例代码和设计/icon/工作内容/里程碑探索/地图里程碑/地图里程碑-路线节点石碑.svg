@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="地图里程碑 路线节点石碑">
+  <defs>
+    <linearGradient id="mapMilestoneNodeBg" x1="14" y1="12" x2="114" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F0FDFA"/>
+      <stop offset="1" stop-color="#E0E7FF"/>
+    </linearGradient>
+    <linearGradient id="mapMilestoneNodeStone" x1="55" y1="27" x2="91" y2="105" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D1D5DB"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#mapMilestoneNodeBg)"/>
+  <path d="M24 93c15-33 47-14 58-44c6-16 19-18 28-16" fill="none" stroke="#1E293B" stroke-width="12" stroke-linecap="round"/>
+  <path d="M24 93c15-33 47-14 58-44c6-16 19-18 28-16" fill="none" stroke="#F8FAFC" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 9"/>
+  <circle cx="24" cy="93" r="9" fill="#FFFFFF" stroke="#2563EB" stroke-width="4"/>
+  <circle cx="65" cy="68" r="9" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="4"/>
+  <path d="M88 35c-11 0-20 9-20 20v46h40V55c0-11-9-20-20-20z" fill="url(#mapMilestoneNodeStone)" stroke="#475569" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M65 101h46" stroke="#475569" stroke-width="6" stroke-linecap="round"/>
+  <text x="88" y="63" font-family="Arial, sans-serif" font-size="18" font-weight="900" text-anchor="middle" fill="#334155">8</text>
+  <text x="88" y="80" font-family="Arial, sans-serif" font-size="9" font-weight="800" text-anchor="middle" fill="#64748B">KM</text>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="重复-复印纸堆">
+  <rect width="512" height="512" rx="72" fill="#F3E8D6"/>
+  <path d="M154 114h190l42 42v236H154z" fill="#E9D7BA"/>
+  <path d="M130 94h190l42 42v236H130z" fill="#F6E9D6"/>
+  <path d="M106 74h190l42 42v236H106z" fill="#FFFDF5"/>
+  <path d="M296 74v42h42" fill="#E2D1B9"/>
+  <path d="M146 154h142M146 198h112M146 242h142M146 286h96" stroke="#C8B79D" stroke-width="12" stroke-linecap="round"/>
+  <path d="M162 394c56 35 131 34 185-4c42-29 40-76-1-101c-49-29-120-2-132 52" fill="none" stroke="#7B4E83" stroke-width="12" stroke-linecap="round" stroke-dasharray="1 25"/>
+  <path d="M214 341l-21-39l44 5" fill="none" stroke="#7B4E83" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="280" y="228" width="92" height="72" rx="14" fill="#243856"/>
+  <path d="M300 264h52" stroke="#FFD166" stroke-width="10" stroke-linecap="round"/>
+</svg>

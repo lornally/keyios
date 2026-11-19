@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="项目 具象里程碑 公里碑">
+  <defs>
+    <linearGradient id="kilometerStoneBg" x1="14" y1="14" x2="114" y2="114" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#DBEAFE"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </linearGradient>
+    <linearGradient id="kilometerStoneBody" x1="49" y1="25" x2="91" y2="105" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#CBD5E1"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#kilometerStoneBg)"/>
+  <path d="M20 105c10-18 22-32 38-42s32-16 50-37" fill="none" stroke="#1E293B" stroke-width="14" stroke-linecap="round"/>
+  <path d="M20 105c10-18 22-32 38-42s32-16 50-37" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 11"/>
+  <path d="M76 35c-12 0-22 10-22 22v47h44V57c0-12-10-22-22-22z" fill="url(#kilometerStoneBody)" stroke="#475569" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M51 104h50" stroke="#475569" stroke-width="6" stroke-linecap="round"/>
+  <text x="76" y="62" font-family="Arial, sans-serif" font-size="18" font-weight="900" text-anchor="middle" fill="#1E293B">42</text>
+  <text x="76" y="79" font-family="Arial, sans-serif" font-size="10" font-weight="800" text-anchor="middle" fill="#64748B">KM</text>
+  <path d="M63 88h26" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
+</svg>

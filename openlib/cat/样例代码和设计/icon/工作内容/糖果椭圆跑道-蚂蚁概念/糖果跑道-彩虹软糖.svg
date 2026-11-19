@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="糖果跑道-彩虹软糖">
+  <defs>
+    <linearGradient id="bg" x1="64" y1="34" x2="448" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#EAF9F3"/>
+      <stop offset=".48" stop-color="#FBE2A4"/>
+      <stop offset="1" stop-color="#A7C7E7"/>
+    </linearGradient>
+    <linearGradient id="rainbow" x1="92" y1="134" x2="420" y2="398" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E75757"/>
+      <stop offset=".2" stop-color="#F2B84B"/>
+      <stop offset=".42" stop-color="#73C66D"/>
+      <stop offset=".65" stop-color="#42B7D6"/>
+      <stop offset="1" stop-color="#7B4E83"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#51727C" flood-opacity=".22"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="72" fill="url(#bg)"/>
+  <path d="M82 266c0-90 73-163 163-163h22c90 0 163 73 163 163s-73 163-163 163h-22c-90 0-163-73-163-163z" fill="none" stroke="#FFFFFF" stroke-width="72" stroke-linecap="round" filter="url(#soft)"/>
+  <path d="M82 266c0-90 73-163 163-163h22c90 0 163 73 163 163s-73 163-163 163h-22c-90 0-163-73-163-163z" fill="none" stroke="url(#rainbow)" stroke-width="52" stroke-linecap="round"/>
+  <path d="M142 266c0-57 46-103 103-103h22c57 0 103 46 103 103s-46 103-103 103h-22c-57 0-103-46-103-103z" fill="#F7FFF8"/>
+  <path d="M140 385c54 24 113 25 178 2" stroke="#243856" stroke-width="10" stroke-linecap="round" opacity=".18"/>
+  <g fill="#243856" stroke="#243856" stroke-width="4" stroke-linecap="round">
+    <g transform="translate(332 384) rotate(-18)">
+      <circle cx="0" cy="0" r="9"/><circle cx="15" cy="-1" r="8"/><circle cx="29" cy="-1" r="7"/>
+      <path d="M8 7l-7 13M18 6l2 14M30 5l12 10M8-7L-3-18M18-8l3-14M30-8l13-8"/>
+    </g>
+    <g transform="translate(156 164) rotate(18) scale(.86)">
+      <circle cx="0" cy="0" r="9"/><circle cx="15" cy="-1" r="8"/><circle cx="29" cy="-1" r="7"/>
+      <path d="M8 7l-7 13M18 6l2 14M30 5l12 10M8-7L-3-18M18-8l3-14M30-8l13-8"/>
+    </g>
+  </g>
+</svg>

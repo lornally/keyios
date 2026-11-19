@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="项目 具象里程碑 三阶段石碑">
+  <defs>
+    <linearGradient id="threeMilestoneBg" x1="12" y1="16" x2="116" y2="112" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F0FDFA"/>
+      <stop offset=".55" stop-color="#DBEAFE"/>
+      <stop offset="1" stop-color="#FAE8FF"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#threeMilestoneBg)"/>
+  <path d="M25 91c16-25 38-28 53-24s24-4 30-21" fill="none" stroke="#1E293B" stroke-width="9" stroke-linecap="round"/>
+  <path d="M25 91c16-25 38-28 53-24s24-4 30-21" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="7 8"/>
+  <g stroke="#475569" stroke-width="4" stroke-linejoin="round">
+    <path d="M32 63c-8 0-14 6-14 14v24h28V77c0-8-6-14-14-14z" fill="#E2E8F0"/>
+    <path d="M66 43c-9 0-16 7-16 16v38h32V59c0-9-7-16-16-16z" fill="#FFFFFF"/>
+    <path d="M101 27c-8 0-14 6-14 14v48h28V41c0-8-6-14-14-14z" fill="#E2E8F0"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-weight="800" text-anchor="middle" fill="#334155">
+    <text x="32" y="83" font-size="10">M1</text>
+    <text x="66" y="65" font-size="11">M2</text>
+    <text x="101" y="50" font-size="10">M3</text>
+  </g>
+  <g stroke="#64748B" stroke-width="3" stroke-linecap="round">
+    <path d="M27 91h10"/>
+    <path d="M59 77h14"/>
+    <path d="M96 61h10"/>
+  </g>
+</svg>

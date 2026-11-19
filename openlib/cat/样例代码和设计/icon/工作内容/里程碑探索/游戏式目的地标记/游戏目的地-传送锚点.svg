@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="游戏目的地 传送锚点">
+  <defs>
+    <radialGradient id="teleportAnchorBg" cx="50%" cy="43%" r="62%">
+      <stop offset="0" stop-color="#BAE6FD"/>
+      <stop offset=".65" stop-color="#ECFEFF"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </radialGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#teleportAnchorBg)"/>
+  <ellipse cx="64" cy="100" rx="33" ry="8" fill="#0F172A" opacity=".12"/>
+  <path d="M64 22l20 20l-9 51H53l-9-51z" fill="#E0F2FE" stroke="#0369A1" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M64 22v71" stroke="#38BDF8" stroke-width="4" stroke-linecap="round"/>
+  <path d="M48 43h32M51 61h26M54 79h20" stroke="#7DD3FC" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="64" cy="58" r="13" fill="#FFFFFF" stroke="#0284C7" stroke-width="5"/>
+  <path d="M64 45v26M51 58h26" stroke="#0EA5E9" stroke-width="4" stroke-linecap="round"/>
+  <path d="M44 94h40l9 11H35z" fill="#0369A1" stroke="#075985" stroke-width="4" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="组合 指示牌与方柱碑">
+  <defs>
+    <linearGradient id="signPillarComboBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ECFDF5"/>
+      <stop offset="1" stop-color="#E0F2FE"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#signPillarComboBg)"/>
+  <path d="M20 102c20-29 44-39 88-55" fill="none" stroke="#1E293B" stroke-width="14" stroke-linecap="round"/>
+  <path d="M20 102c20-29 44-39 88-55" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 11"/>
+  <path d="M39 91V43" stroke="#7C2D12" stroke-width="7" stroke-linecap="round"/>
+  <path d="M19 32h48l11 11l-11 11H19z" fill="#D97706" stroke="#92400E" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M28 43h31" stroke="#FFF7ED" stroke-width="4" stroke-linecap="round"/>
+  <path d="M78 52h28v52H78z" fill="#F8FAFC" stroke="#475569" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M78 65h28" stroke="#EF4444" stroke-width="9"/>
+  <text x="92" y="91" font-family="Arial, sans-serif" font-size="17" font-weight="900" text-anchor="middle" fill="#334155">5</text>
+  <path d="M72 105h39" stroke="#475569" stroke-width="6" stroke-linecap="round"/>
+</svg>

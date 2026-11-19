@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="回归-回家">
+  <defs>
+    <linearGradient id="homeSky" x1="64" y1="20" x2="450" y2="496" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFE4A8"/>
+      <stop offset=".42" stop-color="#9ED7D8"/>
+      <stop offset="1" stop-color="#5D77A8"/>
+    </linearGradient>
+    <linearGradient id="homeHill" x1="52" y1="302" x2="464" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8ACB88"/>
+      <stop offset=".55" stop-color="#4D9B72"/>
+      <stop offset="1" stop-color="#2F5D62"/>
+    </linearGradient>
+    <radialGradient id="homeSun" cx="120" cy="102" r="112" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF4C7"/>
+      <stop offset=".58" stop-color="#FFD166"/>
+      <stop offset="1" stop-color="#FFD166" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="homeShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#243856" flood-opacity=".2"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="72" fill="url(#homeSky)"/>
+  <circle cx="120" cy="102" r="112" fill="url(#homeSun)"/>
+  <path d="M0 358c72-42 139-48 202-18c54 25 111 22 172-14c47-28 92-32 138-12v198H0z" fill="url(#homeHill)"/>
+  <path d="M0 408c78-34 153-37 226-9c65 25 125 21 180-12c40-24 75-31 106-20v145H0z" fill="#2D6A58" opacity=".55"/>
+
+  <g filter="url(#homeShadow)">
+    <path d="M296 384V262l70-64l70 64v122z" fill="#FFF4D6"/>
+    <path d="M278 270l88-80l88 80" fill="none" stroke="#243856" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="340" y="304" width="52" height="80" rx="10" fill="#243856"/>
+    <rect x="314" y="280" width="38" height="38" rx="8" fill="#FFD166"/>
+    <rect x="382" y="280" width="38" height="38" rx="8" fill="#FFD166"/>
+  </g>
+
+  <path d="M64 402c58-62 135-81 214-58c44 13 76 14 105 3" fill="none" stroke="#FFF2C2" stroke-width="12" stroke-linecap="round" stroke-dasharray="2 24"/>
+  <path d="M383 347l-42-11l31-31" fill="none" stroke="#FFF2C2" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g aria-label="ants carrying food home">
+    <path d="M86 392c31-12 67-21 103-23" fill="none" stroke="#243856" stroke-width="5" stroke-linecap="round" opacity=".32"/>
+    <g fill="#243856">
+      <circle cx="92" cy="392" r="8"/>
+      <circle cx="105" cy="388" r="7"/>
+      <circle cx="117" cy="385" r="6"/>
+      <path d="M100 394l-9 10M108 393l-3 12M115 390l8 9M101 383l-8-8M110 382l3-11M119 382l10-8" stroke="#243856" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="152" cy="376" r="8"/>
+      <circle cx="165" cy="373" r="7"/>
+      <circle cx="177" cy="371" r="6"/>
+      <path d="M160 380l-8 10M168 378l-2 12M176 376l9 9M160 369l-9-8M169 368l3-11M178 368l10-8" stroke="#243856" stroke-width="4" stroke-linecap="round"/>
+    </g>
+    <path d="M126 374l24-16l12 18l-27 13z" fill="#F2B84B"/>
+    <path d="M190 360l21-15l13 17l-24 13z" fill="#F08A6B"/>
+  </g>
+
+  <g aria-label="bee bringing nectar home">
+    <path d="M118 252c44-42 102-49 155-20" fill="none" stroke="#FFF2C2" stroke-width="8" stroke-linecap="round" stroke-dasharray="1 18"/>
+    <path d="M273 232l-36-7l24-28" fill="none" stroke="#FFF2C2" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <ellipse cx="118" cy="252" rx="16" ry="11" fill="#FFD166" transform="rotate(-18 118 252)"/>
+    <path d="M107 247l25 8M116 241l11 22" stroke="#243856" stroke-width="5" stroke-linecap="round"/>
+    <ellipse cx="108" cy="238" rx="15" ry="9" fill="#FFFFFF" opacity=".65" transform="rotate(-40 108 238)"/>
+    <ellipse cx="129" cy="234" rx="15" ry="9" fill="#FFFFFF" opacity=".65" transform="rotate(-7 129 234)"/>
+  </g>
+
+  <g aria-label="migrating geese returning">
+    <path d="M206 116c17 16 36 26 57 30c-22 4-43 0-62-11c-19 11-40 15-62 11c21-4 40-14 57-30c3-3 7-3 10 0z" fill="#243856"/>
+    <path d="M300 148c14 13 29 21 46 24c-18 3-34 0-49-8c-15 8-31 11-49 8c17-3 32-11 46-24c2-3 5-3 6 0z" fill="#243856"/>
+    <path d="M158 176c12 11 25 18 40 21c-16 2-30 0-43-8c-13 8-28 10-43 8c15-3 28-10 40-21c2-2 4-2 6 0z" fill="#243856"/>
+  </g>
+
+  <g aria-label="butterfly migration">
+    <path d="M383 132c30 24 44 56 42 95" fill="none" stroke="#F8DFA5" stroke-width="8" stroke-linecap="round" stroke-dasharray="1 18"/>
+    <path d="M425 227l-25-25l34-11" fill="none" stroke="#F8DFA5" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M374 128c-23-25-50-13-47 14c3 22 25 31 47 5c22 26 45 17 48-5c3-27-24-39-48-14z" fill="#E75757"/>
+    <path d="M374 127v37" stroke="#243856" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="374" cy="122" r="5" fill="#243856"/>
+  </g>
+
+  <g aria-label="ducks going home">
+    <path d="M274 419c37 20 83 22 128 3" fill="none" stroke="#A7E8D8" stroke-width="8" stroke-linecap="round" opacity=".7"/>
+    <g fill="#FFD166" stroke="#243856" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M282 401c19-13 43-7 52 12c-21 12-45 8-58-8z"/>
+      <path d="M326 397c8-14 25-12 32 0c-11 7-23 7-32 0z"/>
+      <path d="M358 397h18"/>
+      <path d="M319 415l-5 12M340 415l5 12"/>
+    </g>
+  </g>
+</svg>

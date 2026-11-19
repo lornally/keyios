@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#334155" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="回归-高保真复现">
+  <rect x="4" y="4" width="16" height="12.5" rx="2" />
+  <path d="M8 20h8" />
+  <path d="M12 16.5V20" />
+  <path d="M8 8.1h4.2" />
+  <path d="M8 11.1h3.2" />
+  <path d="M14.2 8.2h2.6a2.8 2.8 0 1 1-2 4.8" />
+  <path d="M14.2 8.2l1.4-1.4" />
+  <path d="M14.2 8.2l1.4 1.4" />
+  <path d="M14 13.2l1.7 1.7" />
+  <path d="M15.7 13.2L14 14.9" />
+</svg>

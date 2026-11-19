@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="游戏方尖碑 地图节点">
+  <defs>
+    <linearGradient id="gameObeliskMapBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#E0F2FE"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#gameObeliskMapBg)"/>
+  <path d="M25 42l26-10l27 10l25-10v58l-25 10l-27-10l-26 10z" fill="#FFFFFF" stroke="#475569" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M51 32v58M78 42v58" stroke="#CBD5E1" stroke-width="4"/>
+  <path d="M36 79c17-23 38 2 58-26" fill="none" stroke="#2563EB" stroke-width="6" stroke-linecap="round"/>
+  <path d="M72 24l-11 21h17z" fill="#F8FAFC" stroke="#334155" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M72 24l22 21H78z" fill="#CBD5E1" stroke="#334155" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M61 45h17v34H61z" fill="#F8FAFC" stroke="#334155" stroke-width="3"/>
+  <path d="M78 45h16v34H78z" fill="#94A3B8" stroke="#334155" stroke-width="3"/>
+  <path d="M57 79h42l6 8H51z" fill="#64748B" stroke="#334155" stroke-width="3"/>
+</svg>

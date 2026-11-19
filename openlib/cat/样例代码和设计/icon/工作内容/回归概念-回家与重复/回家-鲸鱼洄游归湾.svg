@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="回家-鲸鱼洄游归湾">
+  <defs>
+    <linearGradient id="bg" x1="68" y1="24" x2="450" y2="502" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#DDF4FF"/>
+      <stop offset=".45" stop-color="#76C5D4"/>
+      <stop offset="1" stop-color="#244B7A"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="72" fill="url(#bg)"/>
+  <path d="M0 355c77-42 147-43 211-4c66 41 143 40 231-2c26-12 49-18 70-18v181H0z" fill="#226D8A"/>
+  <path d="M0 420c70-23 139-24 207-2c76 25 154 20 233-16c25-11 49-17 72-16v126H0z" fill="#123B5D" opacity=".45"/>
+  <path d="M84 314c80-82 175-114 286-95" fill="none" stroke="#D7F7FF" stroke-width="11" stroke-linecap="round" stroke-dasharray="2 24"/>
+  <path d="M370 219l-42-16l34-27" fill="none" stroke="#D7F7FF" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M166 310c61-58 158-63 231-13c-29 69-122 101-208 66l-58 33l20-62c-25-7-44-15-58-24c25-6 49-6 73 0z" fill="#F7FAFF"/>
+  <path d="M362 286c27-31 57-35 90-12c-24 30-54 38-90 12z" fill="#F7FAFF"/>
+  <circle cx="220" cy="302" r="7" fill="#243856"/>
+  <path d="M242 270c-8-34 4-60 36-79c9 35-1 62-36 79z" fill="#D7F7FF"/>
+</svg>

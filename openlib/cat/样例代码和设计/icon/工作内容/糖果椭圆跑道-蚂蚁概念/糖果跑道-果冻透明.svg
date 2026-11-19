@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="糖果跑道-果冻透明">
+  <defs>
+    <linearGradient id="bg" x1="70" y1="28" x2="448" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E8FBFF"/>
+      <stop offset=".52" stop-color="#D4F1D0"/>
+      <stop offset="1" stop-color="#A7C7E7"/>
+    </linearGradient>
+    <linearGradient id="jelly" x1="118" y1="126" x2="398" y2="402" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#B4F7FF" stop-opacity=".95"/>
+      <stop offset=".5" stop-color="#75D8C8" stop-opacity=".72"/>
+      <stop offset="1" stop-color="#3A9DAB" stop-opacity=".92"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#3A9DAB" flood-opacity=".28"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="72" fill="url(#bg)"/>
+  <path d="M88 266c0-91 74-165 165-165h6c91 0 165 74 165 165s-74 165-165 165h-6c-91 0-165-74-165-165z" fill="url(#jelly)" filter="url(#glow)"/>
+  <path d="M128 266c0-69 56-125 125-125h6c69 0 125 56 125 125s-56 125-125 125h-6c-69 0-125-56-125-125z" fill="#E8FBFF" opacity=".88"/>
+  <path d="M112 218c37-56 90-84 160-84" fill="none" stroke="#FFFFFF" stroke-width="13" stroke-linecap="round" opacity=".76"/>
+  <path d="M156 368c53 28 115 31 185 8" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity=".4"/>
+  <g fill="#243856" stroke="#243856" stroke-width="4" stroke-linecap="round">
+    <g transform="translate(120 266) rotate(-90)">
+      <circle cx="0" cy="0" r="9"/><circle cx="15" cy="0" r="8"/><circle cx="29" cy="0" r="7"/>
+      <path d="M8 7l-7 13M18 7v14M30 6l12 9M8-7L-3-18M18-7v-14M30-6l12-9"/>
+    </g>
+    <g transform="translate(392 266) rotate(90) scale(.9)">
+      <circle cx="0" cy="0" r="9"/><circle cx="15" cy="0" r="8"/><circle cx="29" cy="0" r="7"/>
+      <path d="M8 7l-7 13M18 7v14M30 6l12 9M8-7L-3-18M18-7v-14M30-6l12-9"/>
+    </g>
+  </g>
+</svg>

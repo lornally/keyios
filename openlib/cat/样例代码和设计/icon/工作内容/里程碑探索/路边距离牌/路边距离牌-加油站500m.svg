@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="路边距离牌 加油站 500m">
+  <defs>
+    <linearGradient id="gas500Bg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#DBEAFE"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#gas500Bg)"/>
+  <path d="M32 101V78M96 101V78" stroke="#475569" stroke-width="7" stroke-linecap="round"/>
+  <rect x="18" y="28" width="92" height="54" rx="8" fill="#1D4ED8" stroke="#1E3A8A" stroke-width="5"/>
+  <path d="M34 44h20v27H34z" fill="#FFFFFF" stroke="#DBEAFE" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M38 49h12M54 49c9 4 10 11 10 20c0 5 7 5 7 0V55l-5-5" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="81" y="55" font-family="Arial, sans-serif" font-size="14" font-weight="900" text-anchor="middle" fill="#FFFFFF">加油站</text>
+  <text x="81" y="72" font-family="Arial, sans-serif" font-size="12" font-weight="800" text-anchor="middle" fill="#BFDBFE">500 m</text>
+  <path d="M24 93h80" stroke="#64748B" stroke-width="8" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="游戏目的地 营火路标">
+  <defs>
+    <linearGradient id="campMarkerBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF7ED"/>
+      <stop offset="1" stop-color="#FEF3C7"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#campMarkerBg)"/>
+  <path d="M64 19c10 17-5 20 7 34c5 6 8 12 8 19c0 14-11 24-25 24S30 86 30 72c0-12 8-21 18-26c-1 10 4 14 10 17c-5-18 10-24 6-44z" fill="#F97316" stroke="#9A3412" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M62 53c7 11-5 14 3 23c3 4 4 7 4 11c0 8-6 14-14 14s-14-6-14-14c0-7 4-12 10-15c0 6 3 8 7 10c-3-12 7-16 4-29z" fill="#FDE68A"/>
+  <path d="M33 101l48-20M77 101L29 81" stroke="#7C2D12" stroke-width="6" stroke-linecap="round"/>
+  <path d="M91 34v47" stroke="#475569" stroke-width="5" stroke-linecap="round"/>
+  <path d="M91 35h21l-6 7l6 7H91z" fill="#22C55E" stroke="#15803D" stroke-width="3" stroke-linejoin="round"/>
+</svg>

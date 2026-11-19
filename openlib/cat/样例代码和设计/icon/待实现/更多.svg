@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 34 112 60" width="112" height="60" role="img" aria-label="更多">
+  <circle cx="28" cy="64" r="17" fill="#38BDF8"/>
+  <circle cx="64" cy="64" r="17" fill="#A78BFA"/>
+  <circle cx="100" cy="64" r="17" fill="#F97316"/>
+  <g fill="#FFFFFF"><circle cx="28" cy="64" r="6"/><circle cx="64" cy="64" r="6"/><circle cx="100" cy="64" r="6"/></g>
+</svg>

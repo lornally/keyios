@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="金色检查点小路 S曲线">
+  <defs>
+    <linearGradient id="goldPathSbg" x1="14" y1="14" x2="114" y2="114" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF7ED"/>
+      <stop offset="1" stop-color="#ECFEFF"/>
+    </linearGradient>
+    <linearGradient id="goldPathSline" x1="25" y1="93" x2="100" y2="35" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#60A5FA"/>
+      <stop offset=".48" stop-color="#34D399"/>
+      <stop offset="1" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#goldPathSbg)"/>
+  <path d="M25 93C46 91 53 76 43 65C29 50 39 34 59 34C82 34 87 52 74 64C57 79 68 94 91 88C103 85 106 76 101 66" fill="none" stroke="#FFFFFF" stroke-width="19" stroke-linecap="round"/>
+  <path d="M25 93C46 91 53 76 43 65C29 50 39 34 59 34C82 34 87 52 74 64C57 79 68 94 91 88C103 85 106 76 101 66" fill="none" stroke="url(#goldPathSline)" stroke-width="11" stroke-linecap="round"/>
+  <path d="M25 93C46 91 53 76 43 65C29 50 39 34 59 34C82 34 87 52 74 64C57 79 68 94 91 88C103 85 106 76 101 66" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="7 11" opacity=".75"/>
+  <circle cx="25" cy="93" r="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="4"/>
+  <circle cx="43" cy="65" r="7" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="4"/>
+  <circle cx="59" cy="34" r="7" fill="#FFFFFF" stroke="#22C55E" stroke-width="4"/>
+  <circle cx="74" cy="64" r="7" fill="#FFFFFF" stroke="#06B6D4" stroke-width="4"/>
+  <circle cx="101" cy="66" r="18" fill="#FFFFFF" stroke="#D97706" stroke-width="5"/>
+  <circle cx="101" cy="66" r="7" fill="#FACC15" stroke="#92400E" stroke-width="3"/>
+  <path d="M101 39v11M101 82v11M74 66h11M117 66h-5" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,58 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>日常候选图标</title>
+<style>
+  body {
+    margin: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f8fafc;
+    color: #0f172a;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+  }
+  .sample {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 92px;
+  }
+  .dark {
+    background: #111827;
+  }
+  img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+  }
+  .name {
+    padding: 10px 12px;
+    font-size: 13px;
+    border-top: 1px solid #e2e8f0;
+  }
+</style>
+<div class="grid">
+  <div class="card">
+    <div class="sample"><img src="日月.svg"></div>
+    <div class="sample dark"><img src="日月.svg"></div>
+    <div class="name">日月</div>
+  </div>
+  <div class="card">
+    <div class="sample"><img src="马桶.svg"></div>
+    <div class="sample dark"><img src="马桶.svg"></div>
+    <div class="name">马桶</div>
+  </div>
+  <div class="card">
+    <div class="sample"><img src="饭碗.svg"></div>
+    <div class="sample dark"><img src="饭碗.svg"></div>
+    <div class="name">饭 / 碗</div>
+  </div>
+</div>

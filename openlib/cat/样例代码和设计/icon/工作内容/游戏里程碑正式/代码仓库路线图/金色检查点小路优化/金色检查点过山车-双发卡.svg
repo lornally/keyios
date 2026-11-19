@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="金色检查点过山车 双发卡">
+  <defs>
+    <linearGradient id="coasterDoubleBg" x1="14" y1="14" x2="114" y2="114" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E0F2FE"/>
+      <stop offset="1" stop-color="#FFF7ED"/>
+    </linearGradient>
+    <linearGradient id="coasterDoubleLine" x1="22" y1="98" x2="102" y2="34" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22C55E"/>
+      <stop offset=".35" stop-color="#38BDF8"/>
+      <stop offset=".72" stop-color="#A78BFA"/>
+      <stop offset="1" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#coasterDoubleBg)"/>
+  <path d="M22 98H84c17 0 17-19 0-19H45c-17 0-17-19 0-19h49c17 0 17-19 0-19H58c-14 0-18-10-10-17" fill="none" stroke="#FFFFFF" stroke-width="19" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M22 98H84c17 0 17-19 0-19H45c-17 0-17-19 0-19h49c17 0 17-19 0-19H58c-14 0-18-10-10-17" fill="none" stroke="url(#coasterDoubleLine)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M22 98H84c17 0 17-19 0-19H45c-17 0-17-19 0-19h49c17 0 17-19 0-19H58c-14 0-18-10-10-17" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 10" opacity=".75"/>
+  <circle cx="22" cy="98" r="8" fill="#FFFFFF" stroke="#22C55E" stroke-width="4"/>
+  <circle cx="45" cy="79" r="7" fill="#FFFFFF" stroke="#38BDF8" stroke-width="4"/>
+  <circle cx="94" cy="60" r="7" fill="#FFFFFF" stroke="#A78BFA" stroke-width="4"/>
+  <circle cx="48" cy="24" r="18" fill="#FFFFFF" stroke="#D97706" stroke-width="5"/>
+  <circle cx="48" cy="24" r="7" fill="#FACC15" stroke="#92400E" stroke-width="3"/>
+  <path d="M48 5v6M48 40v10M27 24h8M61 24h9" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
+</svg>

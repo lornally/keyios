@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="游戏目的地 地图任务标">
+  <defs>
+    <linearGradient id="questMarkerBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#E0F2FE"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#questMarkerBg)"/>
+  <path d="M25 41l26-10l27 10l25-10v60l-25 10l-27-10l-26 10z" fill="#FFFFFF" stroke="#475569" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M51 31v60M78 41v60" stroke="#CBD5E1" stroke-width="4"/>
+  <path d="M35 80c16-22 36 2 58-25" fill="none" stroke="#2563EB" stroke-width="6" stroke-linecap="round"/>
+  <path d="M70 83c-16-22-24-37-24-48c0-14 11-24 24-24s24 10 24 24c0 11-8 26-24 48z" fill="#EF4444" stroke="#991B1B" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M70 24l5 10l11 2l-8 8l2 11l-10-5l-10 5l2-11l-8-8l11-2z" fill="#FACC15" stroke="#92400E" stroke-width="3" stroke-linejoin="round"/>
+</svg>

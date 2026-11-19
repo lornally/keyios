@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="重复访问-访客星轨">
+  <defs>
+    <linearGradient id="orbitBg" x1="78" y1="22" x2="456" y2="506" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#232A5C"/>
+      <stop offset=".5" stop-color="#6A4C93"/>
+      <stop offset="1" stop-color="#F2A65A"/>
+    </linearGradient>
+    <filter id="orbitGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#FFF0B8" flood-opacity=".65"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="72" fill="url(#orbitBg)"/>
+  <g fill="#FFF6D7" opacity=".8">
+    <circle cx="118" cy="118" r="4"/>
+    <circle cx="172" cy="86" r="3"/>
+    <circle cx="414" cy="156" r="4"/>
+    <circle cx="376" cy="78" r="3"/>
+    <circle cx="83" cy="305" r="3"/>
+    <circle cx="431" cy="344" r="3"/>
+  </g>
+  <path d="M95 286c49-95 144-137 232-94c78 38 84 126 15 171c-73 47-186 16-204-57c-14-57 39-108 116-108" fill="none" stroke="#FFE6A8" stroke-width="12" stroke-linecap="round" stroke-dasharray="1 25"/>
+  <path d="M254 198l-43-23l43-21" fill="none" stroke="#FFE6A8" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="256" cy="268" r="58" fill="#FFFFFF" opacity=".16"/>
+  <path d="M256 202l17 42l45 4l-34 29l11 44l-39-23l-39 23l11-44l-34-29l45-4z" fill="#FFD166" filter="url(#orbitGlow)"/>
+  <path d="M178 377c50 22 103 22 158 0" stroke="#FFF6D7" stroke-width="8" stroke-linecap="round" opacity=".34"/>
+</svg>

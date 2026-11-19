@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="里程碑 刻度碑">
+  <defs>
+    <linearGradient id="scaleMarkerBg" x1="14" y1="14" x2="114" y2="114" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#E0F2FE"/>
+    </linearGradient>
+    <linearGradient id="scaleMarkerStone" x1="46" y1="18" x2="83" y2="110" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#CBD5E1"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#scaleMarkerBg)"/>
+  <path d="M64 21c-13 0-24 11-24 24v61h48V45c0-13-11-24-24-24z" fill="url(#scaleMarkerStone)" stroke="#334155" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M36 106h56" stroke="#334155" stroke-width="7" stroke-linecap="round"/>
+  <path d="M53 49h22M53 61h16M53 73h22M53 85h16" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
+  <path d="M84 29c9 8 14 19 13 32" fill="none" stroke="#F97316" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="97" cy="62" r="7" fill="#FFFFFF" stroke="#F97316" stroke-width="4"/>
+  <path d="M22 96c18-18 39-26 64-23" fill="none" stroke="#2563EB" stroke-width="5" stroke-linecap="round" stroke-dasharray="7 8"/>
+</svg>

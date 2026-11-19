@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="一直回来-无限归途">
+  <defs>
+    <linearGradient id="infiniteBg" x1="60" y1="36" x2="448" y2="498" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8E7B8"/>
+      <stop offset=".43" stop-color="#9BD6C7"/>
+      <stop offset="1" stop-color="#516A9F"/>
+    </linearGradient>
+    <linearGradient id="ribbon" x1="102" y1="178" x2="406" y2="342" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E75757"/>
+      <stop offset=".5" stop-color="#FFD166"/>
+      <stop offset="1" stop-color="#2E8C8A"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#243856" flood-opacity=".22"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="72" fill="url(#infiniteBg)"/>
+  <path d="M100 266c44-76 98-112 156-7c58 105 112 69 156-7" fill="none" stroke="#FFFFFF" stroke-width="62" stroke-linecap="round" opacity=".38"/>
+  <path d="M100 266c44-76 98-112 156-7c58 105 112 69 156-7" fill="none" stroke="url(#ribbon)" stroke-width="26" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M412 252l-48-8l27-39" fill="none" stroke="#2E8C8A" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M178 334h106v70H178z" fill="#243856"/>
+  <path d="M158 334l73-62l73 62z" fill="#E75757"/>
+  <rect x="218" y="358" width="26" height="46" rx="5" fill="#FFD166"/>
+  <g fill="#243856">
+    <path d="M180 150c13 12 28 20 45 23c-18 3-35 0-49-8c-15 8-31 11-49 8c17-3 32-11 45-23c2-3 6-3 8 0z"/>
+    <path d="M262 141c11 10 24 17 38 19c-15 3-29 1-41-6c-13 7-26 9-41 6c14-2 27-9 38-19c2-2 4-2 6 0z"/>
+    <path d="M328 176c9 8 19 13 31 16c-12 2-24 0-34-6c-10 6-21 8-34 6c12-3 22-8 31-16c2-2 4-2 6 0z"/>
+  </g>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="代码仓库路线图 金色检查点">
+  <defs>
+    <linearGradient id="repoGraceBg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF7ED"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#repoGraceBg)"/>
+  <path d="M24 94c9-18 24-12 29-29c5-16-13-18-7-31c8-17 34-12 41 3c8 17-10 24-1 38c6 9 18 3 23-9" fill="none" stroke="#FDE68A" stroke-width="16" stroke-linecap="round"/>
+  <path d="M24 94c9-18 24-12 29-29c5-16-13-18-7-31c8-17 34-12 41 3c8 17-10 24-1 38c6 9 18 3 23-9" fill="none" stroke="#38BDF8" stroke-width="10" stroke-linecap="round"/>
+  <path d="M24 94c9-18 24-12 29-29c5-16-13-18-7-31c8-17 34-12 41 3c8 17-10 24-1 38c6 9 18 3 23-9" fill="none" stroke="#A7F3D0" stroke-width="4" stroke-linecap="round" stroke-dasharray="9 10"/>
+  <circle cx="24" cy="94" r="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="4"/>
+  <circle cx="50" cy="65" r="8" fill="#FFFFFF" stroke="#A855F7" stroke-width="4"/>
+  <circle cx="48" cy="35" r="8" fill="#FFFFFF" stroke="#F97316" stroke-width="4"/>
+  <circle cx="88" cy="37" r="8" fill="#FFFFFF" stroke="#22C55E" stroke-width="4"/>
+  <circle cx="86" cy="75" r="8" fill="#FFFFFF" stroke="#06B6D4" stroke-width="4"/>
+  <circle cx="109" cy="66" r="18" fill="#FFFFFF" stroke="#D97706" stroke-width="5"/>
+  <circle cx="109" cy="66" r="7" fill="#FACC15" stroke="#92400E" stroke-width="3"/>
+  <path d="M109 39v11M109 82v11M82 66h11M125 66h-5" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
+</svg>

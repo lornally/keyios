@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 7 138 108" width="138" height="108" role="img" aria-label="日月">
+  <defs>
+    <linearGradient id="sunFill" x1="14" y1="30" x2="59" y2="75" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FDE68A"/>
+      <stop offset="1" stop-color="#F59E0B"/>
+    </linearGradient>
+    <linearGradient id="moonFill" x1="72" y1="26" x2="134" y2="98" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#A78BFA"/>
+      <stop offset="1" stop-color="#4F46E5"/>
+    </linearGradient>
+    <mask id="moonCut">
+      <rect x="0" y="0" width="138" height="128" fill="black"/>
+      <circle cx="105" cy="62" r="33" fill="white"/>
+      <circle cx="91" cy="52" r="33" fill="black"/>
+    </mask>
+  </defs>
+  <path d="M36 8v13M36 84v13M0 53h13M59 53h13M12 29l9 9M51 68l9 9M12 77l9-9M51 38l9-9" stroke="#F59E0B" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="36" cy="53" r="23" fill="url(#sunFill)"/>
+  <circle cx="105" cy="62" r="33" fill="url(#moonFill)" mask="url(#moonCut)"/>
+</svg>

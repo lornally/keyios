@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="糖果跑道-棒棒糖椭圆">
+  <defs>
+    <linearGradient id="bg" x1="68" y1="28" x2="448" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF3CE"/>
+      <stop offset=".5" stop-color="#F9C7D2"/>
+      <stop offset="1" stop-color="#91C9D8"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#72536B" flood-opacity=".22"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="72" fill="url(#bg)"/>
+  <path d="M84 270c0-93 75-168 168-168h8c93 0 168 75 168 168s-75 168-168 168h-8c-93 0-168-75-168-168z" fill="#FFF8F1" filter="url(#shadow)"/>
+  <path d="M116 270c0-75 61-136 136-136h8c75 0 136 61 136 136s-61 136-136 136h-8c-75 0-136-61-136-136z" fill="#FF6B91"/>
+  <path d="M154 270c0-54 44-98 98-98h8c54 0 98 44 98 98s-44 98-98 98h-8c-54 0-98-44-98-98z" fill="#FFF8F1"/>
+  <path d="M120 270c0-73 59-132 132-132h8c73 0 132 59 132 132s-59 132-132 132h-8c-73 0-132-59-132-132z" fill="none" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round" stroke-dasharray="34 22" opacity=".88"/>
+  <path d="M187 207c44-38 105-45 158-21" fill="none" stroke="#FFD166" stroke-width="11" stroke-linecap="round" stroke-dasharray="1 22"/>
+  <path d="M345 186l-38-7l25-29" fill="none" stroke="#FFD166" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#243856" stroke="#243856" stroke-width="4" stroke-linecap="round">
+    <circle cx="188" cy="207" r="9"/>
+    <circle cx="202" cy="200" r="8"/>
+    <circle cx="215" cy="194" r="7"/>
+    <path d="M196 211l-9 13M207 205l-1 14M217 199l12 8M196 196l-12-8M207 191l1-14M218 187l11-10"/>
+  </g>
+  <g fill="#FFF2BE">
+    <circle cx="154" cy="190" r="5"/><circle cx="363" cy="239" r="4"/><circle cx="336" cy="358" r="5"/><circle cx="179" cy="344" r="4"/>
+  </g>
+</svg>

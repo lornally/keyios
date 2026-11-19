@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="地图里程碑 地形路线碑">
+  <defs>
+    <linearGradient id="mapMilestoneTerrainBg" x1="14" y1="12" x2="114" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#DBEAFE"/>
+      <stop offset="1" stop-color="#DCFCE7"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#mapMilestoneTerrainBg)"/>
+  <path d="M18 92l24-32l15 18l20-31l34 45z" fill="#BBF7D0" stroke="#16A34A" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M22 103c17-23 34-34 54-41c13-5 23-13 32-27" fill="none" stroke="#1E293B" stroke-width="11" stroke-linecap="round"/>
+  <path d="M22 103c17-23 34-34 54-41c13-5 23-13 32-27" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 9"/>
+  <path d="M72 42c-10 0-18 8-18 18v39h36V60c0-10-8-18-18-18z" fill="#F8FAFC" stroke="#475569" stroke-width="5" stroke-linejoin="round"/>
+  <text x="72" y="68" font-family="Arial, sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#334155">7</text>
+  <path d="M63 80h18" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
+</svg>

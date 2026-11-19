@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="路边距离牌 出口 500m">
+  <defs>
+    <linearGradient id="exit500Bg" x1="12" y1="12" x2="116" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#DCFCE7"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="12" width="108" height="104" rx="22" fill="url(#exit500Bg)"/>
+  <path d="M62 104V78" stroke="#475569" stroke-width="8" stroke-linecap="round"/>
+  <path d="M20 34h67l21 22l-21 22H20z" fill="#15803D" stroke="#14532D" stroke-width="5" stroke-linejoin="round"/>
+  <text x="43" y="56" font-family="Arial, sans-serif" font-size="18" font-weight="900" text-anchor="middle" fill="#FFFFFF">出口</text>
+  <text x="55" y="72" font-family="Arial, sans-serif" font-size="12" font-weight="800" text-anchor="middle" fill="#DCFCE7">500 m</text>
+  <path d="M82 56h14M91 47l9 9l-9 9" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M26 96h76" stroke="#64748B" stroke-width="8" stroke-linecap="round"/>
+</svg>

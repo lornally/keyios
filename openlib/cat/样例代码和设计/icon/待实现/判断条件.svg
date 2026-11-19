@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 6 112 116" width="112" height="116" role="img" aria-label="判断条件">
+  <path d="M64 10l48 48l-48 48l-48-48z" fill="#FDE68A" stroke="#F59E0B" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M49 55h30M64 40v30" stroke="#92400E" stroke-width="8" stroke-linecap="round"/>
+  <path d="M64 106v10M29 91l-13 13M99 91l13 13" stroke="#38BDF8" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="64" cy="116" r="6" fill="#2563EB"/>
+  <circle cx="16" cy="104" r="6" fill="#2563EB"/>
+  <circle cx="112" cy="104" r="6" fill="#2563EB"/>
+</svg>

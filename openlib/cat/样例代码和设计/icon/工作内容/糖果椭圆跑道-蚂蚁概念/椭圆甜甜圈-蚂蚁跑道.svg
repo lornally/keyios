@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="椭圆甜甜圈-蚂蚁跑道">
+  <defs>
+    <linearGradient id="table" x1="54" y1="28" x2="462" y2="506" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF1D6"/>
+      <stop offset=".52" stop-color="#F2C7B1"/>
+      <stop offset="1" stop-color="#9BC9D0"/>
+    </linearGradient>
+    <radialGradient id="bread" cx="252" cy="234" r="210" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFE8B0"/>
+      <stop offset=".56" stop-color="#D9964C"/>
+      <stop offset="1" stop-color="#9C5E2D"/>
+    </radialGradient>
+    <linearGradient id="icing" x1="86" y1="168" x2="424" y2="340" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF9DBC"/>
+      <stop offset=".48" stop-color="#FF6F98"/>
+      <stop offset="1" stop-color="#D94C7C"/>
+    </linearGradient>
+    <filter id="drop" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="22" stdDeviation="20" flood-color="#714D58" flood-opacity=".28"/>
+    </filter>
+    <clipPath id="donutBand">
+      <path d="M66 260c0-86 85-156 190-156s190 70 190 156s-85 156-190 156S66 346 66 260z"/>
+      <path d="M152 260c0-48 46-86 104-86s104 38 104 86s-46 86-104 86s-104-38-104-86z"/>
+    </clipPath>
+  </defs>
+
+  <rect width="512" height="512" rx="72" fill="url(#table)"/>
+  <ellipse cx="256" cy="386" rx="178" ry="28" fill="#744A55" opacity=".18"/>
+
+  <g filter="url(#drop)">
+    <path d="M66 260c0-86 85-156 190-156s190 70 190 156s-85 156-190 156S66 346 66 260z" fill="url(#bread)"/>
+    <path d="M112 250c13-68 76-117 155-119c85-2 147 48 158 120c-38-23-74-20-105-1c-35 21-84 22-124 1c-31-16-58-16-84-1z" fill="url(#icing)"/>
+    <path d="M152 260c0-48 46-86 104-86s104 38 104 86s-46 86-104 86s-104-38-104-86z" fill="#FFF1D6"/>
+    <ellipse cx="256" cy="260" rx="88" ry="70" fill="#E7B06A" opacity=".42"/>
+  </g>
+
+  <path d="M78 260c0-80 80-144 178-144s178 64 178 144s-80 144-178 144S78 340 78 260z" fill="none" stroke="#FFF7E6" stroke-width="10" stroke-linecap="round" stroke-dasharray="2 24"/>
+  <path d="M126 250c23-55 78-88 146-84c55 3 101 31 123 74" fill="none" stroke="#FFC8D8" stroke-width="12" stroke-linecap="round" opacity=".7"/>
+
+  <g stroke-linecap="round" stroke-width="8">
+    <path d="M152 178l23 8" stroke="#42B7D6"/>
+    <path d="M220 142l8 22" stroke="#7B4E83"/>
+    <path d="M300 145l-15 19" stroke="#73C66D"/>
+    <path d="M382 212l-23 5" stroke="#FFD166"/>
+    <path d="M356 326l-18-15" stroke="#42B7D6"/>
+    <path d="M206 374l5-22" stroke="#7B4E83"/>
+    <path d="M120 295l22-7" stroke="#73C66D"/>
+  </g>
+
+  <path d="M112 262c0-62 65-112 144-112s144 50 144 112" fill="none" stroke="#FFD166" stroke-width="11" stroke-linecap="round" stroke-dasharray="1 22"/>
+  <path d="M400 262l-38-16l32-25" fill="none" stroke="#FFD166" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g fill="#243856" stroke="#243856" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <g transform="translate(125 268) rotate(-88)">
+      <circle cx="0" cy="0" r="9"/>
+      <circle cx="15" cy="0" r="8"/>
+      <circle cx="29" cy="0" r="7"/>
+      <path d="M8 7l-7 13M18 7v14M30 6l12 9M8-7L-3-18M18-7v-14M30-6l12-9"/>
+    </g>
+    <g transform="translate(257 118) rotate(3)">
+      <circle cx="0" cy="0" r="9"/>
+      <circle cx="15" cy="0" r="8"/>
+      <circle cx="29" cy="0" r="7"/>
+      <path d="M8 7l-7 13M18 7v14M30 6l12 9M8-7L-3-18M18-7v-14M30-6l12-9"/>
+    </g>
+    <g transform="translate(389 266) rotate(88)">
+      <circle cx="0" cy="0" r="9"/>
+      <circle cx="15" cy="0" r="8"/>
+      <circle cx="29" cy="0" r="7"/>
+      <path d="M8 7l-7 13M18 7v14M30 6l12 9M8-7L-3-18M18-7v-14M30-6l12-9"/>
+    </g>
+  </g>
+</svg>

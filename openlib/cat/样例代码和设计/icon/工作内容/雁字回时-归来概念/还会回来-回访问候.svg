@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="还会回来-回访问候">
+  <defs>
+    <linearGradient id="helloBg" x1="72" y1="28" x2="448" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8EBD1"/>
+      <stop offset=".52" stop-color="#E8B7B0"/>
+      <stop offset="1" stop-color="#6B7EAD"/>
+    </linearGradient>
+    <filter id="bubbleShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#4B405A" flood-opacity=".2"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="72" fill="url(#helloBg)"/>
+  <path d="M130 146h252c26 0 47 21 47 47v108c0 26-21 47-47 47H260l-82 58l24-58h-72c-26 0-47-21-47-47V193c0-26 21-47 47-47z" fill="#FFFFFF" filter="url(#bubbleShadow)"/>
+  <circle cx="180" cy="246" r="18" fill="#E75757"/>
+  <circle cx="256" cy="246" r="18" fill="#FFD166"/>
+  <circle cx="332" cy="246" r="18" fill="#2E8C8A"/>
+  <path d="M136 342c64 47 153 54 220 15c45-27 52-74 14-104c-43-34-114-15-139 36" fill="none" stroke="#7B4E83" stroke-width="13" stroke-linecap="round" stroke-dasharray="1 26"/>
+  <path d="M231 289l-13-41l41 12" fill="none" stroke="#7B4E83" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M148 384h180" stroke="#243856" stroke-width="12" stroke-linecap="round" opacity=".26"/>
+</svg>

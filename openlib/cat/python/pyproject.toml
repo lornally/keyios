@@ -1,0 +1,11 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cat"
+version = "0.1.0"
+description = "icon 关键词标准: keywords.yaml + macos.yaml 的 Python 数据包"
+
+[tool.setuptools]
+packages = ["cat"]
